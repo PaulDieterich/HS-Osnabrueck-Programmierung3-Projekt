@@ -1,0 +1,25 @@
+Projektvorschlag: SportWetterApp
+Projektbeteiligt: Paul Dieterich, Stefan Waschk
+Projektbeschreibung:
+Die SportWetterApp soll Sportlnern die mögkichkeit geben Wetterinformationen angepasst an ihre Sportaktivität anzuzeigen. 
+Der Nutzer soll die möglichkeit haben Touren/Sportaktivitäten zu erstellen und freunde dazu einzuladen. 
+
+Muss-Kriterien:
+- Nach dem Start der App erscheint ein Splash-Screen
+- Beim ersten öffnen gibt die möglichkeit sich einzuloggen. 
+- Nach dem starten erscheint Die wetter anzeige der Aktuellen Region/ oder angegebene Region
+	- Wetter daten per OpenWetherAPI	
+- Es gibt die möglichkeit Aktivitäten zu erstellen und Routen zu planen, mit Start und Ziel. 
+- Freunde zu erstellten Aktivitäten einladen.
+- Die Daten werden in einer SQL-DB gespeichert
+	 
+Kann-Kriterien:
+	- Aktivitäten auf Sozialenmeiden/massagenern teilen
+	- Aktivitäten Routenplanung mit OpenStreetMap als visualte Darstellung
+	- Passend zur Wetterlage der Ausgewählten Region gibt es im Hintergund eine animation. 
+UI-Mock: 
+
+
+
+
+Frage: OpenstreepMap API oder GoogleMaps API ?
