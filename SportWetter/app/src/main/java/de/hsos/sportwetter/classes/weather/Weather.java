@@ -16,6 +16,8 @@ import org.chromium.net.UrlRequest;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import de.hsos.sportwetter.classes.Callback;
+
 /**
  * To save Data from
  * https://openweathermap.org/api
@@ -36,7 +38,7 @@ import java.util.concurrent.Executors;
  *         "morn":297.77}, //morning temperature
  * */
 
-public class Weather {
+public class Weather extends AppCompatActivity {
     private Bitmap bitmap;
     private Canvas canvas;
     private ImageView imageView;

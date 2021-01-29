@@ -47,9 +47,11 @@ dependencies {
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
 
-
     //https://medium.com/@toddcookevt/android-room-storing-lists-of-objects-766cca57e3f9
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    //Cronet Implemenation for URL Requests
+    implementation 'com.google.android.gms:play-services-cronet:17.0.0'
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
