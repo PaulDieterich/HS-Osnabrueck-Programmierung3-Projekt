@@ -27,17 +27,17 @@ public class User {
     private Date birthday;
     @ColumnInfo(name="liked_sport_acivity")
     List<Sport> likedSportAcivity;
-    @ColumnInfo(name="frend_list")
-    List<User> frendList;
+    @ColumnInfo(name="friend_list")
+    List<User> friendList;
 
 
-    public User( String name, String firstname, Date birthday, List<Sport> likedSportAcivity, List<User> frendList) {
+    public User( String name, String firstname, Date birthday, List<Sport> likedSportAcivity, List<User> friendList) {
         this.userID = UUID.randomUUID();
         this.name = name;
         this.firstname = firstname;
         this.birthday = birthday;
         this.likedSportAcivity = likedSportAcivity;
-        this.frendList = frendList;
+        this.friendList = friendList;
     }
     @Ignore
     public User(){
@@ -85,11 +85,11 @@ public class User {
         this.likedSportAcivity = likedSportAcivity;
     }
 
-    public List<User> getFrendList() {
-        return frendList;
+    public List<User> getfriendList() {
+        return friendList;
     }
 
-    public void setFrendList(List<User> frendList) {
-        this.frendList = frendList;
+    public void setfriendList(List<User> friendList) {
+        this.friendList = friendList;
     }
 }
