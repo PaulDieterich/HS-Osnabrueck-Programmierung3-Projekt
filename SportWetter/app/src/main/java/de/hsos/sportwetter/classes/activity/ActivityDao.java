@@ -1,4 +1,4 @@
-package de.hsos.sportwetter.activity;
+package de.hsos.sportwetter.classes.activity;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -8,7 +8,6 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import de.hsos.sportwetter.location.Location;
 @Dao
 public interface ActivityDao {
 
