@@ -4,19 +4,20 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import de.hsos.sportwetter.activity.Activity;
-import de.hsos.sportwetter.activity.ActivityDao;
-import de.hsos.sportwetter.location.Location;
-import de.hsos.sportwetter.location.LocationDao;
-import de.hsos.sportwetter.sport.Sport;
-import de.hsos.sportwetter.sport.SportDao;
-import de.hsos.sportwetter.user.User;
-import de.hsos.sportwetter.user.UserDao;
+import de.hsos.sportwetter.classes.Converters;
+import de.hsos.sportwetter.classes.activity.Activity;
+import de.hsos.sportwetter.classes.activity.ActivityDao;
+import de.hsos.sportwetter.classes.location.Location;
+import de.hsos.sportwetter.classes.location.LocationDao;
+import de.hsos.sportwetter.classes.sport.Sport;
+import de.hsos.sportwetter.classes.sport.SportDao;
+import de.hsos.sportwetter.classes.user.User;
+import de.hsos.sportwetter.classes.user.UserDao;
 
 
 /**
@@ -33,6 +34,7 @@ import de.hsos.sportwetter.user.UserDao;
 version = 0,
 exportSchema = false
 )
+@TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract SportDao sportDao();
 
