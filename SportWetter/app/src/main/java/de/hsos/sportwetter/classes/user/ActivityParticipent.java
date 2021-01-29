@@ -1,9 +1,9 @@
-package de.hsos.sportwetter.user;
+package de.hsos.sportwetter.classes.user;
 
 import java.util.Date;
 import java.util.List;
 
-import de.hsos.sportwetter.sport.Sport;
+import de.hsos.sportwetter.classes.sport.Sport;
 
 public class ActivityParticipent extends User {
 

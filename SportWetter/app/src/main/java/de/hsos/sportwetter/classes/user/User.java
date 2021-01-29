@@ -1,19 +1,22 @@
-package de.hsos.sportwetter.user;
+package de.hsos.sportwetter.classes.user;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
 
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import de.hsos.sportwetter.sport.Sport;
+import de.hsos.sportwetter.classes.sport.Sport;
 
 
 
 @Entity(tableName = "USER")
 public class User {
-    @PrimaryKey
+    @PrimaryKey @NonNull
     @ColumnInfo(name="user_id")
     private UUID userID;
     @ColumnInfo(name="name")
@@ -21,19 +24,33 @@ public class User {
     @ColumnInfo(name="firstname")
     private String firstname;
     @ColumnInfo(name="gbdate")
-    private Date gbdate;
+    private Date birthday;
     @ColumnInfo(name="liked_sport_acivity")
     List<Sport> likedSportAcivity;
     @ColumnInfo(name="frend_list")
     List<User> frendList;
 
-    public User( String name, String firstname, Date gbdate, List<Sport> likedSportAcivity, List<User> frendList) {
+
+    public User( String name, String firstname, Date birthday, List<Sport> likedSportAcivity, List<User> frendList) {
         this.userID = UUID.randomUUID();
         this.name = name;
         this.firstname = firstname;
-        this.gbdate = gbdate;
+        this.birthday = birthday;
         this.likedSportAcivity = likedSportAcivity;
         this.frendList = frendList;
+    }
+    @Ignore
+    public User(){
+
+    }
+
+
+    public UUID getUserID() {
+        return userID;
+    }
+
+    public void setUserID(UUID userID) {
+        this.userID = userID;
     }
 
     public String getName() {
@@ -52,12 +69,12 @@ public class User {
         this.firstname = firstname;
     }
 
-    public Date getGbdate() {
-        return gbdate;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setGbdate(Date gbdate) {
-        this.gbdate = gbdate;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public List<Sport> getLikedSportAcivity() {

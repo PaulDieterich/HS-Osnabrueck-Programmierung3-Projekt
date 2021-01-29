@@ -1,4 +1,4 @@
-package de.hsos.sportwetter.user;
+package de.hsos.sportwetter.classes.user;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,8 +7,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
-
-import de.hsos.sportwetter.sport.Sport;
 
 /**
  * @author Paul Dieterich
