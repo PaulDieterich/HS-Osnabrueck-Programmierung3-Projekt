@@ -1,4 +1,4 @@
-package de.hsos.sportwetter.location;
+package de.hsos.sportwetter.classes.location;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -26,8 +26,8 @@ public interface LocationDao {
         @Delete
         void deleteLocation(Location... location);
 
-        @Query("SELECT * FROM Sport")
-        public List<Location> getAllLocations();
+     //@Query("SELECT * FROM Sport")
+    // public List<Location> getAllLocations();
 
     }
 

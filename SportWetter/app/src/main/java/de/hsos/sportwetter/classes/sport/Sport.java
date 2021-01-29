@@ -1,5 +1,6 @@
-package de.hsos.sportwetter.sport;
+package de.hsos.sportwetter.classes.sport;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -13,7 +14,7 @@ import java.util.UUID;
 
 @Entity(tableName = "SPORT")
 public class Sport {
-    @PrimaryKey
+    @PrimaryKey @NonNull
     @ColumnInfo(name = "sport_id")
     private UUID sportID;
     @ColumnInfo(name = "sport_name")
@@ -23,11 +24,20 @@ public class Sport {
     @ColumnInfo(name = "max_number_of_participants")
     private int maxNumberOfParticipants;
 
-    public Sport(UUID sportID, String name, int min_anzahl, int max_anzahl) {
-        this.sportID = sportID;
+    public Sport(){
+        this.sportID = UUID.randomUUID();
+        this.name = "unset";
+        this.minNumberOfParticipants = 0;
+        this.maxNumberOfParticipants = 0;
+    }
+    public Sport(String name, int min_anzahl, int max_anzahl) {
+        this.sportID = UUID.randomUUID();
         this.name = name;
         this.minNumberOfParticipants = min_anzahl;
         this.maxNumberOfParticipants = max_anzahl;
+    }
+
+    public Sport(String sport) {
     }
 
     public UUID getSportID() {
@@ -60,5 +70,9 @@ public class Sport {
 
     public void setMaxNumberOfParticipants(int maxNumberOfParticipants) {
         this.maxNumberOfParticipants = maxNumberOfParticipants;
+    }
+    @Override
+    public String toString(){
+        return "{"+getSportID() +","+getName()+","+ getMinNumberOfParticipants() +","+getMaxNumberOfParticipants() + "}";
     }
 }

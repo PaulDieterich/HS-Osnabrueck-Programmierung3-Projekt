@@ -1,4 +1,4 @@
-package de.hsos.sportwetter.weather;
+package de.hsos.sportwetter.classes.weather;
 
 
 

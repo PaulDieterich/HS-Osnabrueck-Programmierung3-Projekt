@@ -1,7 +1,10 @@
-package de.hsos.sportwetter.location;
+package de.hsos.sportwetter.classes.location;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 /**
  * @author Paul Dieterich
  * location klasse für die erstellung von locaion Objekten
@@ -10,7 +13,7 @@ import androidx.room.Entity;
 
 @Entity(tableName = "LOCATION")
 public class Location {
-
+    @PrimaryKey @NonNull
     @ColumnInfo(name = "placeName")
     private String placeName;
     @ColumnInfo(name = "street")
@@ -26,6 +29,15 @@ public class Location {
     @ColumnInfo(name = "longitude")
     private long longitude;
 
+    public Location(){
+        this.placeName = "unset";
+        this.street = "unset";
+        this.country = "unset";
+        this.city = "unset";
+        this.plz = 0;
+        this.latitude = 0;
+        this.longitude = 0;
+    }
     public Location(String placeName, String streed, String country, String city, int plz, long latitude, long longitude) {
         this.placeName = placeName;
         this.street = streed;
@@ -34,6 +46,20 @@ public class Location {
         this.plz = plz;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public Location(String l) {
+
+    }
+
+    public Location(Location l) {
+        this.placeName = "unset";
+        this.street = l.street;
+        this.country = l.country;
+        this.city = l.city;
+        this.plz = l.plz;
+        this.latitude = l.latitude;
+        this.longitude = l.longitude;
     }
 
     public String getPlaceName() {
