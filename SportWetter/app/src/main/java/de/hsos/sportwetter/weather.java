@@ -1,4 +1,4 @@
-package de.hsos.sportwetter.classes.weather;
+package de.hsos.sportwetter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,42 +11,7 @@ import net.aksingh.owmjapis.api.APIException;
 import net.aksingh.owmjapis.core.OWM;
 import net.aksingh.owmjapis.model.CurrentWeather;
 
-import de.hsos.sportwetter.R;
-
-/**
- * To save Data from
- * https://openweathermap.org/api
- *
- * Example of current weather API response
- *      "temp":306.15, //current temperature
- *      "pressure":1013,
- *      "humidity":44,
- *      "temp_min":306, //min current temperature in the city
- *      "temp_max":306 //max current temperature in the city
- *
- * Example of daily forecast weather API response
- *         "day":297.77,  //daily averaged temperature
- *         "min":293.52, //daily min temperature
- *         "max":297.77, //daily max temperature
- *         "night":293.52, //night temperature
- *         "eve":297.77, //evening temperature
- *         "morn":297.77}, //morning temperature
- * */
-
-public class Weather extends AppCompatActivity {
-
-    private float temp;
-    private float temp_min;
-    private float temp_max;
-    private int pressure;
-    private int humidity;
-
-    private float dailyAveragedTemp;
-    private float dailyMinTemp;
-    private float dailyMaxTemp;
-    private float nightTemp;
-    private float eveningTemp;
-    private float morningTemp;
+public class WeatherFragment extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +19,8 @@ public class Weather extends AppCompatActivity {
         setContentView(R.layout.activity_weather);
 
         OWM owm = new OWM(getString(R.string.openweather_api_key));
-        SearchView searchView = (SearchView)findViewById(R.id.stadtsuche);
+        SearchView searchView = new SearchView(this);
+        WebView webView = new WebView(this);
         CharSequence input = searchView.getQuery();
 
         TextView stadtname = (TextView)findViewById(R.id.stadtname);
@@ -75,7 +41,5 @@ public class Weather extends AppCompatActivity {
         } catch (APIException e) {
             e.printStackTrace();
         }
-
     }
-
 }
