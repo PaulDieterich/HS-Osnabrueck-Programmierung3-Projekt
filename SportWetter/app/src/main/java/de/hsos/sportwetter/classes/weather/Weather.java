@@ -2,6 +2,7 @@ package de.hsos.sportwetter.classes.weather;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -36,7 +37,8 @@ import java.util.concurrent.Executors;
  *         "morn":297.77}, //morning temperature
  * */
 
-public class Weather {
+public class Weather extends Context {
+
     private Bitmap bitmap;
     private Canvas canvas;
     private ImageView imageView;
@@ -56,7 +58,7 @@ public class Weather {
         this.imageView.setImageBitmap(this.bitmap);
         this.paint = new Paint();
 
-        //setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
         setContentView(imageView);
 
         //Cronet initialisieren, um Executor zu bauen
@@ -77,5 +79,8 @@ public class Weather {
 
         //Request abfeuern
         request.start();
+    }
+
+    private void setContentView(ImageView imageView) {
     }
 }
