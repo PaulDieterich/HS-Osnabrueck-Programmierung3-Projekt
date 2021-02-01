@@ -37,50 +37,21 @@ import java.util.concurrent.Executors;
  *         "morn":297.77}, //morning temperature
  * */
 
-public class Weather extends Context {
+public class Weather{
 
-    private Bitmap bitmap;
-    private Canvas canvas;
-    private ImageView imageView;
-    private Paint paint;
 
-    private int breite, hoehe;
-    private int cityID;
+    private float temp;
+    private float temp_min;
+    private float temp_max;
+    private int pressure;
+    private int humidity;
 
-    final private String apiKey = "21e7a9fdfcb6191632a1252da242cc81";
+    private float dailyAveragedTemp;
+    private float dailyMinTemp;
+    private float dailyMaxTemp;
+    private float nightTemp;
+    private float eveningTemp;
+    private float morningTemp;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.bitmap = Bitmap.createBitmap(this.breite, this.hoehe, Bitmap.Config.ARGB_8888);
-        this.canvas = new Canvas(this.bitmap);
-        this.imageView = new ImageView(this);
-        this.imageView.setImageBitmap(this.bitmap);
-        this.paint = new Paint();
 
-        setContentView(R.layout.activity_main);
-        setContentView(imageView);
-
-        //Cronet initialisieren, um Executor zu bauen
-        CronetProviderInstaller.installProvider(this);
-        CronetEngine.Builder myBuilder = new CronetEngine.Builder(this);
-        CronetEngine cronetEngine = myBuilder.build();
-
-        //Executor initialisieren, einzelner Thread (Multithread ginge wohl auch)
-        Executor executor = Executors.newSingleThreadExecutor();
-
-        //Builder mit URL (CityID aus res/city.list.json), Callback-Object und Executor vorbereiten
-        UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
-                "api.openweathermap.org/data/2.5/weather?id=" + cityID + "&appid=" + apiKey,
-                new Callback(), executor);
-
-        //Request ueber den Builder bauen
-        UrlRequest request = requestBuilder.build();
-
-        //Request abfeuern
-        request.start();
-    }
-
-    private void setContentView(ImageView imageView) {
-    }
 }
