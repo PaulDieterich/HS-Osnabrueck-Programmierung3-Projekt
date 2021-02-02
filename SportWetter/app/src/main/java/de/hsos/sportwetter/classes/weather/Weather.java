@@ -3,7 +3,6 @@ package de.hsos.sportwetter.classes.weather;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.webkit.WebView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -48,10 +47,13 @@ public class Weather extends AppCompatActivity {
     private float eveningTemp;
     private float morningTemp;
 
+
+    //TODO: Business Logik! Die UI Elemente werden in ui/weather/WeatherFragment behandelt!
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weather);
+        setContentView(R.layout.fragment_weather);
 
         OWM owm = new OWM(getString(R.string.openweather_api_key));
         SearchView searchView = (SearchView)findViewById(R.id.stadtsuche);
@@ -62,20 +64,19 @@ public class Weather extends AppCompatActivity {
         TextView maxTemp = (TextView)findViewById(R.id.maxTemp);
 
         try {
-            CurrentWeather cwd = owm.currentWeatherByCityName(input.toString());
+            CurrentWeather cwd = owm.currentWeatherByCityName("Braunschweig", OWM.Country.GERMANY);
             if(cwd.hasRespCode() && cwd.getRespCode() == 200) {
                 if(cwd.hasCityName()) {
                     stadtname.setText(cwd.getCityName());
                 }
                 if(cwd.hasMainData() && cwd.getMainData().hasTempMin() && cwd.getMainData().hasTempMax()) {
-                    minTemp.setText(cwd.getMainData().getTempMin() + "°C");
-                    maxTemp.setText(cwd.getMainData().getTempMax() + "°C");
+                    minTemp.setText(cwd.getMainData().getTempMin().toString());
+                    maxTemp.setText(cwd.getMainData().getTempMax().toString());
                 }
             }
         } catch (APIException e) {
             e.printStackTrace();
         }
-
     }
 
 }
