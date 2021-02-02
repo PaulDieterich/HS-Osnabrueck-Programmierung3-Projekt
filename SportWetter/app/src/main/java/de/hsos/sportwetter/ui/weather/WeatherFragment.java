@@ -2,11 +2,15 @@ package de.hsos.sportwetter.ui.weather;
 
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import de.hsos.sportwetter.R;
 
@@ -60,7 +64,25 @@ public class WeatherFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_weather, container, false);
+
+        TextView stadtname = (TextView) view.findViewById(R.id.stadtname);
+        TextView minTemp = (TextView) view.findViewById(R.id.minTemp);
+        TextView maxTemp = (TextView) view.findViewById(R.id.maxTemp);
+
+        //EditText searchView = (EditText) view.findViewById(R.id.stadtsuche);
+
+        stadtname.setText("Sample Town");
+        minTemp.setText("Sample Min Temp");
+        maxTemp.setText("Sample Max Temp");
+
+        stadtname.setTextSize(30);
+        stadtname.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        minTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        maxTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_weather, container, false);
+        return view;
     }
 }
