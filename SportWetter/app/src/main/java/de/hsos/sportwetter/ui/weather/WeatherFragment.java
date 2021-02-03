@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import de.hsos.sportwetter.R;
+import de.hsos.sportwetter.classes.weather.Weather;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,9 +80,12 @@ public class WeatherFragment extends Fragment implements View.OnClickListener{
         Button addBtn = (Button) view.findViewById(R.id.add_btn);
         //EditText searchView = (EditText) view.findViewById(R.id.stadtsuche);
 
-        stadtname.setText("Sample Town");
-        minTemp.setText("Sample Min Temp");
-        maxTemp.setText("Sample Max Temp");
+        Weather weather = new Weather();
+        weather.onCreate(savedInstanceState);
+
+        stadtname.setText(weather.getStadtname());
+        minTemp.setText(Double.toString(weather.getTempMin()));
+        maxTemp.setText(Double.toString(weather.getTempMax()));
 
         stadtname.setTextSize(30);
         stadtname.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

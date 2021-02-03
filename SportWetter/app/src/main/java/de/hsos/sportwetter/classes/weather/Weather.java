@@ -34,49 +34,57 @@ import de.hsos.sportwetter.R;
 
 public class Weather extends AppCompatActivity {
 
-    private float temp;
-    private float temp_min;
-    private float temp_max;
+    private String stadtname;
+
+    private double temp;
+    private double temp_min;
+    private double temp_max;
     private int pressure;
     private int humidity;
 
-    private float dailyAveragedTemp;
-    private float dailyMinTemp;
-    private float dailyMaxTemp;
-    private float nightTemp;
-    private float eveningTemp;
-    private float morningTemp;
+    private double dailyAveragedTemp;
+    private double dailyMinTemp;
+    private double dailyMaxTemp;
+    private double nightTemp;
+    private double eveningTemp;
+    private double morningTemp;
 
 
     //TODO: Business Logik! Die UI Elemente werden in ui/weather/WeatherFragment behandelt!
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_weather);
 
         OWM owm = new OWM(getString(R.string.openweather_api_key));
-        SearchView searchView = (SearchView)findViewById(R.id.stadtsuche);
-        CharSequence input = searchView.getQuery();
-
-        TextView stadtname = (TextView)findViewById(R.id.stadtname);
-        TextView minTemp = (TextView)findViewById(R.id.minTemp);
-        TextView maxTemp = (TextView)findViewById(R.id.maxTemp);
 
         try {
             CurrentWeather cwd = owm.currentWeatherByCityName("Braunschweig", OWM.Country.GERMANY);
             if(cwd.hasRespCode() && cwd.getRespCode() == 200) {
                 if(cwd.hasCityName()) {
-                    stadtname.setText(cwd.getCityName());
+                    this.stadtname = cwd.getCityName();
                 }
                 if(cwd.hasMainData() && cwd.getMainData().hasTempMin() && cwd.getMainData().hasTempMax()) {
-                    minTemp.setText(cwd.getMainData().getTempMin().toString());
-                    maxTemp.setText(cwd.getMainData().getTempMax().toString());
+                    this.temp_min = cwd.getMainData().getTempMin();
+                    this.temp_max = cwd.getMainData().getTempMax();
                 }
             }
         } catch (APIException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getStadtname() {
+        return this.stadtname;
+    }
+
+    public double getTempMin() {
+        return this.temp_min;
+    }
+
+    public double getTempMax() {
+        return this.temp_max;
     }
 
 }
