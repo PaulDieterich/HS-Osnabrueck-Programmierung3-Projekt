@@ -1,5 +1,15 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <PreferenceCategory android:title="Account">
+        <EditTextPreference
+            android:defaultValue="false"
+            android:key="edit_text_preference_1"
+            android:selectAllOnFocus="false"
+            android:singleLine="true"
+            android:title="Profile"
+            app:icon="@drawable/ic_baseline_supervised_user_circle_24" />
+    </PreferenceCategory>
     <PreferenceCategory app:title="@string/messages_header">
 
         <EditTextPreference

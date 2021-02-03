@@ -11,35 +11,44 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
+            android:id="@+id/action_mainFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
+        <action
             android:id="@+id/action_mainFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_weatherFragment"
-            app:destination="@id/weatherFragment" />
+            android:id="@+id/action_mainFragment_to_settingsFragment2"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_activityItemFragment"
+            app:destination="@id/activityItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewWeatherLocationFragment"
         android:name="de.hsos.sportwetter.ui.weather.AddNewWeatherLocationFragment"
         android:label="fragment_add_new_weather_location"
-        tools:layout="@layout/fragment_add_new_weather_location" />
-    <fragment
-        android:id="@+id/activityFragment"
-        android:name="de.hsos.sportwetter.ui.activitys.ActivityFragment"
-        android:label="fragment_activity"
-        tools:layout="@layout/fragment_activity" />
+        tools:layout="@layout/fragment_weather_add_new_location" />
     <fragment
         android:id="@+id/weatherFragment"
         android:name="de.hsos.sportwetter.ui.weather.WeatherFragment"
         android:label="fragment_activity"
-        tools:layout="@layout/fragment_weather" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="de.hsos.sportwetter.ui.settings.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_weather" >
+        <action
+            android:id="@+id/action_weatherFragment_to_addNewWeatherLocationFragment"
+            app:destination="@id/addNewWeatherLocationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mapsFragment"
         android:name="de.hsos.sportwetter.MapFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="de.hsos.sportwetter.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/activityItemFragment"
+        android:name="de.hsos.sportwetter.ui.activitys.activityItemFragment"
+        android:label="fragment_activity_item_list"
+        tools:layout="@layout/fragment_activity_item_list" />
 </navigation>
