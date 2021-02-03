@@ -14,9 +14,9 @@ import java.util.UUID;
 
 @Entity(tableName = "SPORT")
 public class Sport {
-    @PrimaryKey @NonNull
+    @PrimaryKey(autoGenerate = true) @NonNull
     @ColumnInfo(name = "sport_id")
-    private UUID sportID;
+    private long sportID;
     @ColumnInfo(name = "sport_name")
     private String name;
     @ColumnInfo(name = "min_number_of_participants")
@@ -25,13 +25,13 @@ public class Sport {
     private int maxNumberOfParticipants;
 
     public Sport(){
-        this.sportID = UUID.randomUUID();
+
         this.name = "unset";
         this.minNumberOfParticipants = 0;
         this.maxNumberOfParticipants = 0;
     }
     public Sport(String name, int min_anzahl, int max_anzahl) {
-        this.sportID = UUID.randomUUID();
+
         this.name = name;
         this.minNumberOfParticipants = min_anzahl;
         this.maxNumberOfParticipants = max_anzahl;
@@ -40,11 +40,11 @@ public class Sport {
     public Sport(String sport) {
     }
 
-    public UUID getSportID() {
+    public long getSportID() {
         return sportID;
     }
 
-    public void setSportID(UUID sportID) {
+    public void setSportID(long sportID) {
         this.sportID = sportID;
     }
 

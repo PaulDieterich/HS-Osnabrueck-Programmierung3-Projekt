@@ -12,13 +12,11 @@ import java.util.List;
 import java.util.UUID;
 import de.hsos.sportwetter.classes.sport.Sport;
 
-
-
 @Entity(tableName = "USER")
 public class User {
-    @PrimaryKey @NonNull
+    @PrimaryKey(autoGenerate = true) @NonNull
     @ColumnInfo(name="user_id")
-    private UUID userID;
+    private long userID;
     @ColumnInfo(name="name")
     private String name;
     @ColumnInfo(name="firstname")
@@ -32,7 +30,7 @@ public class User {
 
 
     public User( String name, String firstname, Date birthday, List<Sport> likedSportAcivity, List<User> friendList) {
-        this.userID = UUID.randomUUID();
+
         this.name = name;
         this.firstname = firstname;
         this.birthday = birthday;
@@ -44,12 +42,11 @@ public class User {
 
     }
 
-
-    public UUID getUserID() {
+    public long getUserID() {
         return userID;
     }
 
-    public void setUserID(UUID userID) {
+    public void setUserID(long userID) {
         this.userID = userID;
     }
 

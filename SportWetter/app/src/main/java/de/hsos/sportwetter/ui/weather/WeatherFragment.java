@@ -1,13 +1,17 @@
 package de.hsos.sportwetter.ui.weather;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -19,7 +23,8 @@ import de.hsos.sportwetter.R;
  * Use the {@link WeatherFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WeatherFragment extends Fragment {
+@RequiresApi(api = Build.VERSION_CODES.M)
+public class WeatherFragment extends Fragment implements View.OnClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +35,7 @@ public class WeatherFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    NavController navController;
     public WeatherFragment() {
         // Required empty public constructor
     }
@@ -70,7 +76,7 @@ public class WeatherFragment extends Fragment {
         TextView stadtname = (TextView) view.findViewById(R.id.stadtname);
         TextView minTemp = (TextView) view.findViewById(R.id.minTemp);
         TextView maxTemp = (TextView) view.findViewById(R.id.maxTemp);
-
+        Button addBtn = (Button) view.findViewById(R.id.add_btn);
         //EditText searchView = (EditText) view.findViewById(R.id.stadtsuche);
 
         stadtname.setText("Sample Town");
@@ -84,5 +90,10 @@ public class WeatherFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        navController.navigate(R.id.action_weatherFragment_to_addNewWeatherLocationFragment);
     }
 }

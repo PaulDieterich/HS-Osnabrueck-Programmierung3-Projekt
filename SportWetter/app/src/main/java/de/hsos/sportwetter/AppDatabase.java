@@ -31,7 +31,7 @@ import de.hsos.sportwetter.classes.user.UserDao;
         Location.class,
         Activity.class
 },
-version = 0,
+version = 1,
 exportSchema = false
 )
 @TypeConverters({Converters.class})
@@ -46,15 +46,15 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseWriteExecutor =
-            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static AppDatabase getDatabase(final Context context) {
+    public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null)
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "AppDatabase").build();
+
+                            AppDatabase.class, "AppDatabase").fallbackToDestructiveMigration().build();
             }
         }
         return INSTANCE;

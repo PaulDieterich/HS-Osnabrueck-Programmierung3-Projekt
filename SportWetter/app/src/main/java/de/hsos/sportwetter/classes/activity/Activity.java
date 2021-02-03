@@ -1,10 +1,18 @@
 package de.hsos.sportwetter.classes.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.UUID;
 import de.hsos.sportwetter.classes.location.Location;
 import de.hsos.sportwetter.classes.sport.Sport;
@@ -18,9 +26,9 @@ import de.hsos.sportwetter.classes.user.ActivityProvider;
 @Entity(tableName = "ACTIVITY")
 public class Activity {
 
-    @PrimaryKey @NonNull
+    @PrimaryKey(autoGenerate = true) @NonNull
     @ColumnInfo(name = "activity_id")
-    private UUID uuid;
+    private long id;
     @ColumnInfo(name = "name")
     private String name;
     @ColumnInfo(name = "provider")
@@ -33,7 +41,6 @@ public class Activity {
     private Location start;
 
     public Activity(){
-        this.uuid = UUID.randomUUID();
         this.name = "unset";
         this.provider = new ActivityProvider();
         this.art = new Sport();
@@ -42,7 +49,6 @@ public class Activity {
     }
     @Ignore
     public Activity(String name, ActivityProvider provider, Sport art, Location ziel, Location start) {
-        this.uuid = UUID.randomUUID();
         this.name = name;
         this.provider = provider;
         this.art = art;
@@ -50,12 +56,12 @@ public class Activity {
         this.start = start;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public long getId() {
+        return id;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {

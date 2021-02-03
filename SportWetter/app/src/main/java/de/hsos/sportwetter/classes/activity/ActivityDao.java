@@ -23,5 +23,6 @@ public interface ActivityDao {
     @Query("SELECT * FROM Activity")
     public List<Activity> getAllActivitys();
 
+
 }
 
