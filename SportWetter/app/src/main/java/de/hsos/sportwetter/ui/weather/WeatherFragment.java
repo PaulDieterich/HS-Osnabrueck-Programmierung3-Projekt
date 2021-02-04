@@ -1,5 +1,6 @@
 package de.hsos.sportwetter.ui.weather;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -81,7 +82,10 @@ public class WeatherFragment extends Fragment implements View.OnClickListener{
         //EditText searchView = (EditText) view.findViewById(R.id.stadtsuche);
 
         Weather weather = new Weather();
-        weather.onCreate(savedInstanceState);
+
+        //TODO: Aufruf der Logik, vielleicht als Background Task
+        Intent intent = new Intent(this.getContext(), Weather.class);
+        intent.getAction();
 
         stadtname.setText(weather.getStadtname());
         minTemp.setText(Double.toString(weather.getTempMin()));
