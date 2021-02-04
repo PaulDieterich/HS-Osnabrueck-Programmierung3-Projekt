@@ -57,6 +57,9 @@ dependencies {
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:1.0.0-alpha06"
 
+    // Implementation AndroiX Preference
+    implementation 'androidx.preference:preference:1.0.0-rc02'
+
     //-------------------------------------------------------------------------------------------
     def fragment_version = "1.2.5"
 
