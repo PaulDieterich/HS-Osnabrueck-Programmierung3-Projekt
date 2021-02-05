@@ -1,11 +1,15 @@
 package de.hsos.sportwetter.ui.weather;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 
@@ -17,9 +21,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.aksingh.owmjapis.api.APIException;
 
+import de.hsos.sportwetter.MainActivity;
+import de.hsos.sportwetter.MainFragment;
 import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.weather.Weather;
 
@@ -30,6 +37,9 @@ import de.hsos.sportwetter.classes.weather.Weather;
  */
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class WeatherFragment extends Fragment implements View.OnClickListener {
+
+    private static final int INTERNET_PERMISSION = 100;
+    private Weather weather;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,14 +80,20 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        this.weather = new Weather(getString(R.string.openweather_api_key));
+
+        Thread thread = new Thread(() -> weather.wetterAbfrage());
+        thread.start();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
 
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
@@ -87,10 +103,15 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         Button addBtn = (Button) view.findViewById(R.id.add_btn);
         //EditText searchView = (EditText) view.findViewById(R.id.stadtsuche);
 
-        Weather weather = new Weather(getString(R.string.openweather_api_key));
-
-        Thread thread = new Thread(() -> weather.wetterAbfrage());
-        thread.start();
+        if(ContextCompat.checkSelfPermission(
+                this.getContext(), Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(
+                    this.getContext(), "Internet permission already granted", Toast.LENGTH_SHORT).show();
+        } else {
+            ActivityCompat.requestPermissions(
+                    this.getActivity(), new String[]{Manifest.permission.INTERNET}, INTERNET_PERMISSION
+            );
+        }
 
         stadtname.setTextSize(30);
         stadtname.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
