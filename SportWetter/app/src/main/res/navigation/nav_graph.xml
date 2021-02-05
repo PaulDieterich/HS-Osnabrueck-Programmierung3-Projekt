@@ -39,16 +39,43 @@
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="de.hsos.sportwetter.MapFragment"
+        android:name="de.hsos.sportwetter.ui.maps.MapFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="de.hsos.sportwetter.ui.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/activityItemFragment"
         android:name="de.hsos.sportwetter.ui.activitys.activityItemFragment"
         android:label="fragment_activity_item_list"
-        tools:layout="@layout/fragment_activity_item_list" />
+        tools:layout="@layout/fragment_activity_item_list" >
+        <action
+            android:id="@+id/action_activityItemFragment_to_activtyInfo"
+            app:destination="@id/activtyInfo" />
+    </fragment>
+    <fragment
+        android:id="@+id/activtyInfo"
+        android:name="de.hsos.sportwetter.ui.activitys.ActivtyInfo"
+        android:label="fragment_activty_info"
+        tools:layout="@layout/fragment_activty_info" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="de.hsos.sportwetter.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="de.hsos.sportwetter.ui.settings.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
