@@ -88,7 +88,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        this.weather = new Weather(getString(R.string.openweather_api_key));
+        this.weather = new Weather(getString(R.string.openweather_key));
         this.handler = new Handler();
     }
 
@@ -142,7 +142,6 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         };
         handler.post(runnableCode);
 
-        // Inflate the layout for this fragment
         return view;
     }
 
