@@ -1,16 +1,9 @@
 package de.hsos.sportwetter.classes.weather;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
-import android.os.Bundle;
-import android.widget.SearchView;
-import android.widget.TextView;
-
-import net.aksingh.owmjapis.api.APIException;
 import net.aksingh.owmjapis.core.OWM;
 import net.aksingh.owmjapis.model.CurrentWeather;
-
-import de.hsos.sportwetter.R;
 
 /**
  * To save Data from
@@ -32,15 +25,19 @@ import de.hsos.sportwetter.R;
  *         "morn":297.77}, //morning temperature
  * */
 
-public class Weather extends AppCompatActivity {
+public class Weather {
 
     private String stadtname;
+    private String land;
+
+    @NonNull
+    private OWM owm;
 
     private double temp;
     private double temp_min;
     private double temp_max;
-    private int pressure;
-    private int humidity;
+    private double pressure;
+    private double humidity;
 
     private double dailyAveragedTemp;
     private double dailyMinTemp;
@@ -49,34 +46,42 @@ public class Weather extends AppCompatActivity {
     private double eveningTemp;
     private double morningTemp;
 
+    public Weather(String apikey) {
+        this.owm = new OWM(apikey);
+        //TODO: Freie Auswahl der Einheit (Metric, Imperial, Kelvin)
+        owm.setUnit(OWM.Unit.METRIC);
+    }
 
-    //TODO: Business Logik! Die UI Elemente werden in ui/weather/WeatherFragment behandelt!
+    //TODO: Logik! Die UI Elemente werden in ui/weather/WeatherFragment behandelt!
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_weather);
-
-        OWM owm = new OWM(getString(R.string.openweather_api_key));
-
+    public void wetterAbfrage(String stadt) {
         try {
-            CurrentWeather cwd = owm.currentWeatherByCityName("Braunschweig", OWM.Country.GERMANY);
+            CurrentWeather cwd = owm.currentWeatherByCityName(stadt);
             if(cwd.hasRespCode() && cwd.getRespCode() == 200) {
-                if(cwd.hasCityName()) {
-                    this.stadtname = cwd.getCityName();
-                }
-                if(cwd.hasMainData() && cwd.getMainData().hasTempMin() && cwd.getMainData().hasTempMax()) {
-                    this.temp_min = cwd.getMainData().getTempMin();
-                    this.temp_max = cwd.getMainData().getTempMax();
-                }
+                this.stadtname = cwd.getCityName();
+                this.land = cwd.getSystemData().getCountryCode();
+                this.temp = cwd.getMainData().getTemp();
+                this.temp_min = cwd.getMainData().getTempMin();
+                this.temp_max = cwd.getMainData().getTempMax();
+
+                this.pressure = cwd.getMainData().getPressure();
+                this.humidity = cwd.getMainData().getHumidity();
             }
-        } catch (APIException e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }
 
     public String getStadtname() {
         return this.stadtname;
+    }
+
+    public String getLand() {
+        return this.land;
+    }
+
+    public double getTempAvg() {
+        return this.temp;
     }
 
     public double getTempMin() {
