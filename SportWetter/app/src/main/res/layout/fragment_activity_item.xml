@@ -13,7 +13,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/content"
+            android:id="@+id/activiryName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
@@ -21,11 +21,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/item_number"
+            app:layout_constraintTop_toTopOf="@+id/ActiviryLocation"
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/content2"
+            android:id="@+id/activiryArt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
@@ -37,13 +37,14 @@
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/item_number"
+            android:id="@+id/ActiviryLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
+            android:autoText="false"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/content"
+            app:layout_constraintEnd_toStartOf="@+id/activiryName"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
