@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,15 +99,16 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
         TextView stadtname = (TextView) view.findViewById(R.id.stadtname);
+        TextView land = (TextView) view.findViewById(R.id.land);
+        TextView avgTemp = (TextView) view.findViewById(R.id.avgTemp);
         TextView minTemp = (TextView) view.findViewById(R.id.minTemp);
         TextView maxTemp = (TextView) view.findViewById(R.id.maxTemp);
         Button addBtn = (Button) view.findViewById(R.id.add_btn);
-        //EditText searchView = (EditText) view.findViewById(R.id.stadtsuche);
+        SearchView stadtsuche = (SearchView) view.findViewById(R.id.stadtsuche);
 
         if(ContextCompat.checkSelfPermission(
-                this.getContext(), Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(
-                    this.getContext(), "Internet permission already granted", Toast.LENGTH_SHORT).show();
+            this.getContext(), Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this.getContext(), "Internet permission already granted", Toast.LENGTH_SHORT).show();
         } else {
             ActivityCompat.requestPermissions(
                     this.getActivity(), new String[]{Manifest.permission.INTERNET}, INTERNET_PERMISSION
@@ -115,21 +117,25 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
 
         stadtname.setTextSize(30);
         stadtname.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        land.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        avgTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         minTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         maxTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         //TODO: Aufruf der Logik, vielleicht als Background Task
         //Thread thread = new Thread(() -> weather.wetterAbfrage());
-        //thread.run();
+        //thread.stadt();
         Runnable runnableCode = new Runnable() {
             @Override
             public void run() {
-                weather.wetterAbfrage();
+                weather.wetterAbfrage(stadtsuche.getQuery().toString());
                 stadtname.setText(weather.getStadtname());
-                minTemp.setText(Double.toString(weather.getTempMin()));
-                maxTemp.setText(Double.toString(weather.getTempMax()));
-                Log.d("Handlers", "Called on main thread");
-                // Repeat this the same runnable code block again another 2 seconds
+                land.setText(weather.getLand());
+                avgTemp.setText(Double.toString(weather.getTempAvg()) + " °C");
+                minTemp.setText(Double.toString(weather.getTempMin()) + " °C");
+                maxTemp.setText(Double.toString(weather.getTempMax()) + " °C");
+                // Log.d("Handlers", "Called on main thread");
+                // Repeat this the same runnable code block again another 5 seconds
                 // 'this' is referencing the Runnable object
                 handler.postDelayed(this, 5000);
             }

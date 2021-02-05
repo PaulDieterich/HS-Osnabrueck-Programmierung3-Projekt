@@ -5,8 +5,6 @@ import androidx.annotation.NonNull;
 import net.aksingh.owmjapis.core.OWM;
 import net.aksingh.owmjapis.model.CurrentWeather;
 
-import java.util.logging.Handler;
-
 /**
  * To save Data from
  * https://openweathermap.org/api
@@ -30,6 +28,7 @@ import java.util.logging.Handler;
 public class Weather {
 
     private String stadtname;
+    private String land;
 
     @NonNull
     private OWM owm;
@@ -37,8 +36,8 @@ public class Weather {
     private double temp;
     private double temp_min;
     private double temp_max;
-    private int pressure;
-    private int humidity;
+    private double pressure;
+    private double humidity;
 
     private double dailyAveragedTemp;
     private double dailyMinTemp;
@@ -49,33 +48,40 @@ public class Weather {
 
     public Weather(String apikey) {
         this.owm = new OWM(apikey);
+        //TODO: Freie Auswahl der Einheit (Metric, Imperial, Kelvin)
+        owm.setUnit(OWM.Unit.METRIC);
     }
 
-    //TODO: Business Logik! Die UI Elemente werden in ui/weather/WeatherFragment behandelt!
+    //TODO: Logik! Die UI Elemente werden in ui/weather/WeatherFragment behandelt!
 
-    public void wetterAbfrage() {
+    public void wetterAbfrage(String stadt) {
         try {
-            CurrentWeather cwd = owm.currentWeatherByCityName("London");
+            CurrentWeather cwd = owm.currentWeatherByCityName(stadt);
             if(cwd.hasRespCode() && cwd.getRespCode() == 200) {
-                if (cwd.hasCityName()) {
-                    this.setStadtname(cwd.getCityName());
-                }
-                if (cwd.hasMainData() && cwd.getMainData().hasTempMin() && cwd.getMainData().hasTempMax()) {
-                    this.temp_min = cwd.getMainData().getTempMin();
-                    this.temp_max = cwd.getMainData().getTempMax();
-                }
+                this.stadtname = cwd.getCityName();
+                this.land = cwd.getSystemData().getCountryCode();
+                this.temp = cwd.getMainData().getTemp();
+                this.temp_min = cwd.getMainData().getTempMin();
+                this.temp_max = cwd.getMainData().getTempMax();
+
+                this.pressure = cwd.getMainData().getPressure();
+                this.humidity = cwd.getMainData().getHumidity();
             }
         } catch(Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void setStadtname(String stadtname) {
-        this.stadtname = stadtname;
-    }
-
     public String getStadtname() {
         return this.stadtname;
+    }
+
+    public String getLand() {
+        return this.land;
+    }
+
+    public double getTempAvg() {
+        return this.temp;
     }
 
     public double getTempMin() {
