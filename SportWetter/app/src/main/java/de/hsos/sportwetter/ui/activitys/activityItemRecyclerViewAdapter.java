@@ -50,9 +50,9 @@ public class activityItemRecyclerViewAdapter extends RecyclerView.Adapter<activi
 
         public ViewHolder(FragmentActivityItemBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
-            mContentView2 = binding.content2;
+            mIdView = binding.activiryArt;
+            mContentView = binding.ActiviryLocation;
+            mContentView2 = binding.activiryName;
         }
         @Override
         public String toString() {
