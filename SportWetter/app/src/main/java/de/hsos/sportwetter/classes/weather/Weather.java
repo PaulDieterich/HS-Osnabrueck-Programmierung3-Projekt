@@ -1,16 +1,9 @@
 package de.hsos.sportwetter.classes.weather;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
-import android.os.Bundle;
-import android.widget.SearchView;
-import android.widget.TextView;
-
-import net.aksingh.owmjapis.api.APIException;
 import net.aksingh.owmjapis.core.OWM;
 import net.aksingh.owmjapis.model.CurrentWeather;
-
-import de.hsos.sportwetter.R;
 
 /**
  * To save Data from
@@ -32,51 +25,71 @@ import de.hsos.sportwetter.R;
  *         "morn":297.77}, //morning temperature
  * */
 
-public class Weather extends AppCompatActivity {
+public class Weather {
 
-    private float temp;
-    private float temp_min;
-    private float temp_max;
-    private int pressure;
-    private int humidity;
+    private String stadtname;
+    private String land;
 
-    private float dailyAveragedTemp;
-    private float dailyMinTemp;
-    private float dailyMaxTemp;
-    private float nightTemp;
-    private float eveningTemp;
-    private float morningTemp;
+    @NonNull
+    private OWM owm;
 
+    private double temp;
+    private double temp_min;
+    private double temp_max;
+    private double pressure;
+    private double humidity;
 
-    //TODO: Business Logik! Die UI Elemente werden in ui/weather/WeatherFragment behandelt!
+    private double dailyAveragedTemp;
+    private double dailyMinTemp;
+    private double dailyMaxTemp;
+    private double nightTemp;
+    private double eveningTemp;
+    private double morningTemp;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_weather);
+    public Weather(String apikey) {
+        this.owm = new OWM(apikey);
+        //TODO: Freie Auswahl der Einheit (Metric, Imperial, Kelvin)
+        owm.setUnit(OWM.Unit.METRIC);
+    }
 
-        OWM owm = new OWM(getString(R.string.openweather_api_key));
-        SearchView searchView = (SearchView)findViewById(R.id.stadtsuche);
-        CharSequence input = searchView.getQuery();
+    //TODO: Logik! Die UI Elemente werden in ui/weather/WeatherFragment behandelt!
 
-        TextView stadtname = (TextView)findViewById(R.id.stadtname);
-        TextView minTemp = (TextView)findViewById(R.id.minTemp);
-        TextView maxTemp = (TextView)findViewById(R.id.maxTemp);
-
+    public void wetterAbfrage(String stadt) {
         try {
-            CurrentWeather cwd = owm.currentWeatherByCityName("Braunschweig", OWM.Country.GERMANY);
+            CurrentWeather cwd = owm.currentWeatherByCityName(stadt);
             if(cwd.hasRespCode() && cwd.getRespCode() == 200) {
-                if(cwd.hasCityName()) {
-                    stadtname.setText(cwd.getCityName());
-                }
-                if(cwd.hasMainData() && cwd.getMainData().hasTempMin() && cwd.getMainData().hasTempMax()) {
-                    minTemp.setText(cwd.getMainData().getTempMin().toString());
-                    maxTemp.setText(cwd.getMainData().getTempMax().toString());
-                }
+                this.stadtname = cwd.getCityName();
+                this.land = cwd.getSystemData().getCountryCode();
+                this.temp = cwd.getMainData().getTemp();
+                this.temp_min = cwd.getMainData().getTempMin();
+                this.temp_max = cwd.getMainData().getTempMax();
+
+                this.pressure = cwd.getMainData().getPressure();
+                this.humidity = cwd.getMainData().getHumidity();
             }
-        } catch (APIException e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getStadtname() {
+        return this.stadtname;
+    }
+
+    public String getLand() {
+        return this.land;
+    }
+
+    public double getTempAvg() {
+        return this.temp;
+    }
+
+    public double getTempMin() {
+        return this.temp_min;
+    }
+
+    public double getTempMax() {
+        return this.temp_max;
     }
 
 }

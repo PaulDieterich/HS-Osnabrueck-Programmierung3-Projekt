@@ -21,18 +21,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <SearchView
-        android:id="@+id/stadtsuche"
-        android:layout_width="411dp"
-        android:layout_height="68dp"
-        android:iconifiedByDefault="false"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/avgTemp"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:text="@string/temp_min"
+        app:layout_constraintBottom_toTopOf="@+id/stadtsuche"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.672" />
+        app:layout_constraintTop_toTopOf="@+id/land"
+        app:layout_constraintVertical_bias="0.245" />
+
+    <TextView
+        android:id="@+id/land"
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:text="@string/temp_min"
+        app:layout_constraintBottom_toTopOf="@+id/stadtsuche"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stadtname"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/stadtname"
@@ -43,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.363" />
+        app:layout_constraintVertical_bias="0.295" />
 
     <TextView
         android:id="@+id/minTemp"
@@ -54,8 +65,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stadtname"
-        app:layout_constraintVertical_bias="0.066" />
+        app:layout_constraintTop_toBottomOf="@+id/avgTemp"
+        app:layout_constraintVertical_bias="0.417" />
 
     <TextView
         android:id="@+id/maxTemp"
@@ -66,8 +77,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.714"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stadtname"
-        app:layout_constraintVertical_bias="0.066" />
+        app:layout_constraintTop_toBottomOf="@+id/avgTemp"
+        app:layout_constraintVertical_bias="0.417" />
+
+    <SearchView
+        android:id="@+id/stadtsuche"
+        android:layout_width="411dp"
+        android:layout_height="68dp"
+        android:iconifiedByDefault="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.672" />
 
     <Button
         android:id="@+id/add_btn"
@@ -75,7 +98,7 @@
         android:layout_height="38dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="+"
+        android:text="@string/add"
         app:layout_constraintBottom_toTopOf="@+id/stadtname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

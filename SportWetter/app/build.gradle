@@ -58,6 +58,11 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:1.0.0-alpha06"
 
     //-------------------------------------------------------------------------------------------
+    def preference_version = "1.1.1"
+    // Implementation AndroiX Preference
+    implementation "androidx.preference:preference:$preference_version"
+
+    //-------------------------------------------------------------------------------------------
     def fragment_version = "1.2.5"
 
     //https://developer.android.com/guide/fragments/create
@@ -69,6 +74,8 @@ dependencies {
         Source: https://github.com/iamashks/OWM-JAPIs
      */
     implementation files('libs\\owm-japis-2.5.3.0.jar')
+    implementation 'com.squareup.retrofit2:retrofit:2.0.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
 
     //-------------------------------------------------------------------------------------------
     //https://medium.com/@toddcookevt/android-room-storing-lists-of-objects-766cca57e3f9
