@@ -25,5 +25,5 @@ public interface UserDao {
     void deleteSport(User... user);
 
     @Query("SELECT * FROM User")
-    public List<User> getAllSports();
+    public List<User> getAllUsers();
 }

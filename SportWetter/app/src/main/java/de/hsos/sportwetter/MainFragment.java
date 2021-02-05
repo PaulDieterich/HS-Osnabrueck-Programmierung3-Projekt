@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import org.jetbrains.annotations.NotNull;
 
 
-public class MainFragment extends Fragment implements View.OnClickListener {
+public class MainFragment extends Fragment  {
 
 
 
@@ -28,14 +28,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        navController = Navigation.findNavController(view);
-        view.findViewById(R.id.weather_btn).setOnClickListener(this);
+
     }
 
-    public void onClick(View v) {
-        switch (v.getId()){
-       //     case R.id.weather_btn: navController.navigate(R.id.action_mainFragment_to_weatherFragment);
-        }
-    }
+
 }
 

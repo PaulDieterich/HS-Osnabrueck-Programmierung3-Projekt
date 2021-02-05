@@ -3,21 +3,27 @@ package de.hsos.sportwetter.ui.login;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.navigation.NavController;
 
 import android.util.Patterns;
 
+import de.hsos.sportwetter.AppDatabase;
+import de.hsos.sportwetter.classes.activity.ActivityDao;
+import de.hsos.sportwetter.classes.user.User;
+import de.hsos.sportwetter.classes.user.UserDao;
 import de.hsos.sportwetter.data.LoginRepository;
 import de.hsos.sportwetter.data.Result;
 import de.hsos.sportwetter.data.model.LoggedInUser;
 import de.hsos.sportwetter.R;
 
 public class LoginViewModel extends ViewModel {
-
+    NavController navController;
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
     LoginViewModel(LoginRepository loginRepository) {
+
         this.loginRepository = loginRepository;
     }
 
@@ -32,6 +38,7 @@ public class LoginViewModel extends ViewModel {
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
         Result<LoggedInUser> result = loginRepository.login(username, password);
+
 
         if (result instanceof Result.Success) {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
@@ -48,6 +55,8 @@ public class LoginViewModel extends ViewModel {
             loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));
         } else {
             loginFormState.setValue(new LoginFormState(true));
+
+
         }
     }
 
@@ -56,6 +65,8 @@ public class LoginViewModel extends ViewModel {
         if (username == null) {
             return false;
         }
+        //kein regex aber sollte reichen, nicht wirklich aussage kräftig aber fürn
+        // test das wirklich eine mailadresse angegeben wird.
         if (username.contains("@")) {
             return Patterns.EMAIL_ADDRESS.matcher(username).matches();
         } else {

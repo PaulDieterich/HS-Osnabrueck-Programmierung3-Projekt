@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +23,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import de.hsos.sportwetter.AppDatabase;
+import de.hsos.sportwetter.MainActivity;
+import de.hsos.sportwetter.classes.user.User;
+import de.hsos.sportwetter.classes.user.UserDao;
 import de.hsos.sportwetter.databinding.FragmentLoginBinding;
 
 import de.hsos.sportwetter.R;
@@ -29,27 +37,34 @@ public class LoginFragment extends Fragment {
 
     private LoginViewModel loginViewModel;
     private FragmentLoginBinding binding;
+    NavController navController;
+
+
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        UserDao dao = AppDatabase.getDatabase(getContext()).userDao();
+
 
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
-
+//id action_loginFragment_to_mainFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
-        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
+        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
+        final Button registerButton = binding.register;
         final ProgressBar loadingProgressBar = binding.loading;
 
         loginViewModel.getLoginFormState().observe(getViewLifecycleOwner(), new Observer<LoginFormState>() {
@@ -118,10 +133,15 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                loginViewModel.login(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+
             }
+        });
+        registerButton.setOnClickListener(v -> {
+            navController.navigate(R.id.action_loginFragment_to_mainFragment);
+
         });
     }
 
