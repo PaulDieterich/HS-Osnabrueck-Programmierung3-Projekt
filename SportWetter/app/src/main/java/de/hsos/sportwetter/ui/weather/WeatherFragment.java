@@ -13,7 +13,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 
+import android.os.Handler;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +42,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
 
     private static final int INTERNET_PERMISSION = 100;
     private Weather weather;
+    private Handler handler;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,10 +88,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         StrictMode.setThreadPolicy(policy);
 
         this.weather = new Weather(getString(R.string.openweather_api_key));
-
-        Thread thread = new Thread(() -> weather.wetterAbfrage());
-        thread.start();
-
+        this.handler = new Handler();
     }
 
     @Override
@@ -119,9 +119,22 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         maxTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         //TODO: Aufruf der Logik, vielleicht als Background Task
-        stadtname.setText(weather.getStadtname());
-        minTemp.setText(Double.toString(weather.getTempMin()));
-        maxTemp.setText(Double.toString(weather.getTempMax()));
+        //Thread thread = new Thread(() -> weather.wetterAbfrage());
+        //thread.run();
+        Runnable runnableCode = new Runnable() {
+            @Override
+            public void run() {
+                weather.wetterAbfrage();
+                stadtname.setText(weather.getStadtname());
+                minTemp.setText(Double.toString(weather.getTempMin()));
+                maxTemp.setText(Double.toString(weather.getTempMax()));
+                Log.d("Handlers", "Called on main thread");
+                // Repeat this the same runnable code block again another 2 seconds
+                // 'this' is referencing the Runnable object
+                handler.postDelayed(this, 5000);
+            }
+        };
+        handler.post(runnableCode);
 
         // Inflate the layout for this fragment
         return view;

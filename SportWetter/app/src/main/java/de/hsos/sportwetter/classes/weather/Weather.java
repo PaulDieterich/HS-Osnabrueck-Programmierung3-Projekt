@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import net.aksingh.owmjapis.core.OWM;
 import net.aksingh.owmjapis.model.CurrentWeather;
 
+import java.util.logging.Handler;
+
 /**
  * To save Data from
  * https://openweathermap.org/api
@@ -52,7 +54,6 @@ public class Weather {
     //TODO: Business Logik! Die UI Elemente werden in ui/weather/WeatherFragment behandelt!
 
     public void wetterAbfrage() {
-
         try {
             CurrentWeather cwd = owm.currentWeatherByCityName("London");
             if(cwd.hasRespCode() && cwd.getRespCode() == 200) {
