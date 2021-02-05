@@ -1,16 +1,9 @@
 package de.hsos.sportwetter.classes.weather;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
-import android.os.Bundle;
-import android.widget.SearchView;
-import android.widget.TextView;
-
-import net.aksingh.owmjapis.api.APIException;
 import net.aksingh.owmjapis.core.OWM;
 import net.aksingh.owmjapis.model.CurrentWeather;
-
-import de.hsos.sportwetter.R;
 
 /**
  * To save Data from
@@ -32,9 +25,12 @@ import de.hsos.sportwetter.R;
  *         "morn":297.77}, //morning temperature
  * */
 
-public class Weather extends AppCompatActivity {
+public class Weather {
 
     private String stadtname;
+
+    @NonNull
+    private OWM owm;
 
     private double temp;
     private double temp_min;
@@ -49,30 +45,32 @@ public class Weather extends AppCompatActivity {
     private double eveningTemp;
     private double morningTemp;
 
+    public Weather(String apikey) {
+        this.owm = new OWM(apikey);
+    }
 
     //TODO: Business Logik! Die UI Elemente werden in ui/weather/WeatherFragment behandelt!
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_weather);
-
-        OWM owm = new OWM(getString(R.string.openweather_api_key));
+    public void wetterAbfrage() {
 
         try {
-            CurrentWeather cwd = owm.currentWeatherByCityName("Braunschweig", OWM.Country.GERMANY);
+            CurrentWeather cwd = owm.currentWeatherByCityName("London");
             if(cwd.hasRespCode() && cwd.getRespCode() == 200) {
-                if(cwd.hasCityName()) {
-                    this.stadtname = cwd.getCityName();
+                if (cwd.hasCityName()) {
+                    this.setStadtname(cwd.getCityName());
                 }
-                if(cwd.hasMainData() && cwd.getMainData().hasTempMin() && cwd.getMainData().hasTempMax()) {
+                if (cwd.hasMainData() && cwd.getMainData().hasTempMin() && cwd.getMainData().hasTempMax()) {
                     this.temp_min = cwd.getMainData().getTempMin();
                     this.temp_max = cwd.getMainData().getTempMax();
                 }
             }
-        } catch (APIException e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setStadtname(String stadtname) {
+        this.stadtname = stadtname;
     }
 
     public String getStadtname() {

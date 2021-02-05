@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import net.aksingh.owmjapis.api.APIException;
 
 import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.weather.Weather;
@@ -26,7 +29,7 @@ import de.hsos.sportwetter.classes.weather.Weather;
  * create an instance of this fragment.
  */
 @RequiresApi(api = Build.VERSION_CODES.M)
-public class WeatherFragment extends Fragment implements View.OnClickListener{
+public class WeatherFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,6 +76,9 @@ public class WeatherFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
         TextView stadtname = (TextView) view.findViewById(R.id.stadtname);
@@ -81,20 +87,20 @@ public class WeatherFragment extends Fragment implements View.OnClickListener{
         Button addBtn = (Button) view.findViewById(R.id.add_btn);
         //EditText searchView = (EditText) view.findViewById(R.id.stadtsuche);
 
-        Weather weather = new Weather();
+        Weather weather = new Weather(getString(R.string.openweather_api_key));
 
-        //TODO: Aufruf der Logik, vielleicht als Background Task
-        Intent intent = new Intent(this.getContext(), Weather.class);
-        intent.getAction();
-
-        stadtname.setText(weather.getStadtname());
-        minTemp.setText(Double.toString(weather.getTempMin()));
-        maxTemp.setText(Double.toString(weather.getTempMax()));
+        Thread thread = new Thread(() -> weather.wetterAbfrage());
+        thread.start();
 
         stadtname.setTextSize(30);
         stadtname.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         minTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         maxTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+        //TODO: Aufruf der Logik, vielleicht als Background Task
+        stadtname.setText(weather.getStadtname());
+        minTemp.setText(Double.toString(weather.getTempMin()));
+        maxTemp.setText(Double.toString(weather.getTempMax()));
 
         // Inflate the layout for this fragment
         return view;
