@@ -122,7 +122,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         minTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         maxTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
-        //TODO: Aufruf der Logik, vielleicht als Background Task
+        //TODO: Aktualisierung jede Stunde bei gueltiger Stadt oder wenn User neue Anfrage abfeuert
         //Thread thread = new Thread(() -> weather.wetterAbfrage());
         //thread.stadt();
         Runnable runnableCode = new Runnable() {
@@ -141,7 +141,11 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
             }
         };
         handler.post(runnableCode);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> origin/main
         return view;
     }
 
