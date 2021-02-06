@@ -6,8 +6,8 @@ import java.util.List;
 import de.hsos.sportwetter.classes.sport.Sport;
 
 public class ActivityProvider extends User{
-    public ActivityProvider(String name, String firstname, Date gbdate, List<Sport> likedSportAcivity, List<User> frendList) {
-        super(name, firstname, gbdate, likedSportAcivity, frendList);
+    public ActivityProvider(String name, String firstname, String email,Date gbdate, List<Sport> likedSportAcivity, List<User> frendList) {
+        super(name, firstname,email, gbdate, likedSportAcivity, frendList);
     }
 
     public ActivityProvider(){

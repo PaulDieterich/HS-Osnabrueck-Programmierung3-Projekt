@@ -13,6 +13,8 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
+
 public class MainActivity extends AppCompatActivity {
     NavController navController = null;
     BottomNavigationView bottomNavigationView = null;
@@ -27,4 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
     }
+
+
+
 }

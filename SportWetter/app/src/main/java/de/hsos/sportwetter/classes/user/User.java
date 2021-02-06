@@ -21,6 +21,8 @@ public class User {
     private String name;
     @ColumnInfo(name="firstname")
     private String firstname;
+    @ColumnInfo(name="email")
+    private String email;
     @ColumnInfo(name="gbdate")
     private Date birthday;
     @ColumnInfo(name="liked_sport_acivity")
@@ -29,15 +31,16 @@ public class User {
     List<User> friendList;
 
 
-    public User( String name, String firstname, Date birthday, List<Sport> likedSportAcivity, List<User> friendList) {
+    public User(String name, String firstname, String email, Date birthday, List<Sport> likedSportAcivity, List<User> friendList) {
 
         this.name = name;
         this.firstname = firstname;
+        this.email = email;
         this.birthday = birthday;
         this.likedSportAcivity = likedSportAcivity;
         this.friendList = friendList;
     }
-    @Ignore
+        @Ignore
     public User(){
 
     }
@@ -65,6 +68,10 @@ public class User {
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
 
     public Date getBirthday() {
         return birthday;

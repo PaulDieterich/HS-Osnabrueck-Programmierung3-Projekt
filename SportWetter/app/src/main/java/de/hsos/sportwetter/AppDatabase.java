@@ -6,6 +6,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -53,8 +54,11 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null)
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-
-                            AppDatabase.class, "AppDatabase").fallbackToDestructiveMigration().build();
+                            AppDatabase.class, "AppDatabase")
+                            .fallbackToDestructiveMigration()
+                            .allowMainThreadQueries()
+                            .createFromAsset("database/sportWeather.db")
+                            .build();
             }
         }
         return INSTANCE;
