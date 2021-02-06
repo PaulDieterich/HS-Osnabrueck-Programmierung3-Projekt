@@ -141,11 +141,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
             }
         };
         handler.post(runnableCode);
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> origin/main
         return view;
     }
 
