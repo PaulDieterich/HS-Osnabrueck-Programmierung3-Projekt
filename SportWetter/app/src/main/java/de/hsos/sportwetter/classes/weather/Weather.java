@@ -72,6 +72,7 @@ public class Weather {
         }
     }
 
+
     public String getStadtname() {
         return this.stadtname;
     }
