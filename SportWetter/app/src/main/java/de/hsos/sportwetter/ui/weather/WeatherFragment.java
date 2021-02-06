@@ -88,7 +88,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        this.weather = new Weather(getString(R.string.openweather_api_key));
+        this.weather = new Weather(getString(R.string.openweather_key));
         this.handler = new Handler();
     }
 
@@ -122,7 +122,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         minTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         maxTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
-        //TODO: Aufruf der Logik, vielleicht als Background Task
+        //TODO: Aktualisierung jede Stunde bei gueltiger Stadt oder wenn User neue Anfrage abfeuert
         //Thread thread = new Thread(() -> weather.wetterAbfrage());
         //thread.stadt();
         Runnable runnableCode = new Runnable() {
@@ -141,8 +141,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
             }
         };
         handler.post(runnableCode);
-
-        // Inflate the layout for this fragment
+        
         return view;
     }
 
