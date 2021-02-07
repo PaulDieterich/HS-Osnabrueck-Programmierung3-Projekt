@@ -5,9 +5,12 @@
     android:id="@+id/list"
     android:name="de.hsos.sportwetter.activityItemFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.activitys.activityItemFragment"
-    tools:listitem="@layout/fragment_activity_item" />
+    tools:listitem="@layout/fragment_activity_item">
+
+
+</androidx.recyclerview.widget.RecyclerView>
