@@ -40,13 +40,8 @@ public class Activity {
     @ColumnInfo(name = "start")
     private Location start;
 
-    public Activity(){
-        this.name = "unset";
-        this.provider = new ActivityProvider();
-        this.art = new Sport();
-        this.ziel = new Location();
-        this.start = new Location();
-    }
+
+
     @Ignore
     public Activity(String name, ActivityProvider provider, Sport art, Location ziel, Location start) {
         this.name = name;
@@ -55,7 +50,13 @@ public class Activity {
         this.ziel = ziel;
         this.start = start;
     }
-
+    public Activity(){
+        this.name = "unset";
+        this.provider = new ActivityProvider();
+        this.art = new Sport();
+        this.ziel = new Location();
+        this.start = new Location();
+    }
     public long getId() {
         return id;
     }

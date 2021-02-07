@@ -12,13 +12,13 @@ import java.util.List;
 public interface ActivityDao {
 
     @Insert
-    void insertLocation(Activity activity);
+    void insertActivity(Activity activity);
 
     @Update
-    void updateLocation(Activity activity);
+    void updateActivity(Activity activity);
 
     @Delete
-    void deleteLocation(Activity... activity);
+    void deleteActivity(Activity... activity);
 
     @Query("SELECT * FROM Activity")
     public List<Activity> getAllActivitys();

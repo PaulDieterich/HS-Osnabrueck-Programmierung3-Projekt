@@ -1,14 +1,20 @@
 package de.hsos.sportwetter.classes.user;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.UUID;
 import de.hsos.sportwetter.classes.sport.Sport;
 
@@ -17,12 +23,16 @@ public class User {
     @PrimaryKey(autoGenerate = true) @NonNull
     @ColumnInfo(name="user_id")
     private long userID;
+    @ColumnInfo(name="username")
+    private String username;
     @ColumnInfo(name="name")
     private String name;
     @ColumnInfo(name="firstname")
     private String firstname;
     @ColumnInfo(name="email")
     private String email;
+    @ColumnInfo(name="passwd")
+    private String password;
     @ColumnInfo(name="gbdate")
     private Date birthday;
     @ColumnInfo(name="liked_sport_acivity")
@@ -40,7 +50,12 @@ public class User {
         this.likedSportAcivity = likedSportAcivity;
         this.friendList = friendList;
     }
-        @Ignore
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+    @Ignore
     public User(){
 
     }

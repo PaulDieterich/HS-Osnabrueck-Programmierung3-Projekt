@@ -16,13 +16,13 @@ import java.util.List;
 @Dao
 public interface UserDao {
     @Insert
-    void insertSport(User sport);
+    void insertUser(User sport);
 
     @Update
-    void updateSport(User user);
+    void updateUser(User user);
 
     @Delete
-    void deleteSport(User... user);
+    void deleteUser(User... user);
 
     @Query("SELECT * FROM User")
     public List<User> getAllUsers();
