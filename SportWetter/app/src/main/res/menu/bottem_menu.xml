@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_baseline_wb_sunny_24"
         android:title="weather" />
     <item
-        android:id="@+id/activityItemFragment"
+        android:id="@+id/activityFragment"
         android:icon="@drawable/ic_baseline_calendar_today_24"
         android:title="aktivitäten" />
     <item
