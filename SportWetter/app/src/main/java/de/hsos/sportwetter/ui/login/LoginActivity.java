@@ -23,7 +23,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import de.hsos.sportwetter.MainActivity;
 import de.hsos.sportwetter.R;
-import de.hsos.sportwetter.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
     Button login, register;

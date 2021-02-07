@@ -48,12 +48,10 @@ public class AddNewWeatherLocationFragment extends Fragment  {
         String stadtname = searchView.getQuery().toString();
 
         /**
-         * TODO: Create search for Cityname and get all Citys in a list that are equel. 
+         * TODO: Create search for Cityname and get all Citys in a list that are equel.
         Runnable runnable = new Runnable() {
             @Override
-            public void run() {
-
-            }
+            public void run() {}
         }
         */
 

@@ -5,13 +5,16 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -26,8 +29,7 @@ import de.hsos.sportwetter.classes.activity.Activity;
 
 public class ActivityFragment extends Fragment{
 
-
-
+    Button createActivity;
     public interface ActivityFragmentListener{
         void onInputActivitySent(Activity a);
     }
@@ -45,6 +47,7 @@ public class ActivityFragment extends Fragment{
             view.setClickable(true);
             view.setFocusable(true);
             LinearLayout layout = view.findViewById(R.id.list);
+            Button createActivity = (Button) view.findViewById(R.id.createActivity);
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -52,6 +55,10 @@ public class ActivityFragment extends Fragment{
                 }
             });
             //final textView tv = (TextView) view.findViewById(R.id.)
+            createActivity.setOnClickListener(v ->{
+                Log.d("ActivityFragment: ", "createActivity button");
+                Navigation.findNavController(v).navigate(R.id.action_activityFragment_to_activity_createFragment);
+            });
             return view;
         }
         return view;

@@ -19,15 +19,17 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.MainActivity;
 import de.hsos.sportwetter.R;
+import de.hsos.sportwetter.classes.activity.Activity;
+import de.hsos.sportwetter.classes.activity.ActivityDao;
+import de.hsos.sportwetter.classes.user.User;
+import de.hsos.sportwetter.classes.user.UserDao;
 import de.hsos.sportwetter.databinding.ActivityRegisterBinding;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    Button registerbtn;
-    EditText username, password, email;
-    String userName, passwd, eMail;
+    
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     @Override
@@ -35,24 +37,31 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
          sharedPreferences = getSharedPreferences("usersFile", Context.MODE_PRIVATE);
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
-        email = findViewById(R.id.email);
-        registerbtn = (Button) findViewById(R.id.registerbtn);
+        EditText username = findViewById(R.id.username);
+        EditText password = findViewById(R.id.password);
+        EditText email = findViewById(R.id.email);
+        Button registerbtn = (Button) findViewById(R.id.registerbtn);
+        String userName = username.getText().toString();
+        String passwd = password.getText().toString();
+        String eMail = email.getText().toString();
 
         registerbtn.setOnClickListener(v -> {
-            this.userName = username.getText().toString();
-            this.passwd = password.getText().toString();
-            this.eMail = email.getText().toString();
-            editor.putString("userName",userName);
-            editor.putString("passwd", passwd);
-            editor.putString("email",eMail);
-            editor.commit();
-            Toast.makeText(RegisterActivity.this, "added to sharedPreferences", Toast.LENGTH_LONG).show();
+            UserDao dao = AppDatabase.getDatabase(this).userDao();
+            User u = createUser(userName,eMail,passwd);
+            dao.insertUser(u);
+
+            Toast.makeText(RegisterActivity.this, "Create new User", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+
+            //Create new User and add this into the activity database
+
         });
 
+    }
+    private User createUser(String userName, String eMail,String passwd){
+        User newUser = new User(userName,eMail, passwd);
+        return newUser;
     }
 
 }
