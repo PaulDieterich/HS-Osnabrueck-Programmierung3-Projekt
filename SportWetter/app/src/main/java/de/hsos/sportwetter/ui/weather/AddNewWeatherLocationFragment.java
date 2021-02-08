@@ -17,12 +17,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
 import android.widget.Button;
 import android.widget.LinearLayout;
+=======
+>>>>>>> 2101a8e (grammar tweaks)
 import android.widget.ListView;
 
 import org.jetbrains.annotations.NotNull;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,13 +37,14 @@ import de.hsos.sportwetter.classes.activity.ActivityDao;
 import de.hsos.sportwetter.classes.weather.Weather;
 import de.hsos.sportwetter.ui.weather.WeatherViewModel;
 import de.hsos.sportwetter.ui.weather.RecyclerViewAdapter;
+=======
+import de.hsos.sportwetter.R;
+>>>>>>> 2101a8e (grammar tweaks)
 
 public class AddNewWeatherLocationFragment extends Fragment  {
 
-
     SearchView searchView;
     ListView listView;
-    Weather weather;
     Handler handler;
     RecyclerView rw;
     WeatherViewModel viewModel;
@@ -49,11 +54,9 @@ public class AddNewWeatherLocationFragment extends Fragment  {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -68,6 +71,7 @@ public class AddNewWeatherLocationFragment extends Fragment  {
 
          return view;
     }
+<<<<<<< HEAD
     Observer<ArrayList<Activity>> weatherListUpdateObserver = new Observer<ArrayList<Weather>>() {
         @Override
         public void onChanged(ArrayList<Weather> weatherArrayList) {
@@ -79,4 +83,6 @@ public class AddNewWeatherLocationFragment extends Fragment  {
         }
     };
 
+=======
+>>>>>>> 2101a8e (grammar tweaks)
 }
