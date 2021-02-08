@@ -45,5 +45,6 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_fragment_weather_item">fragment_weather_item</string>
 
 </resources>
