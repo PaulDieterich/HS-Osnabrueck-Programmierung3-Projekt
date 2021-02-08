@@ -78,7 +78,11 @@
         android:id="@+id/activity_createFragment"
         android:name="de.hsos.sportwetter.ui.activitys.ActivityCreateFragment"
         android:label="fragment_activity_create"
-        tools:layout="@layout/fragment_activity_create" />
+        tools:layout="@layout/fragment_activity_create" >
+        <action
+            android:id="@+id/action_activity_createFragment_to_activityFragment2"
+            app:destination="@id/activityFragment" />
+    </fragment>
     <fragment
         android:id="@+id/activityFragment"
         android:name="de.hsos.sportwetter.ui.activitys.ActivityFragment"
