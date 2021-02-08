@@ -85,13 +85,8 @@ public class WeatherFragment extends Fragment implements SearchView.OnQueryTextL
         this.stadtsuche = (SearchView) view.findViewById(R.id.stadtsuche);
         stadtsuche.setOnQueryTextListener(this);
 
-        if(ContextCompat.checkSelfPermission(
-            this.getContext(), Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this.getContext(), "Internet permission already granted", Toast.LENGTH_SHORT).show();
-        } else {
-            ActivityCompat.requestPermissions(
-                    this.getActivity(), new String[]{Manifest.permission.INTERNET}, INTERNET_PERMISSION
-            );
+        if(!(ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.INTERNET}, INTERNET_PERMISSION);
         }
 
         stadtname.setTextSize(30);
