@@ -28,7 +28,7 @@ import de.hsos.sportwetter.classes.activity.ActivityDao;
 
 public class ActivityFragment extends Fragment implements LifecycleOwner {
 
-    Button createActivity;
+
     RecyclerView rw;
     ActivityViewModel viewModel;
     RecyclerViewAdapter recyclerViewAdapter;

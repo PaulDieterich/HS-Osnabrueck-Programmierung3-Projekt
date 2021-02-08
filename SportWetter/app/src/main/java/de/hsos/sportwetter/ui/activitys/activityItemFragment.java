@@ -36,9 +36,7 @@ public class activityItemFragment extends Fragment {
     @SuppressWarnings("unused")
     public static activityItemFragment newInstance(int columnCount) {
         activityItemFragment fragment = new activityItemFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -46,9 +44,7 @@ public class activityItemFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+
     }
 
     @Override
