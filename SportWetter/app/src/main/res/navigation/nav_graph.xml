@@ -56,10 +56,10 @@
         android:label="fragment_activity_item_list"
         tools:layout="@layout/fragment_activity_item_list" />
     <fragment
-        android:id="@+id/activtyInfo"
-        android:name="de.hsos.sportwetter.ui.activitys.ActivtyInfo"
-        android:label="fragment_activty_info"
-        tools:layout="@layout/fragment_activty_info" />
+        android:id="@+id/activityInfo"
+        android:name="de.hsos.sportwetter.ui.activitys.ActivityInfo"
+        android:label="fragment_activity_info"
+        tools:layout="@layout/fragment_activity_info" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="de.hsos.sportwetter.ui.settings.ProfileFragment"
@@ -81,12 +81,12 @@
         tools:layout="@layout/fragment_activity_create" />
     <fragment
         android:id="@+id/activityFragment"
-        android:name="de.hsos.sportwetter.ActivityFragment"
+        android:name="de.hsos.sportwetter.ui.activitys.ActivityFragment"
         android:label="fragment_activity"
         tools:layout="@layout/fragment_activity" >
         <action
             android:id="@+id/action_activityFragment_to_activtyInfo"
-            app:destination="@id/activtyInfo" />
+            app:destination="@id/activityInfo" />
         <action
             android:id="@+id/action_activityFragment_to_activity_createFragment"
             app:destination="@id/activity_createFragment" />
