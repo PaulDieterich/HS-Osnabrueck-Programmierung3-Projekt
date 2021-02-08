@@ -63,7 +63,6 @@ public class Weather {
                 this.temp = cwd.getMainData().getTemp();
                 this.temp_min = cwd.getMainData().getTempMin();
                 this.temp_max = cwd.getMainData().getTempMax();
-
                 this.pressure = cwd.getMainData().getPressure();
                 this.humidity = cwd.getMainData().getHumidity();
             }
@@ -71,7 +70,6 @@ public class Weather {
             e.printStackTrace();
         }
     }
-
 
     public String getStadtname() {
         return this.stadtname;

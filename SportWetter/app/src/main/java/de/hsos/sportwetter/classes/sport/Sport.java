@@ -30,6 +30,14 @@ public class Sport {
         this.minNumberOfParticipants = 0;
         this.maxNumberOfParticipants = 0;
     }
+    /**
+     * @author Paul Dieterich
+     * @version 1
+     * @since 20.01.2021
+     * @param name - name des sports, z.B klettern
+     * @param min_anzahl - interesannt für gruppensport oder kleingruppen
+     * @param max_anzahl - interesannt für gruppensport oder kleingruppen
+     * */
     public Sport(String name, int min_anzahl, int max_anzahl) {
 
         this.name = name;

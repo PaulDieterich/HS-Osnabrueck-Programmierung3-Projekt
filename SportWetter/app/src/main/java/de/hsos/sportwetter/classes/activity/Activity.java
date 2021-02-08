@@ -18,11 +18,6 @@ import de.hsos.sportwetter.classes.location.Location;
 import de.hsos.sportwetter.classes.sport.Sport;
 import de.hsos.sportwetter.classes.user.ActivityProvider;
 
-/**
- * @author Paul Dieterich
- * Activity klasse für die erstellung von Activitäts Objekten
- * ebenso eine emplementierung von androidx.room.entity
- */
 @Entity(tableName = "ACTIVITY")
 public class Activity {
 
@@ -41,7 +36,16 @@ public class Activity {
     private Location start;
 
 
-
+    /**
+     * @author Paul Dieterich
+     * @version 3
+     * @since 20.01.2021
+     * @param name - Narme der aktivität
+     * @param provider - name des anbieters der aktivität
+     * @param art - sportart der aktivität z.B Joggen
+     * @param ziel - Location wo z.B die jogging runde zuende ist
+     * @param start - Location wo z.B die jogging runde beginnt
+     * */
     @Ignore
     public Activity(String name, ActivityProvider provider, Sport art, Location ziel, Location start) {
         this.name = name;

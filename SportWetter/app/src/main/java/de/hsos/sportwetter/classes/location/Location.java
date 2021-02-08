@@ -29,6 +29,31 @@ public class Location {
     @ColumnInfo(name = "longitude")
     private long longitude;
 
+
+
+
+    /**
+     * @author Paul Dieterich
+     * @version 2
+     * @since 20.01.2021
+     * @param placeName - name des ortes der aktivität
+     * @param street - Straßenname
+     * @param country - ländername
+     * @param city - Stadtname
+     * @param plz - postleitzahl
+     * @param latitude - breitengrad - wichtig für die spätere googlemaps anbindung (falls zeit)
+     * @param longitude - längengrad - wichtig für die spätere googlemaps anbindung (falls zeit)
+     * */
+    public Location(String placeName, String street, String country, String city, int plz, long latitude, long longitude) {
+        this.placeName = placeName;
+        this.street = street;
+        this.country = country;
+        this.city = city;
+        this.plz = plz;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public Location(){
         this.placeName = "unset";
         this.street = "unset";
@@ -38,16 +63,6 @@ public class Location {
         this.latitude = 0;
         this.longitude = 0;
     }
-    public Location(String placeName, String streed, String country, String city, int plz, long latitude, long longitude) {
-        this.placeName = placeName;
-        this.street = streed;
-        this.country = country;
-        this.city = city;
-        this.plz = plz;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
     public Location(String l) {
 
     }

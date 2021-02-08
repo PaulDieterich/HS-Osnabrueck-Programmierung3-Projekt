@@ -41,7 +41,11 @@ public class User {
     @ColumnInfo(name="friend_list")
     List<User> friendList;
 
-
+    /**
+     * @author Paul Dieterich
+     * @version 1
+     * @since 20.01.2021
+     * */
     public User(String username ,String name, String firstname,String email, String password, Date birthday, List<Sport> likedSportAcivity, List<User> friendList) {
     setUsername(username);
     setName(name);
