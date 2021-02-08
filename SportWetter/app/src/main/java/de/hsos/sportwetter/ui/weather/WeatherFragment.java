@@ -13,12 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.os.Handler;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import net.aksingh.owmjapis.api.APIException;
 import net.aksingh.owmjapis.core.OWM;
 import net.aksingh.owmjapis.model.CurrentWeather;
 
@@ -76,8 +78,17 @@ public class WeatherFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         this.owm = new OWM(getString(R.string.openweather_api_key));
         owm.setUnit(OWM.Unit.METRIC);
+        try {
+            this.cwd = owm.currentWeatherByCityName("Braunschweig");
+            this.aktuelleStadt = new City(this.cwd);
+        } catch (APIException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -110,8 +121,8 @@ public class WeatherFragment extends Fragment {
             @Override
             public void run() {
                 Resources res = getResources();
-                aktuelleStadt.getName();
-                aktuelleStadt.getLand();
+                stadtname.setText(aktuelleStadt.getName());
+                land.setText(aktuelleStadt.getLand());
                 avgTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTemp()));
                 maxTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTempMax()));
                 minTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTempMin()));
