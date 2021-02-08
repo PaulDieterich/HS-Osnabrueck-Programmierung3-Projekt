@@ -29,6 +29,7 @@
     <string name="temp_min"></string>
     <string name="temp_max"></string>
     <string name="add">+</string>
+    <string name="temperature">%1$.2f°C</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
