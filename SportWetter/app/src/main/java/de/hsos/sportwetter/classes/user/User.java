@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Insert;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
 
@@ -41,19 +42,20 @@ public class User {
     List<User> friendList;
 
 
-    public User(String name, String firstname, String email, Date birthday, List<Sport> likedSportAcivity, List<User> friendList) {
+    public User(String username ,String name, String firstname,String email, String password, Date birthday, List<Sport> likedSportAcivity, List<User> friendList) {
+    setUsername(username);
+    setName(name);
+    setFirstname(firstname);
+    setEmail(email);
+    setPassword(password);
+    setBirthday(birthday);
+    setLikedSportAcivity(likedSportAcivity);
+    setfriendList(friendList);
 
-        this.name = name;
-        this.firstname = firstname;
-        this.email = email;
-        this.birthday = birthday;
-        this.likedSportAcivity = likedSportAcivity;
-        this.friendList = friendList;
     }
+    @Ignore
     public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
+        new User(username,"", "", email,password ,null, null,null);
     }
     @Ignore
     public User(){
@@ -66,6 +68,22 @@ public class User {
 
     public void setUserID(long userID) {
         this.userID = userID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {

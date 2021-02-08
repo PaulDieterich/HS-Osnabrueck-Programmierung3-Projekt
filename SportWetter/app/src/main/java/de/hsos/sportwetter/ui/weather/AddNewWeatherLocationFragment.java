@@ -45,17 +45,10 @@ public class AddNewWeatherLocationFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_weather_add_new_location, container, false);
         searchView = (SearchView) view.findViewById(R.id.searchView);
         listView = (ListView) view.findViewById(R.id.listView);
-        String stadtname = searchView.getQuery().toString();
 
-        /**
-         * TODO: Create search for Cityname and get all Citys in a list that are equel.
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {}
-        }
-        */
+        //TODO: do a ist with all found citys that matches the search insert
 
-        return view;
+         return view;
     }
 
 

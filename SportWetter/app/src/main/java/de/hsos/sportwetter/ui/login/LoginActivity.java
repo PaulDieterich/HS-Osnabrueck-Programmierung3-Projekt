@@ -5,24 +5,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.service.autofill.RegexValidator;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
+import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.MainActivity;
 import de.hsos.sportwetter.R;
+import de.hsos.sportwetter.classes.user.User;
+import de.hsos.sportwetter.classes.user.UserDao;
 
 public class LoginActivity extends AppCompatActivity {
     Button login, register;
@@ -39,32 +38,38 @@ public class LoginActivity extends AppCompatActivity {
         sharedPreferences = getApplicationContext().getSharedPreferences("usersFile", Context.MODE_PRIVATE);
         login = (Button) findViewById(R.id.login);
         register = (Button) findViewById(R.id.register);
-
         login.setOnClickListener(v -> {
-            Log.e("LOGIN: ", username.getText().toString());
-            userName = username.getText().toString();
-            passwd = password.getText().toString();
-            String uName, uPass;
-            uName = sharedPreferences.getString("userName", "");
-            uPass = sharedPreferences.getString("passwd", "null");
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-           if(userName.equals(uName) && passwd.equals(uPass)){
-                Log.e("LOGIN: ", "X");
-                Toast.makeText(this,"Login",Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(this, MainActivity.class);
-                startActivity(intent2);
+            String userName = username.getText().toString();
+            String passwd = password.getText().toString();
+           if(isAUser()){
+               Toast.makeText(this,"Login",Toast.LENGTH_SHORT).show();
+               Intent intent = new Intent(this, MainActivity.class);
+               startActivity(intent);
             }else{
-                Toast.makeText(this,"LoginFaild",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Login Failed",Toast.LENGTH_SHORT).show();
             }
-
         });
         register.setOnClickListener(v -> {
             Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
-
         });
-
+    }
+    private boolean isAUser(){
+        UserDao dao = AppDatabase.getDatabase(this).userDao();
+        List<User> userList = dao.getAllUsers();
+        boolean isUser = false;
+        for ( User u : userList) {
+            if(u.getUsername() == userName){
+                if(u.getPassword() == passwd){
+                    isUser = true;
+                }else{
+                    Toast.makeText(this,"Password falsch",Toast.LENGTH_LONG).show();
+                }
+            }else{
+                Toast.makeText(this,"username nicht vorhanden",Toast.LENGTH_LONG).show();
+            }
+        }
+        return isUser;
     }
 
 }

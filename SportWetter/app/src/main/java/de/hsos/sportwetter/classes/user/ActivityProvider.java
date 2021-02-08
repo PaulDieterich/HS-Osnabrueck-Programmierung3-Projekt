@@ -6,15 +6,17 @@ import java.util.List;
 import de.hsos.sportwetter.classes.sport.Sport;
 
 public class ActivityProvider extends User{
-    public ActivityProvider(String name, String firstname, String email,Date gbdate, List<Sport> likedSportAcivity, List<User> frendList) {
-        super(name, firstname,email, gbdate, likedSportAcivity, frendList);
+    public ActivityProvider(String username ,String name, String firstname,String email, String password, Date birthday, List<Sport> likedSportAcivity, List<User> friendList){
+    super();
+    }
+    //für den type convert
+    public ActivityProvider(String user){
+        super();
     }
 
-    public ActivityProvider(){
+    public ActivityProvider() {
         super();
     }
-    //TODO: mal überlegen
-    public ActivityProvider(String user) {
-        super();
-    }
+
+
 }

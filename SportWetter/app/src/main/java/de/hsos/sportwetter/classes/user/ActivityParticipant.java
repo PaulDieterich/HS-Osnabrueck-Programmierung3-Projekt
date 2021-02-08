@@ -7,7 +7,14 @@ import de.hsos.sportwetter.classes.sport.Sport;
 
 public class ActivityParticipant extends User {
 
-    public ActivityParticipant(String name, String firstname,String email, Date gbdate, List<Sport> likedSportAcivity, List<User> frendList) {
-        super(name, firstname, email,gbdate, likedSportAcivity, frendList);
+    public ActivityParticipant(String username ,String name, String firstname,String email, String password, Date birthday, List<Sport> likedSportAcivity, List<User> friendList) {
+        super();
     }
+    public ActivityParticipant(){
+        super();
+    };
+    //für den typeconvert
+    public ActivityParticipant(String user){
+        super();
+    };
 }
