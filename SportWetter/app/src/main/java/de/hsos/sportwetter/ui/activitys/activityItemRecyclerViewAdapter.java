@@ -7,15 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import de.hsos.sportwetter.classes.activity.Activity;
-import de.hsos.sportwetter.placeholder.PlaceholderContent.PlaceholderItem;
 import de.hsos.sportwetter.databinding.FragmentActivityItemBinding;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class activityItemRecyclerViewAdapter extends RecyclerView.Adapter<activityItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<Activity> mValues;

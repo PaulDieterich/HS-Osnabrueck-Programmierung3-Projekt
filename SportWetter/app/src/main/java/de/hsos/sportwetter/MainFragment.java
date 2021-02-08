@@ -18,9 +18,6 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class MainFragment extends Fragment  {
-
-
-
     public MainFragment() {
         // Required empty public constructor
     }

@@ -14,9 +14,8 @@ import android.view.ViewGroup;
 
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.R;
-import de.hsos.sportwetter.classes.activity.Activity;
 import de.hsos.sportwetter.classes.activity.ActivityDao;
-import de.hsos.sportwetter.placeholder.PlaceholderContent;
+
 
 /**
  * A fragment representing a list of Items.
