@@ -35,15 +35,22 @@ import de.hsos.sportwetter.R;
  * create an instance of this fragment.
  */
 @RequiresApi(api = Build.VERSION_CODES.M)
-public class WeatherFragment extends Fragment implements SearchView.OnQueryTextListener {
+public class WeatherFragment extends Fragment {
 
     private static final int INTERNET_PERMISSION = 100;
     OWM owm;
     CurrentWeather cwd;
     private Handler handler;
     TextView stadtname, land, avgTemp, minTemp, maxTemp;
-    SearchView stadtsuche;
     Button addBtn;
+<<<<<<< HEAD
+=======
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+>>>>>>> 7987967 (rearranging weather completely)
 
     NavController navController;
     public WeatherFragment() {
@@ -74,15 +81,12 @@ public class WeatherFragment extends Fragment implements SearchView.OnQueryTextL
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
-        addBtn = (Button) view.findViewById(R.id.add_btn);
+        this.addBtn = (Button) view.findViewById(R.id.add_btn);
         this.stadtname = (TextView) view.findViewById(R.id.stadtname);
         this.land = (TextView) view.findViewById(R.id.land);
         this.avgTemp = (TextView) view.findViewById(R.id.avgTemp);
         this.minTemp = (TextView) view.findViewById(R.id.minTemp);
         this.maxTemp = (TextView) view.findViewById(R.id.maxTemp);
-        this.addBtn = (Button) view.findViewById(R.id.add_btn);
-        this.stadtsuche = (SearchView) view.findViewById(R.id.stadtsuche);
-        stadtsuche.setOnQueryTextListener(this);
 
         if(!(ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.INTERNET}, INTERNET_PERMISSION);
@@ -117,42 +121,11 @@ public class WeatherFragment extends Fragment implements SearchView.OnQueryTextL
         };
         handler.post(runnableCode);
          */
+
         addBtn.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_weatherFragment_to_addNewWeatherLocationFragment);
         });
 
         return view;
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        Resources res = getResources();
-        try {
-            cwd = owm.currentWeatherByCityName(query);
-            if(cwd.hasRespCode() && cwd.getRespCode() == 200) {
-                if(cwd.hasCityName()) {
-                    stadtname.setText(cwd.getCityName());
-                    land.setText(cwd.getSystemData().getCountryCode());
-                    minTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTempMin()));
-                    maxTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTempMax()));
-                    avgTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTemp()));
-                    return true;
-                } else {
-                    Toast.makeText(this.getActivity(),"Stadt nicht gefunden.",Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            } else {
-                Toast.makeText(this.getActivity(),"OpenWeather nicht erreichbar - bitte später erneut versuchen!.",Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        } catch (APIException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
     }
 }
