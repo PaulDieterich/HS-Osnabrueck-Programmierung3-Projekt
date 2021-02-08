@@ -52,6 +52,10 @@ public class Weather {
         owm.setUnit(OWM.Unit.METRIC);
     }
 
+    public Weather() {
+
+    }
+
     //TODO: Logik! Die UI Elemente werden in ui/weather/WeatherFragment behandelt!
 
     public void wetterAbfrage(String stadt) {
