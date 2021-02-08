@@ -105,6 +105,12 @@ public class Activity {
         return start;
     }
 
-    public void setStart(Location start) { this.start = start;
+    public void setStart(Location start) { this.start = start;}
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

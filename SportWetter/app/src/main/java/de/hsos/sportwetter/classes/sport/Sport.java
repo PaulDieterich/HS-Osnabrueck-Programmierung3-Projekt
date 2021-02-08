@@ -45,7 +45,8 @@ public class Sport {
         this.maxNumberOfParticipants = max_anzahl;
     }
 
-    public Sport(String sport) {
+    public Sport(String name) {
+        this.name = name;
     }
 
     public long getSportID() {
@@ -79,8 +80,11 @@ public class Sport {
     public void setMaxNumberOfParticipants(int maxNumberOfParticipants) {
         this.maxNumberOfParticipants = maxNumberOfParticipants;
     }
+
     @Override
-    public String toString(){
-        return "{"+getSportID() +","+getName()+","+ getMinNumberOfParticipants() +","+getMaxNumberOfParticipants() + "}";
+    public String toString() {
+        return "Sport{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

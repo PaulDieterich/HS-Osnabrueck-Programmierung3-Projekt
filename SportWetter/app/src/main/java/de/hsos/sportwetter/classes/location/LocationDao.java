@@ -26,8 +26,8 @@ public interface LocationDao {
         @Delete
         void deleteLocation(Location... location);
 
-     //@Query("SELECT * FROM Sport")
-    // public List<Location> getAllLocations();
+     @Query("SELECT * FROM Location")
+     public List<Location> getAllLocations();
 
     }
 

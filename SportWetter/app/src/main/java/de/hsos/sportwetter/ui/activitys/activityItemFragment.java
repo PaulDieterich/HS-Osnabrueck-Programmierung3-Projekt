@@ -12,8 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.R;
+import de.hsos.sportwetter.classes.activity.Activity;
 import de.hsos.sportwetter.classes.activity.ActivityDao;
 
 
@@ -27,10 +30,6 @@ public class activityItemFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public activityItemFragment() { }
 
     // TODO: Customize parameter initialization
@@ -53,12 +52,11 @@ public class activityItemFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //DAO
         ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
-        View view = inflater.inflate(R.layout.fragment_activity_item_list, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_activity_item, container, false);
+        List<Activity> activityList = dao.getAllActivitys();
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -68,8 +66,10 @@ public class activityItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new activityItemRecyclerViewAdapter(dao.getAllActivitys()));
+
+            recyclerView.setAdapter(new RecyclerViewAdapter(new Activity(),activityList));
         }
         return view;
     }
+
 }

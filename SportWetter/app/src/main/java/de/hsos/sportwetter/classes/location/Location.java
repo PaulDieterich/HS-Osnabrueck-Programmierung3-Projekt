@@ -63,12 +63,17 @@ public class Location {
         this.latitude = 0;
         this.longitude = 0;
     }
-    public Location(String l) {
-
+    public Location(String name) {
+        this.placeName = name;
+        this.street = "unset";
+        this.country = "unset";
+        this.city = "unset";
+        this.plz = 0;
+        this.latitude = 0;
+        this.longitude = 0;
     }
-
     public Location(Location l) {
-        this.placeName = "unset";
+        this.placeName = l.placeName;
         this.street = l.street;
         this.country = l.country;
         this.city = l.city;
@@ -131,5 +136,12 @@ public class Location {
 
     public void setLongitude(long longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "placeName='" + getPlaceName() + '\'' +
+                '}';
     }
 }
