@@ -11,33 +11,25 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 import de.hsos.sportwetter.R;
-import de.hsos.sportwetter.classes.weather.Weather;
 
 public class AddNewWeatherLocationFragment extends Fragment  {
 
-
     SearchView searchView;
     ListView listView;
-    Weather weather;
     Handler handler;
 
     public AddNewWeatherLocationFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -50,6 +42,4 @@ public class AddNewWeatherLocationFragment extends Fragment  {
 
          return view;
     }
-
-
 }
