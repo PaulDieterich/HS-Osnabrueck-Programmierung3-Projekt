@@ -36,41 +36,25 @@ import de.hsos.sportwetter.classes.weather.City;
 public class WeatherFragment extends Fragment {
 
     private static final int INTERNET_PERMISSION = 100;
-<<<<<<< HEAD
     OWM owm;
     CurrentWeather cwd;
-    private Handler handler;
-    TextView stadtname, land, avgTemp, minTemp, maxTemp;
-    Button addBtn;
-<<<<<<< HEAD
-=======
-=======
-    private OWM owm;
-    private CurrentWeather cwd;
     private City aktuelleStadt;
->>>>>>> b323217 (formatting + background weather check)
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
->>>>>>> 7987967 (rearranging weather completely)
 
     public WeatherFragment() {
         // Required empty public constructor
     }
 
     public static WeatherFragment newInstance(String param1, String param2) {
-<<<<<<< HEAD
-        WeatherFragment fragment = new WeatherFragment();
-
-=======
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         WeatherFragment fragment = new WeatherFragment();
         fragment.setArguments(args);
->>>>>>> b323217 (formatting + background weather check)
         return fragment;
     }
 
