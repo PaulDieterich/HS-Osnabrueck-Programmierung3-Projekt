@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".SplashScreenActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="94dp"
+        android:layout_height="60dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="288dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

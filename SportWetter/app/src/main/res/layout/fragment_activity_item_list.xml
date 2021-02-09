@@ -12,5 +12,5 @@
     tools:context=".ui.activitys.activityItemFragment"
     tools:listitem="@layout/fragment_activity_item">
 
-
 </androidx.recyclerview.widget.RecyclerView>
+
