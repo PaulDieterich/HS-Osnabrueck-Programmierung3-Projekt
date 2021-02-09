@@ -2,10 +2,8 @@ package de.hsos.sportwetter.ui.activitys;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
-
-import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.classes.activity.Activity;
-import de.hsos.sportwetter.classes.activity.ActivityDao;
+
 
 
 public class ActivityViewModel extends ViewModel {

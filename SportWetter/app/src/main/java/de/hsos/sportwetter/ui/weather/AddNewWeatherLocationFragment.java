@@ -35,7 +35,6 @@ import java.util.ArrayList;
 
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.R;
-import de.hsos.sportwetter.classes.activity.Activity;
 import de.hsos.sportwetter.classes.activity.ActivityDao;
 
 import de.hsos.sportwetter.classes.weather.City;
@@ -46,9 +45,9 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
     ListView listView;
     Handler handler;
     RecyclerView rw;
-    WeatherViewModel viewModel;
+    CityViewModel viewModel;
     RecyclerViewAdapter recyclerViewAdapter;
-    Weather context;
+    City context;
     OWM owm;
     CurrentWeather cwd;
     SearchView stadtsuche;
@@ -70,32 +69,15 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather_add_new_location, container, false);
         rw = view.findViewById(R.id.rv_main);
-        viewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
-        viewModel.getMutableLiveData().observe(getViewLifecycleOwner(),weatherListUpdateObserver);
-
-        return view;
-
-
-         return view;
-    }
-
-    Observer<ArrayList<Activity>> weatherListUpdateObserver = new Observer<ArrayList<Weather>>() {
-        @Override
-        public void onChanged(ArrayList<Weather> weatherArrayList) {
-            ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
-
-            recyclerViewAdapter  = new RecyclerViewAdapter(context,weatherArrayList);
-            rw.setLayoutManager(new LinearLayoutManager(getContext()));
-            rw.setAdapter(recyclerViewAdapter);
-        }
-    };
+        viewModel = new ViewModelProvider(this).get(CityViewModel.class);
+     //   viewModel.getMutableLiveData().observe(getViewLifecycleOwner(),cityListUpdateObserver);
 
         stadtsuche = (SearchView) view.findViewById(R.id.stadtsuche);
         cityListViewer = (ListView) view.findViewById(R.id.stadtliste);
         stadtsuche.setOnQueryTextListener(this);
 
         ArrayAdapter<City> aa = new ArrayAdapter<>(
-                this.getContext(), R.layout.fragment_weather, R.id.stadt, cityList);
+                this.getContext(), R.layout.fragment_weather, R.id.stadtname, cityList);
 
         cityListViewer = la.getListView();
         cityListViewer.setAdapter(aa);
@@ -108,10 +90,29 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
             }
         });
 
-        //TODO: do a list with all found citys that matches the search insert
-
          return view;
     }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+    Observer<ArrayList<City>> cityListUpdateObserver = new Observer<ArrayList<City>>() {
+        @Override
+        public void onChanged(ArrayList<City> cityArrayList) {
+
+            //Hier muss ne liste gefüllt werden
+            //cityArrayList =
+            recyclerViewAdapter  = new RecyclerViewAdapter(context,cityArrayList);
+            rw.setLayoutManager(new LinearLayoutManager(getContext()));
+           // rw.setAdapter(recyclerViewAdapter);
+        }
+
+
+    };
+
+        //TODO: do a list with all found citys that matches the search insert
 
     @Override
     public boolean onQueryTextSubmit(String query) {
@@ -136,9 +137,6 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
         return false;
     }
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
-    }
+
 
 }

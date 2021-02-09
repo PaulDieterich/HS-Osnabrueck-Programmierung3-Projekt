@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.navigation.NavController;
+import androidx.preference.Preference;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -20,6 +21,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.MainActivity;
 import de.hsos.sportwetter.R;
+import de.hsos.sportwetter.classes.Preferences;
 import de.hsos.sportwetter.classes.user.User;
 import de.hsos.sportwetter.classes.user.UserDao;
 
@@ -62,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             if(u.getUsername() == userName){
                 if(u.getPassword() == passwd){
                     isUser = true;
+                    Preferences.getInstance(this).setUser(u);
                 }else{
                     Toast.makeText(this,"Password falsch",Toast.LENGTH_LONG).show();
                 }

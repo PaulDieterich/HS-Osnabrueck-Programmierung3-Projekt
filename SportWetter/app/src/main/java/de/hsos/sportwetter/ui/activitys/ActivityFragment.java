@@ -1,5 +1,6 @@
 package de.hsos.sportwetter.ui.activitys;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,12 +15,14 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.R;
@@ -53,7 +56,16 @@ public class ActivityFragment extends Fragment implements LifecycleOwner {
                 Log.d("ActivityFragment: ", "createActivity button");
                 Navigation.findNavController(v).navigate(R.id.action_activityFragment_to_activity_createFragment);
             });
+
+        //DAO
+        ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
+        List<Activity> activityList = dao.getAllActivitys();
+        // Set the adapter
+        RecyclerView recyclerView = view.findViewById(R.id.rv_main);
+        recyclerView.setAdapter(new RecyclerViewAdapter(new Activity(),activityList));
+
         return view;
+
     }
     Observer<ArrayList<Activity>> activityListUpdateObserver = new Observer<ArrayList<Activity>>() {
         @Override

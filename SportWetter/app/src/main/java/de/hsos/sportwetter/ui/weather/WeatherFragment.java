@@ -101,10 +101,10 @@ public class WeatherFragment extends Fragment {
         //TODO: Aufruf der Logik, vielleicht als Background Task
 
         Handler handler = new Handler();
+        Resources res = getResources();
         Runnable runnableCode = new Runnable() {
             @Override
             public void run() {
-                Resources res = getResources();
                 stadtname.setText(aktuelleStadt.getName());
                 land.setText(aktuelleStadt.getLand());
                 avgTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTemp()));

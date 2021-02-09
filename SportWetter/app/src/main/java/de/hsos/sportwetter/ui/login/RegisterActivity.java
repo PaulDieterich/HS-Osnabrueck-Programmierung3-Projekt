@@ -22,6 +22,7 @@ import androidx.navigation.ui.NavigationUI;
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.MainActivity;
 import de.hsos.sportwetter.R;
+import de.hsos.sportwetter.classes.Preferences;
 import de.hsos.sportwetter.classes.activity.Activity;
 import de.hsos.sportwetter.classes.activity.ActivityDao;
 import de.hsos.sportwetter.classes.user.User;
@@ -41,15 +42,14 @@ public class RegisterActivity extends AppCompatActivity {
         EditText password = findViewById(R.id.password);
         EditText email = findViewById(R.id.email);
         Button registerbtn = (Button) findViewById(R.id.registerbtn);
-        String userName = username.getText().toString();
-        String passwd = password.getText().toString();
-        String eMail = email.getText().toString();
-
+        UserDao dao = AppDatabase.getDatabase(this).userDao();
         registerbtn.setOnClickListener(v -> {
-            UserDao dao = AppDatabase.getDatabase(this).userDao();
+            String userName = username.getText().toString();
+            String passwd = password.getText().toString();
+            String eMail = email.getText().toString();
             User u = createUser(userName,eMail,passwd);
             dao.insertUser(u);
-
+            Preferences.getInstance(this).setUser(u);
             Toast.makeText(RegisterActivity.this, "Create new User", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);

@@ -7,34 +7,31 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 import de.hsos.sportwetter.R;
-import de.hsos.sportwetter.classes.weather.Weather;
+import de.hsos.sportwetter.classes.weather.City;
+
 
 public class RecyclerViewAdapter {
-    Weather context;
-    private final List<Weather> list;
+    City context;
+    private final List<City> list;
 
-    public RecyclerViewAdapter(Weather context, List<Weather> items){
+    public RecyclerViewAdapter(City context, List<City> items){
         this.context = context;
         list = items;
     }
     @NotNull
-    @Override
-    public de.hsos.sportwetter.ui.activitys.RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_weather_item,parent,false);
-        return ViewHolder(view);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_city_item,parent,false);
+        return new ViewHolder(view);
     }
-    @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        holder.getCityName().setText(list.get(position).getStadtname());
+        holder.getCityName().setText(list.get(position).getName());
 
     }
-    @Override
     public int getItemCount() {
         return list.size();
     }
@@ -46,7 +43,7 @@ public class RecyclerViewAdapter {
 
         public ViewHolder(View view) {
             super(view);
-            cityName = view.findViewById(R.id.cityName);
+            cityName = view.findViewById(R.id.stadtname);
 
         }
 

@@ -55,36 +55,34 @@ public class ActivityCreateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity_create, container, false);
 
-        TextView nameTV = (TextView) view.findViewById(R.id.ActivityName);
-        TextView sportTV = (TextView) view.findViewById(R.id.sportName);
-        TextView startTV = (TextView) view.findViewById(R.id.Activity_start);
-        TextView zielTV = (TextView) view.findViewById(R.id.Activity_ziel);
-        TextView dateTV = (TextView) view.findViewById(R.id.Activity_date);
-        Button createBtn = (Button) view.findViewById(R.id.create_btn);
-        //get input
-        String name_S = nameTV.getText().toString();
-        String sport_S = sportTV.getText().toString();
-        String start_S = startTV.getText().toString();
-        String ziel_S = zielTV.getText().toString();
-        String date_S = dateTV.getText().toString();
+        TextView nameTV = view.findViewById(R.id.ActivityName);
+        TextView sportTV = view.findViewById(R.id.sportName);
+        TextView startTV =  view.findViewById(R.id.Activity_start);
+        TextView zielTV =  view.findViewById(R.id.Activity_ziel);
+        TextView dateTV =  view.findViewById(R.id.Activity_date);
+        Button createBtn = view.findViewById(R.id.create_btn);
+
         createBtn.setOnClickListener(v-> {
+            String name_S = nameTV.getText().toString();
+            String sport_S = sportTV.getText().toString();
+            String start_S = startTV.getText().toString();
+            String ziel_S = zielTV.getText().toString();
+            String date_S = dateTV.getText().toString();
             //Create new Activity and add this into the activity database
             ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
             Activity a = createActivity(name_S, sport_S, start_S, ziel_S, date_S);
             dao.insertActivity(a);
-            Navigation.findNavController(v).navigate(R.id.action_activity_createFragment_to_activityFragment2);
             Toast.makeText(getContext(),"name:" + name_S,Toast.LENGTH_LONG);
+            Navigation.findNavController(v).navigate(R.id.action_activity_createFragment_to_activityFragment2);
         });
     return view;
     }
-
     public Activity createActivity(String name, String art, String ziel, String start, String date){
         Sport s_art = createSport(art);
         Location l_ziel = createLocation(ziel);
         Location l_start = createLocation(start);
         ActivityProvider p = new ActivityProvider();
         Activity newActivity = new Activity(name,p,s_art,l_start,l_ziel);
-
         return newActivity;
     }
     public Location createLocation(String name){
@@ -96,7 +94,7 @@ public class ActivityCreateFragment extends Fragment {
             }
         }
         Location newLocation = new Location(name);
-       // dao.insertLocation(newLocation);
+        // dao.insertLocation(newLocation);
         return newLocation;
     }
 
@@ -109,7 +107,7 @@ public class ActivityCreateFragment extends Fragment {
             }
         }
         Sport newsport = new Sport(art);
-    //    dao.insertSport(newsport);
+       // dao.insertSport(newsport);
         return newsport;
     }
 
