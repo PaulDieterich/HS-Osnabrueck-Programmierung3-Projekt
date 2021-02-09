@@ -57,7 +57,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             AppDatabase.class, "AppDatabase")
                             .fallbackToDestructiveMigration()
                             .allowMainThreadQueries()
-                            .createFromAsset("database/sportWeather.db")
+                            //.createFromAsset("database/sportWeather.db") //nur beim ersten Start. füllt die datenbank mit dummydata
                             .build();
             }
         }

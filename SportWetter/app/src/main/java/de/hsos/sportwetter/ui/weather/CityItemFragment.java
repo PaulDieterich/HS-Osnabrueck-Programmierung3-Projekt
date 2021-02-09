@@ -31,7 +31,7 @@ import de.hsos.sportwetter.ui.weather.databinding.FragmentWeatherItemBinding;
 
 import de.hsos.sportwetter.R;
 
-public class WeatherItemFragment extends AppCompatActivity {
+public class CityItemFragment extends AppCompatActivity {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
