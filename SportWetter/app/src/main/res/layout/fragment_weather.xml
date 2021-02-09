@@ -10,87 +10,64 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="Wetter Fragment"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:id="@+id/stadtname"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:text="@string/stadtname"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.169" />
 
     <TextView
         android:id="@+id/avgTemp"
-        android:layout_width="110dp"
+        android:layout_width="120dp"
         android:layout_height="40dp"
         android:text="@string/temp_min"
-        app:layout_constraintBottom_toTopOf="@+id/stadtsuche"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/land"
-        app:layout_constraintVertical_bias="0.245" />
+        app:layout_constraintVertical_bias="0.146" />
+
+    <TextView
+        android:id="@+id/maxTemp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:text="@string/temp_max"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.704"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avgTemp"
+        app:layout_constraintVertical_bias="0.138" />
 
     <TextView
         android:id="@+id/land"
-        android:layout_width="150dp"
+        android:layout_width="140dp"
         android:layout_height="25dp"
         android:text="@string/temp_min"
-        app:layout_constraintBottom_toTopOf="@+id/stadtsuche"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stadtname"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/stadtname"
-        android:layout_width="239dp"
-        android:layout_height="60dp"
-        android:text="@string/stadtname"
-        app:layout_constraintBottom_toTopOf="@+id/stadtsuche"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.295" />
+        app:layout_constraintVertical_bias="0.026" />
 
     <TextView
         android:id="@+id/minTemp"
-        android:layout_width="110dp"
+        android:layout_width="120dp"
         android:layout_height="40dp"
         android:text="@string/temp_min"
-        app:layout_constraintBottom_toTopOf="@+id/stadtsuche"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.285"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avgTemp"
-        app:layout_constraintVertical_bias="0.417" />
-
-    <TextView
-        android:id="@+id/maxTemp"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
-        android:text="@string/temp_max"
-        app:layout_constraintBottom_toTopOf="@+id/stadtsuche"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.714"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avgTemp"
-        app:layout_constraintVertical_bias="0.417" />
-
-    <SearchView
-        android:id="@+id/stadtsuche"
-        android:layout_width="411dp"
-        android:layout_height="68dp"
-        android:iconifiedByDefault="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.295"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.672" />
+        app:layout_constraintTop_toBottomOf="@+id/avgTemp"
+        app:layout_constraintVertical_bias="0.138" />
 
     <Button
         android:id="@+id/add_btn"
