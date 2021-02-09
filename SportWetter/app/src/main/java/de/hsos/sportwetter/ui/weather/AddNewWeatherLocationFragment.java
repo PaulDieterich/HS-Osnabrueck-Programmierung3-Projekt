@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-<<<<<<< HEAD
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -15,24 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
-import android.widget.Button;
-import android.widget.LinearLayout;
-=======
->>>>>>> 2101a8e (grammar tweaks)
-=======
-import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
->>>>>>> 7987967 (rearranging weather completely)
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,31 +31,17 @@ import net.aksingh.owmjapis.model.param.Weather;
 
 import org.jetbrains.annotations.NotNull;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.ArrayList;
-import java.util.List;
 
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.activity.Activity;
 import de.hsos.sportwetter.classes.activity.ActivityDao;
-import de.hsos.sportwetter.classes.weather.Weather;
-import de.hsos.sportwetter.ui.weather.WeatherViewModel;
-import de.hsos.sportwetter.ui.weather.RecyclerViewAdapter;
-=======
-import de.hsos.sportwetter.R;
->>>>>>> 2101a8e (grammar tweaks)
-=======
-import java.util.ArrayList;
 
-import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.weather.City;
->>>>>>> 7987967 (rearranging weather completely)
 
 public class AddNewWeatherLocationFragment extends Fragment implements SearchView.OnQueryTextListener {
 
-<<<<<<< HEAD
     SearchView searchView;
     ListView listView;
     Handler handler;
@@ -76,7 +49,6 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
     WeatherViewModel viewModel;
     RecyclerViewAdapter recyclerViewAdapter;
     Weather context;
-=======
     OWM owm;
     CurrentWeather cwd;
     SearchView stadtsuche;
@@ -85,7 +57,6 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
     ArrayList<City> cityList = new ArrayList<>();
     ListActivity la = new ListActivity();
 
->>>>>>> 7987967 (rearranging weather completely)
     public AddNewWeatherLocationFragment() {
         // Required empty public constructor
     }
@@ -98,7 +69,6 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather_add_new_location, container, false);
-<<<<<<< HEAD
         rw = view.findViewById(R.id.rv_main);
         viewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
         viewModel.getMutableLiveData().observe(getViewLifecycleOwner(),weatherListUpdateObserver);
@@ -108,7 +78,7 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
 
          return view;
     }
-<<<<<<< HEAD
+
     Observer<ArrayList<Activity>> weatherListUpdateObserver = new Observer<ArrayList<Weather>>() {
         @Override
         public void onChanged(ArrayList<Weather> weatherArrayList) {
@@ -120,12 +90,8 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
         }
     };
 
-=======
->>>>>>> 2101a8e (grammar tweaks)
-=======
         stadtsuche = (SearchView) view.findViewById(R.id.stadtsuche);
         cityListViewer = (ListView) view.findViewById(R.id.stadtliste);
-        stadt = (TextView) view.findViewById(R.id.stadt);
         stadtsuche.setOnQueryTextListener(this);
 
         ArrayAdapter<City> aa = new ArrayAdapter<>(
@@ -174,5 +140,5 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
     public boolean onQueryTextChange(String newText) {
         return false;
     }
->>>>>>> 7987967 (rearranging weather completely)
+
 }
