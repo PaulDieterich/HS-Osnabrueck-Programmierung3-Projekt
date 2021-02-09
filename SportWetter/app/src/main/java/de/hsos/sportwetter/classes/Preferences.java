@@ -5,14 +5,11 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
-import java.util.List;
-import java.util.prefs.Preferences;
-
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.classes.user.User;
 import de.hsos.sportwetter.classes.user.UserDao;
 
-public class Preference {
+public class Preferences {
 
     private static Preferences instance;
 

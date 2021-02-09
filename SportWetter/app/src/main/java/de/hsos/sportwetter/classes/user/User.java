@@ -1,5 +1,8 @@
 package de.hsos.sportwetter.classes.user;
 
+import android.content.Context;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
@@ -20,7 +23,7 @@ import java.util.UUID;
 import de.hsos.sportwetter.classes.sport.Sport;
 
 @Entity(tableName = "USER")
-public class User {
+public class User{
     @PrimaryKey(autoGenerate = true) @NonNull
     @ColumnInfo(name="user_id")
     private long userID;
@@ -40,12 +43,12 @@ public class User {
     List<Sport> likedSportAcivity;
     @ColumnInfo(name="friend_list")
     List<User> friendList;
-
     /**
      * @author Paul Dieterich
      * @version 1
      * @since 20.01.2021
      * */
+    @Ignore
     public User(String username ,String name, String firstname,String email, String password, Date birthday, List<Sport> likedSportAcivity, List<User> friendList) {
     setUsername(username);
     setName(name);
@@ -55,16 +58,15 @@ public class User {
     setBirthday(birthday);
     setLikedSportAcivity(likedSportAcivity);
     setfriendList(friendList);
-
     }
-    @Ignore
+
     public User(String username, String email, String password) {
-        new User(username,"", "", email,password ,null, null,null);
+        this(username,"", "", email,password ,null, null,null);
     }
-    @Ignore
-    public User(){
 
-    }
+    @Ignore
+    public User(){ }
+
 
     public long getUserID() {
         return userID;

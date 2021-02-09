@@ -83,8 +83,6 @@ public class Sport {
 
     @Override
     public String toString() {
-        return "Sport{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
 }

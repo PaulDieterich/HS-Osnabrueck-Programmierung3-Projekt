@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 import java.util.UUID;
 import de.hsos.sportwetter.classes.location.Location;
 import de.hsos.sportwetter.classes.sport.Sport;
@@ -112,5 +113,22 @@ public class Activity {
         return "Activity{" +
                 "name='" + name + '\'' +
                 '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Activity activity = (Activity) o;
+        return id == activity.id &&
+                Objects.equals(name, activity.name) &&
+                Objects.equals(provider, activity.provider) &&
+                Objects.equals(art, activity.art) &&
+                Objects.equals(ziel, activity.ziel) &&
+                Objects.equals(start, activity.start);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, provider, art, ziel, start);
     }
 }
