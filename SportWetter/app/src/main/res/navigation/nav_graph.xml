@@ -27,7 +27,11 @@
         android:id="@+id/addNewWeatherLocationFragment"
         android:name="de.hsos.sportwetter.ui.weather.AddNewWeatherLocationFragment"
         android:label="fragment_add_new_weather_location"
-        tools:layout="@layout/fragment_weather_add_new_location" />
+        tools:layout="@layout/fragment_weather_add_new_location" >
+        <action
+            android:id="@+id/action_addNewWeatherLocationFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
+    </fragment>
     <fragment
         android:id="@+id/weatherFragment"
         android:name="de.hsos.sportwetter.ui.weather.WeatherFragment"
