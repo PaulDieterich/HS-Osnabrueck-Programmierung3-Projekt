@@ -19,6 +19,9 @@ import net.aksingh.owmjapis.model.CurrentWeather;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.Preferences;
@@ -78,10 +81,9 @@ private static final int INTERNET_PERMISSION = 100;
         activityLoaction.setText(aktuelleStadt.getName().toString());
 
        int sunHours = (int) (cwd.getSystemData().getSunsetDateTime().getTime() - cwd.getSystemData().getSunriseDateTime().getTime());
-       sunriseText.setText(cwd.getSystemData().getSunriseDateTime().toString());
-       sunsetText.setText(cwd.getSystemData().getSunsetDateTime().toString());
+       sunriseText.setText(SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT).format(cwd.getSystemData().getSunriseDateTime()));
+       sunsetText.setText(SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT).format(cwd.getSystemData().getSunsetDateTime()));
        sunHoursText.setText(String.valueOf(sunHours) + " h");
-
 
        Button joinBtn = view.findViewById(R.id.joinBtn);
 

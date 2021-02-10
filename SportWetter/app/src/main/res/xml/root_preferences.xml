@@ -1,5 +1,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.settings.SettingsFragment">
 
     <PreferenceCategory android:title="Account">
         <EditTextPreference
@@ -14,9 +16,6 @@
     </PreferenceCategory>
     <PreferenceCategory app:title="@string/messages_header">
 
-
-
-
         <ListPreference
             app:defaultValue="reply"
             app:entries="@array/reply_entries"
@@ -29,17 +28,13 @@
 
     <PreferenceCategory app:title="@string/sync_header">
 
-        <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
-
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
 
     </PreferenceCategory>
+    <Preference
+        android:key="ausloggen"
+        android:id="@+id/ausloggenBox"
+
+        android:onClick="ausloggen"
+        android:title="ausloggen" />
 
 </PreferenceScreen>

@@ -28,6 +28,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         if(Preferences.getInstance(this).getUser() == null){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

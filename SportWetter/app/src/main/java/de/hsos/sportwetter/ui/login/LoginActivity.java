@@ -38,16 +38,16 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         sharedPreferences = getApplicationContext().getSharedPreferences("usersFile", Context.MODE_PRIVATE);
-        login = (Button) findViewById(R.id.login);
-        register = (Button) findViewById(R.id.register);
+        login = findViewById(R.id.login);
+        register = findViewById(R.id.register);
         login.setOnClickListener(v -> {
             String userName = username.getText().toString();
             String passwd = password.getText().toString();
             UserDao dao = AppDatabase.getDatabase(this).userDao();
             List<User> userList = dao.getAllUsers();
             for (User u : userList) {
-                if (u.getUsername() == userName) {
-                    if (u.getPassword() == passwd) {
+                if ( u.getUsername().equals(userName)) {
+                    if (u.getPassword().equals(passwd)) {
                         Preferences.getInstance(this).setUser(u);
                         Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(this, MainActivity.class);
@@ -55,10 +55,9 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(this, "Username existiert nicht", Toast.LENGTH_LONG).show();
                 }
             }
+            Toast.makeText(this, "Username existiert nicht", Toast.LENGTH_LONG).show();
         });
         register.setOnClickListener(v -> {
             Intent intent = new Intent(this, RegisterActivity.class);

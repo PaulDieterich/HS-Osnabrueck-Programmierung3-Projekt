@@ -2,6 +2,7 @@ package de.hsos.sportwetter.classes;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
@@ -21,14 +22,19 @@ public class Preferences {
         this.userDao = AppDatabase.getDatabase(applicationContext).userDao();
     }
     public void setUser(User u){
-        sharedPreferences.edit().putLong("userID", u.getUserID()).apply();
+        if(u == null) {
+            sharedPreferences.edit().putLong("userID", -1).apply();
+        } else {
+            sharedPreferences.edit().putLong("userID", u.getUserID()).apply();
+        }
     }
     public User getUser(){
         long userID = sharedPreferences.getLong("userID",-1);
         if(userID > -1){
             for (User user : userDao.getAllUsers()) {
+                Log.d("getUser", user.getUserID() + " - " + userID);
                 if (user.getUserID() == userID) {
-                    continue;
+                    return user;
                 }
 
             }
