@@ -32,6 +32,8 @@ import net.aksingh.owmjapis.model.param.Weather;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.R;
@@ -41,20 +43,11 @@ import de.hsos.sportwetter.classes.weather.City;
 
 public class AddNewWeatherLocationFragment extends Fragment implements SearchView.OnQueryTextListener {
 
-    SearchView searchView;
-    ListView listView;
-    Handler handler;
     RecyclerView rw;
     CityViewModel viewModel;
-    RecyclerViewAdapter recyclerViewAdapter;
-    City context;
     OWM owm;
     CurrentWeather cwd;
-    SearchView stadtsuche;
-    TextView stadt;
-    ListView cityListViewer;
-    ArrayList<City> cityList = new ArrayList<>();
-    ListActivity la = new ListActivity();
+    List<String> cityList;
 
     public AddNewWeatherLocationFragment() {
         // Required empty public constructor
@@ -70,47 +63,34 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
         View view = inflater.inflate(R.layout.fragment_weather_add_new_location, container, false);
         rw = view.findViewById(R.id.rv_main);
         viewModel = new ViewModelProvider(this).get(CityViewModel.class);
-     //   viewModel.getMutableLiveData().observe(getViewLifecycleOwner(),cityListUpdateObserver);
-
-        stadtsuche = (SearchView) view.findViewById(R.id.stadtsuche);
-        cityListViewer = (ListView) view.findViewById(R.id.stadtliste);
-        stadtsuche.setOnQueryTextListener(this);
-
-        ArrayAdapter<City> aa = new ArrayAdapter<>(
-                this.getContext(), R.layout.fragment_weather, R.id.stadtname, cityList);
-
-        cityListViewer = la.getListView();
-        cityListViewer.setAdapter(aa);
+        //viewModel.getMutableLiveData().observe(getViewLifecycleOwner(),cityListUpdateObserver);
 
         //https://www.tutorialspoint.com/how-to-handle-the-click-event-in-listview-in-android
+
+        //stadtsuche = (SearchView) view.findViewById(R.id.stadtsuche);
+        ListView cityListViewer = (ListView) view.findViewById(R.id.stadtliste);
+        //stadtsuche.setOnQueryTextListener(this);
+
+        String[] staedte = new String[] {"Braunschweig", "Bremen", "Bratislava"};
+        this.cityList = new ArrayList<>(Arrays.asList(staedte));
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_list_item_1, cityList);
+
+        cityListViewer.setAdapter(arrayAdapter);
+
         cityListViewer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Navigation.findNavController(getView()).navigate(R.id.action_mainFragment_to_weatherFragment);
+                Navigation.findNavController(getView()).navigate(R.id.action_addNewWeatherLocationFragment_to_weatherFragment);
             }
         });
 
-         return view;
+        return view;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
         return false;
     }
-
-    Observer<ArrayList<City>> cityListUpdateObserver = new Observer<ArrayList<City>>() {
-        @Override
-        public void onChanged(ArrayList<City> cityArrayList) {
-
-            //Hier muss ne liste gefüllt werden
-            //cityArrayList =
-            recyclerViewAdapter  = new RecyclerViewAdapter(context,cityArrayList);
-            rw.setLayoutManager(new LinearLayoutManager(getContext()));
-           // rw.setAdapter(recyclerViewAdapter);
-        }
-
-
-    };
 
         //TODO: do a list with all found citys that matches the search insert
 
@@ -120,8 +100,7 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
             cwd = owm.currentWeatherByCityName(query);
             if(cwd.hasRespCode() && cwd.getRespCode() == 200) {
                 if(cwd.hasCityName()) {
-                    City city = new City(this.cwd);
-                    this.cityList.add(city);
+                    this.cityList.add(cwd.getCityName());
                     return true;
                 } else {
                     Toast.makeText(this.getActivity(),"Stadt nicht gefunden.",Toast.LENGTH_SHORT).show();
@@ -136,7 +115,4 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
         }
         return false;
     }
-
-
-
 }
