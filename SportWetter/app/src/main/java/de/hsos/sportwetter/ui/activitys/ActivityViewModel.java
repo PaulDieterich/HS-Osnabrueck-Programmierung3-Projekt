@@ -1,4 +1,6 @@
 package de.hsos.sportwetter.ui.activitys;
+import android.widget.ArrayAdapter;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
@@ -15,8 +17,13 @@ public class ActivityViewModel extends ViewModel {
         init();
     }
     MutableLiveData<ArrayList<Activity>> getMutableLiveData() {
+
         return activityLiveData;
     }
+    public void selectItem(ArrayList<Activity> item) {
+        activityLiveData.setValue(item);
+    }
+
     private void init(){
         populateList();
         activityLiveData.setValue(activityArrayList);

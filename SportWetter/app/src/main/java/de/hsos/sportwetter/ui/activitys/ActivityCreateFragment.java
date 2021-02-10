@@ -24,6 +24,7 @@ import java.util.List;
 
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.R;
+import de.hsos.sportwetter.classes.Preferences;
 import de.hsos.sportwetter.classes.activity.Activity;
 import de.hsos.sportwetter.classes.activity.ActivityDao;
 import de.hsos.sportwetter.classes.location.Location;
@@ -81,7 +82,7 @@ public class ActivityCreateFragment extends Fragment {
         Sport s_art = createSport(art);
         Location l_ziel = createLocation(ziel);
         Location l_start = createLocation(start);
-        ActivityProvider p = new ActivityProvider();
+        ActivityProvider p =  (ActivityProvider)Preferences.getInstance(getContext()).getUser();
         Activity newActivity = new Activity(name,p,s_art,l_start,l_ziel);
         return newActivity;
     }

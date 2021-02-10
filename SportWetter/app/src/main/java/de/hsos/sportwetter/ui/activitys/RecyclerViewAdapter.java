@@ -1,11 +1,14 @@
 package de.hsos.sportwetter.ui.activitys;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         public final TextView activity_Name;
         public final TextView activity_Sport;
@@ -54,6 +57,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             activity_Name = view.findViewById(R.id.activityName);
             activity_Sport = view.findViewById(R.id.sportName);
             activity_Ort = view.findViewById(R.id.activityOrt);
+            LinearLayout item = view.findViewById(R.id.item);
+
+            item.setOnClickListener(v->{
+                Navigation.findNavController(v).navigate(R.id.action_activityFragment_to_activtyInfo);
+
+
+
+            });
         }
 
         public TextView getActivity_Name() {
@@ -68,5 +79,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             return activity_Ort;
         }
     }
+
 
 }

@@ -7,60 +7,60 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.R;
+import de.hsos.sportwetter.classes.Preferences;
+import de.hsos.sportwetter.classes.activity.Activity;
+import de.hsos.sportwetter.classes.activity.ActivityDao;
+import de.hsos.sportwetter.classes.user.User;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ActivityInfo#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ActivityInfo extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+/*
+    final static String DATA_RECEIVE = "data";
+    long activityID = Long.parseLong(DATA_RECEIVE);
+        */
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public ActivityInfo() {
+      public ActivityInfo() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ActivityInfo.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ActivityInfo newInstance(String param1, String param2) {
-        ActivityInfo fragment = new ActivityInfo();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_activity_info, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+       View view = inflater.inflate(R.layout.fragment_activity_info, container, false);
+
+       //welcher nutzer eingeloggt ist, informationen aus shardprefernces.
+       User thisUser = Preferences.getInstance(getContext()).getUser();
+
+       ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
+       Activity activityInfo =  dao.getActivityById(1);
+
+       TextView sunriseText = view.findViewById(R.id.sunrise_text);
+       TextView sunsetText = view.findViewById(R.id.sunset_text);
+       TextView rainText = view.findViewById(R.id.rain_text);
+       TextView sunHoursText = view.findViewById(R.id.sunHours_text);
+
+       Button joinBtn = view.findViewById(R.id.joinBtn);
+
+       joinBtn.setOnClickListener(v->{
+           activityInfo.addTeilnehmer(thisUser);
+           dao.updateActivity(activityInfo);
+           Toast.makeText(getContext(),thisUser.getUsername() + " wurde hinzugefügt",Toast.LENGTH_LONG).show();
+       });
+
+
+        return view;
     }
 }
