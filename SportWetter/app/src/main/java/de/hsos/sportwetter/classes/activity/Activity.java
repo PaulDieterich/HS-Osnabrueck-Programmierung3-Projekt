@@ -9,6 +9,8 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.UUID;
 import de.hsos.sportwetter.classes.location.Location;
 import de.hsos.sportwetter.classes.sport.Sport;
 import de.hsos.sportwetter.classes.user.ActivityProvider;
+import de.hsos.sportwetter.classes.user.User;
 
 @Entity(tableName = "ACTIVITY")
 public class Activity {
@@ -35,7 +38,8 @@ public class Activity {
     private Location ziel;
     @ColumnInfo(name = "start")
     private Location start;
-
+    @ColumnInfo(name = "teilnehmer")
+    private List<User> teilnehmer = new ArrayList<>();
 
     /**
      * @author Paul Dieterich
@@ -54,8 +58,9 @@ public class Activity {
         this.art = art;
         this.ziel = ziel;
         this.start = start;
+
     }
-    public Activity(){
+    public Activity() {
         this.name = "unset";
         this.provider = new ActivityProvider();
         this.art = new Sport();
@@ -107,6 +112,17 @@ public class Activity {
     }
 
     public void setStart(Location start) { this.start = start;}
+
+    public List<User> getTeilnehmer() {
+        return teilnehmer;
+    }
+
+    public void setTeilnehmer(List<User> teilnehmer) {
+        this.teilnehmer = teilnehmer;
+    }
+    public void addTeilnehmer(User newTeilnehmer){
+        this.teilnehmer.add(newTeilnehmer);
+    }
 
     @Override
     public String toString() {

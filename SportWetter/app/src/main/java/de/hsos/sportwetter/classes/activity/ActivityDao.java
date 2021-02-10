@@ -24,5 +24,8 @@ public interface ActivityDao {
     public List<Activity> getAllActivitys();
 
 
+    @Query("SELECT * FROM ACTIVITY WHERE activity_id = :id")
+     Activity getActivityById(int id);
+
 }
 
