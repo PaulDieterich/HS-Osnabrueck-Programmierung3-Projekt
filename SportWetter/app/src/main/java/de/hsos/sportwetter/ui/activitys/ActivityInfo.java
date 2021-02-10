@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.R;
@@ -71,16 +73,18 @@ private static final int INTERNET_PERMISSION = 100;
 
        ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
        Activity activityInfo =  dao.getActivityById(1);
-
+        Log.d("ActivityDao", activityInfo.getName());
        TextView sunriseText = view.findViewById(R.id.sunrise_text);
        TextView sunsetText = view.findViewById(R.id.sunset_text);
        TextView rainText = view.findViewById(R.id.rain_text);
        TextView sunHoursText = view.findViewById(R.id.sunHours_text);
 
-        TextView activityLoaction = view.findViewById(R.id.ActivityLocation);
-        activityLoaction.setText(aktuelleStadt.getName().toString());
+       TextView activityName = view.findViewById(R.id.activityName);
+       activityName.setText(activityInfo.getName());
+       TextView activityLoaction = view.findViewById(R.id.ActivityLocation);
+       activityLoaction.setText(activityInfo.getStart().getPlaceName());
 
-       int sunHours = (int) (cwd.getSystemData().getSunsetDateTime().getTime() - cwd.getSystemData().getSunriseDateTime().getTime());
+       Long sunHours =  TimeUnit.MILLISECONDS.toHours(cwd.getSystemData().getSunsetDateTime().getTime() - cwd.getSystemData().getSunriseDateTime().getTime());
        sunriseText.setText(SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT).format(cwd.getSystemData().getSunriseDateTime()));
        sunsetText.setText(SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT).format(cwd.getSystemData().getSunsetDateTime()));
        sunHoursText.setText(String.valueOf(sunHours) + " h");
