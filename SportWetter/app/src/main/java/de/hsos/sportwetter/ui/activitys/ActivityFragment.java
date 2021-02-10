@@ -30,8 +30,6 @@ import de.hsos.sportwetter.classes.activity.Activity;
 import de.hsos.sportwetter.classes.activity.ActivityDao;
 
 public class ActivityFragment extends Fragment implements LifecycleOwner {
-
-
     RecyclerView rw;
     ActivityViewModel viewModel;
     RecyclerViewAdapter recyclerViewAdapter;
@@ -40,9 +38,11 @@ public class ActivityFragment extends Fragment implements LifecycleOwner {
     public interface ActivityFragmentListener{
         void onInputActivitySent(Activity a);
     }
+
     public ActivityFragment() {
         // Required empty public constructor
     }
+
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override

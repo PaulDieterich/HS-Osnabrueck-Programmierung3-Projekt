@@ -43,12 +43,21 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(v -> {
             String userName = username.getText().toString();
             String passwd = password.getText().toString();
-           if(isAUser()){
-               Toast.makeText(this,"Login",Toast.LENGTH_SHORT).show();
-               Intent intent = new Intent(this, MainActivity.class);
-               startActivity(intent);
-            }else{
-                Toast.makeText(this,"Login Failed",Toast.LENGTH_SHORT).show();
+            UserDao dao = AppDatabase.getDatabase(this).userDao();
+            List<User> userList = dao.getAllUsers();
+            for (User u : userList) {
+                if (u.getUsername() == userName) {
+                    if (u.getPassword() == passwd) {
+                        Preferences.getInstance(this).setUser(u);
+                        Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Username existiert nicht", Toast.LENGTH_LONG).show();
+                }
             }
         });
         register.setOnClickListener(v -> {
@@ -56,23 +65,4 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
-    private boolean isAUser(){
-        UserDao dao = AppDatabase.getDatabase(this).userDao();
-        List<User> userList = dao.getAllUsers();
-        boolean isUser = false;
-        for ( User u : userList) {
-            if(u.getUsername() == userName){
-                if(u.getPassword() == passwd){
-                    isUser = true;
-                    Preferences.getInstance(this).setUser(u);
-                }else{
-                    Toast.makeText(this,"Password falsch",Toast.LENGTH_LONG).show();
-                }
-            }else{
-                Toast.makeText(this,"username nicht vorhanden",Toast.LENGTH_LONG).show();
-            }
-        }
-        return isUser;
-    }
-
 }

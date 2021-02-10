@@ -30,38 +30,31 @@ import de.hsos.sportwetter.classes.user.UserDao;
 import de.hsos.sportwetter.databinding.ActivityRegisterBinding;
 
 public class RegisterActivity extends AppCompatActivity {
-    
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-         sharedPreferences = getSharedPreferences("usersFile", Context.MODE_PRIVATE);
         EditText username = findViewById(R.id.username);
         EditText password = findViewById(R.id.password);
         EditText email = findViewById(R.id.email);
-        Button registerbtn = (Button) findViewById(R.id.registerbtn);
-        UserDao dao = AppDatabase.getDatabase(this).userDao();
+        Button registerbtn = findViewById(R.id.registerbtn);
         registerbtn.setOnClickListener(v -> {
             String userName = username.getText().toString();
             String passwd = password.getText().toString();
             String eMail = email.getText().toString();
-            User u = createUser(userName,eMail,passwd);
-            dao.insertUser(u);
-            Preferences.getInstance(this).setUser(u);
-            Toast.makeText(RegisterActivity.this, "Create new User", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-
-            //Create new User and add this into the activity database
-
+            UserDao dao = AppDatabase.getDatabase(this).userDao();
+            for (User user: dao.getAllUsers()) {
+                if(userName == user.getName()){
+                    Toast.makeText(RegisterActivity.this, "username existiert schon", Toast.LENGTH_LONG).show();
+                }else{
+                    User u = new User(userName,eMail, passwd);
+                    dao.insertUser(u);
+                    Preferences.getInstance(this).setUser(u);
+                    Toast.makeText(RegisterActivity.this, "Create new User", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                }
+            }
         });
-
     }
-    private User createUser(String userName, String eMail,String passwd){
-        User newUser = new User(userName,eMail, passwd);
-        return newUser;
-    }
-
 }
