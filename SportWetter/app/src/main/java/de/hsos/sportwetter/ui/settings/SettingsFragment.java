@@ -1,14 +1,19 @@
 package de.hsos.sportwetter.ui.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.EditTextPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import de.hsos.sportwetter.R;
+import de.hsos.sportwetter.classes.Preferences;
+import de.hsos.sportwetter.ui.login.LoginActivity;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements View.OnClickListener{
 
@@ -17,10 +22,21 @@ public class SettingsFragment extends PreferenceFragmentCompat implements View.O
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
+
+        Preference logout = findPreference("ausloggen");
+        logout.setOnPreferenceClickListener(this::ausloggen);
+
     }
 
     @Override
     public void onClick(View v) {
-        navController.navigate(R.id.action_settingsFragment_to_profileFragment);
+       navController.navigate(R.id.action_settingsFragment_to_profileFragment);
+    }
+    private boolean ausloggen(Preference preference){
+        Preferences.getInstance(getContext()).setUser(null);
+
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        startActivity(intent);
+        return true;
     }
 }
