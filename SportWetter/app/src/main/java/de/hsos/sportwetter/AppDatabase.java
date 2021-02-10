@@ -32,7 +32,7 @@ import de.hsos.sportwetter.classes.user.UserDao;
         Location.class,
         Activity.class
 },
-version = 4,
+version = 5,
 exportSchema = false
 )
 @TypeConverters({Converters.class})
