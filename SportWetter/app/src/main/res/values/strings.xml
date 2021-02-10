@@ -48,4 +48,6 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_fragment_weather_item">fragment_weather_item</string>
 
+    <!-- Fragment Activity Item-->
+     <string name="join">teilnehmen</string>
 </resources>
