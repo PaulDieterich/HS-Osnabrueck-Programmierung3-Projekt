@@ -23,6 +23,7 @@ import android.widget.TextView;
 import net.aksingh.owmjapis.api.APIException;
 import net.aksingh.owmjapis.core.OWM;
 import net.aksingh.owmjapis.model.CurrentWeather;
+import net.aksingh.owmjapis.model.DailyWeatherForecast;
 
 import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.weather.City;
@@ -99,21 +100,27 @@ public class WeatherFragment extends Fragment {
         maxTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         //TODO: Aufruf der Logik, vielleicht als Background Task
+        //Eingeben, immer wenn gefunden ArrayList => Cities reingespeichert
 
         Handler handler = new Handler();
         Resources res = getResources();
-        Runnable runnableCode = new Runnable() {
+          Runnable runnableCode = new Runnable() {
             @Override
             public void run() {
-                stadtname.setText(aktuelleStadt.getName());
-                land.setText(aktuelleStadt.getLand());
-                avgTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTemp()));
-                maxTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTempMax()));
-                minTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTempMin()));
-                // Log.d("Handlers", "Called on main thread");
-                // Repeat this the same runnable code block again another 5 seconds
-                // 'this' is referencing the Runnable object
-                handler.postDelayed(this, 5000);
+                try {
+                    cwd = owm.currentWeatherByCityName(aktuelleStadt.getName());
+                    stadtname.setText(aktuelleStadt.getName());
+                    land.setText(aktuelleStadt.getLand());
+                    avgTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTemp()));
+                    maxTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTempMax()));
+                    minTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTempMin()));
+                    // Log.d("Handlers", "Called on main thread");
+                    // Repeat this the same runnable code block again another 5 seconds
+                    // 'this' is referencing the Runnable object
+                    handler.postDelayed(this, 5000);
+                } catch (APIException e) {
+                    e.printStackTrace();
+                }
             }
         };
         handler.post(runnableCode);
