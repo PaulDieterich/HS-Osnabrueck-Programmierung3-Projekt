@@ -3,6 +3,7 @@ package de.hsos.sportwetter.classes.sport;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.UUID;
@@ -23,7 +24,7 @@ public class Sport {
     private int minNumberOfParticipants;
     @ColumnInfo(name = "max_number_of_participants")
     private int maxNumberOfParticipants;
-
+    @Ignore
     public Sport(){
 
         this.name = "unset";
@@ -38,6 +39,7 @@ public class Sport {
      * @param min_anzahl - interesannt für gruppensport oder kleingruppen
      * @param max_anzahl - interesannt für gruppensport oder kleingruppen
      * */
+    @Ignore
     public Sport(String name, int min_anzahl, int max_anzahl) {
 
         this.name = name;

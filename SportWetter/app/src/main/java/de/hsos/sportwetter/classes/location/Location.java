@@ -3,6 +3,7 @@ package de.hsos.sportwetter.classes.location;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
@@ -44,6 +45,7 @@ public class Location {
      * @param latitude - breitengrad - wichtig für die spätere googlemaps anbindung (falls zeit)
      * @param longitude - längengrad - wichtig für die spätere googlemaps anbindung (falls zeit)
      * */
+    @Ignore
     public Location(String placeName, String street, String country, String city, int plz, long latitude, long longitude) {
         this.placeName = placeName;
         this.street = street;
@@ -63,6 +65,7 @@ public class Location {
         this.latitude = 0;
         this.longitude = 0;
     }
+    @Ignore
     public Location(String name) {
         this.placeName = name;
         this.street = "unset";
@@ -72,6 +75,7 @@ public class Location {
         this.latitude = 0;
         this.longitude = 0;
     }
+   
     public Location(Location l) {
         this.placeName = l.placeName;
         this.street = l.street;
