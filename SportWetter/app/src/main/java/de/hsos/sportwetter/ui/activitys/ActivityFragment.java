@@ -15,7 +15,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,9 +34,8 @@ public class ActivityFragment extends Fragment implements LifecycleOwner {
     RecyclerViewAdapter recyclerViewAdapter;
     Activity context;
     RecyclerView recyclerView;
-    public interface ActivityFragmentListener{
-        void onInputActivitySent(Activity a);
-    }
+
+
 
     public ActivityFragment() {
         // Required empty public constructor

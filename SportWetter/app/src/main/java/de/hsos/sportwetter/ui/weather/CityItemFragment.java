@@ -29,7 +29,7 @@ public class CityItemFragment extends AppCompatActivity {
 
     public static CityItemFragment newInstance(int columnCount){
         CityItemFragment fragment = new  CityItemFragment();
-                return fragment;
+        return fragment;
     }
 
     @Override
@@ -43,8 +43,8 @@ public class CityItemFragment extends AppCompatActivity {
 
         View view = inflater.inflate(R.layout.fragment_city_item, container, false);
         // Set the adapter
-            RecyclerView recyclerView = view.findViewById(R.id.rv_main);
-           // recyclerView.setAdapter(new RecyclerViewAdapter();
+        RecyclerView recyclerView = view.findViewById(R.id.rv_main);
+        // recyclerView.setAdapter(new RecyclerViewAdapter();
         return view;
     }
 }

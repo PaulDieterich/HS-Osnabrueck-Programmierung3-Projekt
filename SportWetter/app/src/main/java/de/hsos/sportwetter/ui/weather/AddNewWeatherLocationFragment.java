@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
+import  android.widget.SearchView ;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -37,18 +37,19 @@ import java.util.List;
 
 import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.R;
-import de.hsos.sportwetter.classes.activity.ActivityDao;
 
 import de.hsos.sportwetter.classes.weather.City;
+import de.hsos.sportwetter.ui.weather.RecyclerViewAdapter;
 
-public class AddNewWeatherLocationFragment extends Fragment implements SearchView.OnQueryTextListener {
+public class AddNewWeatherLocationFragment extends Fragment{
 
     RecyclerView rw;
     CityViewModel viewModel;
+    RecyclerViewAdapter recyclerViewAdapter;
     OWM owm;
     CurrentWeather cwd;
     List<String> cityList;
-
+    City context;
     public AddNewWeatherLocationFragment() {
         // Required empty public constructor
     }
@@ -63,36 +64,41 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
         View view = inflater.inflate(R.layout.fragment_weather_add_new_location, container, false);
         rw = view.findViewById(R.id.rv_main);
         viewModel = new ViewModelProvider(this).get(CityViewModel.class);
-        //viewModel.getMutableLiveData().observe(getViewLifecycleOwner(),cityListUpdateObserver);
+        viewModel.getMutableLiveData().observe(getViewLifecycleOwner(),cityListUpdateObserver);
 
-        //https://www.tutorialspoint.com/how-to-handle-the-click-event-in-listview-in-android
-
-        //stadtsuche = (SearchView) view.findViewById(R.id.stadtsuche);
-        ListView cityListViewer = (ListView) view.findViewById(R.id.stadtliste);
-        //stadtsuche.setOnQueryTextListener(this);
-
-        String[] staedte = new String[] {"Braunschweig", "Bremen", "Bratislava"};
-        this.cityList = new ArrayList<>(Arrays.asList(staedte));
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_list_item_1, cityList);
-
-        cityListViewer.setAdapter(arrayAdapter);
-
-        cityListViewer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        SearchView searchView = (SearchView) view.findViewById(R.id.stadtsuche);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Navigation.findNavController(getView()).navigate(R.id.action_addNewWeatherLocationFragment_to_weatherFragment);
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                recyclerViewAdapter.getFilter().filter(newText);
+                return false;
             }
         });
 
+
         return view;
     }
+    Observer<ArrayList<City>> cityListUpdateObserver = new Observer<ArrayList<City>>() {
+        @Override
+        public void onChanged(ArrayList<City> cityArrayList) {
 
+            recyclerViewAdapter  = new RecyclerViewAdapter(context,cityArrayList);
+            rw.setLayoutManager(new LinearLayoutManager(getContext()));
+            rw.setAdapter(recyclerViewAdapter);
+        }
+    };
+    /*
     @Override
     public boolean onQueryTextChange(String newText) {
         return false;
     }
 
-        //TODO: do a list with all found citys that matches the search insert
+    //TODO: do a list with all found citys that matches the search insert
 
     @Override
     public boolean onQueryTextSubmit(String query) {
@@ -115,4 +121,7 @@ public class AddNewWeatherLocationFragment extends Fragment implements SearchVie
         }
         return false;
     }
+    */
+
+
 }

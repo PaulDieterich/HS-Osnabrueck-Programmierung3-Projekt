@@ -104,7 +104,7 @@ public class WeatherFragment extends Fragment {
 
         Handler handler = new Handler();
         Resources res = getResources();
-          Runnable runnableCode = new Runnable() {
+        Runnable runnableCode = new Runnable() {
             @Override
             public void run() {
                 try {

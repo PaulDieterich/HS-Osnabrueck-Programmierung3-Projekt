@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,10 +23,13 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     Activity context;
     private final List<Activity> mValues;
-
+    long id;
     public RecyclerViewAdapter(Activity context, List<Activity> items) {
         this.context = context;
         mValues = items;
+    }
+    public interface AdapterListener{
+        void onContrainerClick(View view, int pos);
     }
 
     @NotNull
@@ -36,17 +41,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
+        id = mValues.get(position).getId();
         holder.getActivity_Name().setText(mValues.get(position).getName());
         holder.getActivity_Ort().setText(mValues.get(position).getStart().getPlaceName());
         holder.getActivity_Sport().setText(mValues.get(position).getArt().getName());
+
     }
 
     @Override
     public int getItemCount() {
         return mValues.size();
     }
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         public final TextView activity_Name;
         public final TextView activity_Sport;
@@ -61,7 +67,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             item.setOnClickListener(v->{
                 Navigation.findNavController(v).navigate(R.id.action_activityFragment_to_activtyInfo);
-
 
 
             });
@@ -79,6 +84,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             return activity_Ort;
         }
     }
-
 
 }
