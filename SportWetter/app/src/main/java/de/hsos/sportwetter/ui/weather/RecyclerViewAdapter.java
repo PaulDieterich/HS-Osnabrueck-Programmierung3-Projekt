@@ -5,9 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import org.jetbrains.annotations.NotNull;
 
@@ -82,7 +84,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(view);
             countryName = view.findViewById(R.id.Land);
             cityName = view.findViewById(R.id.CityName);
-
+            LinearLayout item = view.findViewById(R.id.item);
+            item.setOnClickListener(v -> {
+                Navigation.findNavController(v).navigate(R.id.action_addNewWeatherLocationFragment_to_weatherFragment);
+            });
         }
 
         public TextView getCityName() {
