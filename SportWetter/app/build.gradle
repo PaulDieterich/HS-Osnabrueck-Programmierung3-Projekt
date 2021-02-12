@@ -1,12 +1,10 @@
 plugins {
     id 'com.android.application'
+    id "androidx.navigation.safeargs"
 }
 
 android {
     compileSdkVersion 30
-    dataBinding{
-        enabled = true
-    }
     defaultConfig {
         applicationId "de.hsos.sportwetter"
         minSdkVersion 21
@@ -32,9 +30,15 @@ android {
 }
 
 dependencies {
+    def sqlite_version = "2.1.0"
+
+    // Java language implementation
+    implementation "androidx.sqlite:sqlite:$sqlite_version"
+    // Implementation of the AndroidX SQLite interfaces via the Android framework APIs.
+    implementation "androidx.sqlite:sqlite-framework:$sqlite_version"
 
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
-
+   //------------------------------------------------------------------------------------------------------
     def room_version = "2.2.6"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
