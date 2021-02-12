@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 import de.hsos.sportwetter.ui.activitys.RecyclerViewAdapter;
 
 import de.hsos.sportwetter.R;
@@ -47,4 +50,5 @@ public class CityItemFragment extends AppCompatActivity {
         // recyclerView.setAdapter(new RecyclerViewAdapter();
         return view;
     }
+
 }

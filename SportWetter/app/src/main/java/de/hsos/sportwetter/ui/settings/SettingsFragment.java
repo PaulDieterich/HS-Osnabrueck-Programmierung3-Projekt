@@ -31,10 +31,10 @@ public class SettingsFragment extends PreferenceFragmentCompat{
     }
 
     public boolean profile(Preference preference) {
-       navController.navigate(R.id.action_settingsFragment_to_profileFragment);
+        Navigation.findNavController(getView()).navigate(R.id.action_settingsFragment_to_profileFragment);
        return true;
     }
-    
+
     private boolean ausloggen(Preference preference){
         Preferences.getInstance(getContext()).setUser(null);
 

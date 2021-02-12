@@ -40,6 +40,11 @@
         <action
             android:id="@+id/action_weatherFragment_to_addNewWeatherLocationFragment"
             app:destination="@id/addNewWeatherLocationFragment" />
+        <argument
+            android:name="cityName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="Bremen" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
@@ -66,7 +71,11 @@
         android:id="@+id/activityInfo"
         android:name="de.hsos.sportwetter.ui.activitys.ActivityInfo"
         android:label="fragment_activity_info"
-        tools:layout="@layout/fragment_activity_info" />
+        tools:layout="@layout/fragment_activity_info" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="de.hsos.sportwetter.ui.settings.ProfileFragment"

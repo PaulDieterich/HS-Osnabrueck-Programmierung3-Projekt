@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 import java.util.UUID;
 import de.hsos.sportwetter.classes.sport.Sport;
 
@@ -66,6 +67,18 @@ public class User{
 
     @Ignore
     public User(){ }
+
+    public User(String user) {
+        setUsername(user);
+        setName("name");
+        setFirstname("firstname");
+        setEmail("email");
+        setPassword("password");
+        setBirthday(null);
+        setLikedSportAcivity(null);
+        setfriendList(null);
+
+        }
 
 
     public long getUserID() {
@@ -134,5 +147,20 @@ public class User{
 
     public void setfriendList(List<User> friendList) {
         this.friendList = friendList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(username, user.username) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, email, password);
     }
 }

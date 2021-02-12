@@ -43,17 +43,19 @@ public class RegisterActivity extends AppCompatActivity {
             String passwd = password.getText().toString();
             String eMail = email.getText().toString();
             UserDao dao = AppDatabase.getDatabase(this).userDao();
-            for (User user: dao.getAllUsers()) {
-                if(userName == user.getName()){
-                    Toast.makeText(RegisterActivity.this, "username existiert schon", Toast.LENGTH_LONG).show();
-                }else{
-                    User u = new User(userName,eMail, passwd);
-                    dao.insertUser(u);
-                    Preferences.getInstance(this).setUser(u);
-                    Toast.makeText(RegisterActivity.this, "Create new User", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
+            User result = null;
+            for (User user : dao.getAllUsers()) {
+                if (username.equals(user.getName())){
+                    result = user;
                 }
+            }
+            if (result == null) {
+                User u = new User(userName, eMail, passwd);
+                u.setUserID(dao.insertUser(u));
+                Preferences.getInstance(this).setUser(u);
+                Toast.makeText(RegisterActivity.this, "Create new User", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

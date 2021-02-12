@@ -27,6 +27,7 @@ import net.aksingh.owmjapis.model.DailyWeatherForecast;
 
 import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.weather.City;
+import de.hsos.sportwetter.ui.activitys.ActivityInfoArgs;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,36 +41,31 @@ public class WeatherFragment extends Fragment {
     OWM owm;
     CurrentWeather cwd;
     private City aktuelleStadt;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
+    String cityName = "Bremen";
     public WeatherFragment() {
         // Required empty public constructor
     }
 
     public static WeatherFragment newInstance(String param1, String param2) {
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         WeatherFragment fragment = new WeatherFragment();
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        String cityName = "Bremen";
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        WeatherFragmentArgs args = WeatherFragmentArgs.fromBundle(getArguments());
+        if(args.getCityName() != null){
+            cityName = args.getCityName();
+        }
 
         this.owm = new OWM(getString(R.string.openweather_api_key));
         owm.setUnit(OWM.Unit.METRIC);
         try {
-            this.cwd = owm.currentWeatherByCityName("Braunschweig");
+            this.cwd = owm.currentWeatherByCityName(cityName);
             this.aktuelleStadt = new City(this.cwd);
         } catch (APIException e) {
             e.printStackTrace();
@@ -77,8 +73,7 @@ public class WeatherFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
         Button addBtn = (Button) view.findViewById(R.id.add_btn);

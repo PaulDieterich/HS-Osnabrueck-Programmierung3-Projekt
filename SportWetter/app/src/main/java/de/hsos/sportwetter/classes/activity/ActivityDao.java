@@ -25,7 +25,7 @@ public interface ActivityDao {
 
 
     @Query("SELECT * FROM ACTIVITY WHERE activity_id = :id")
-     Activity getActivityById(int id);
+     Activity getActivityById(long id);
 
 }
 

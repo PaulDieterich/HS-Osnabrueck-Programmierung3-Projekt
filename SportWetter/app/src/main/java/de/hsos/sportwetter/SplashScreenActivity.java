@@ -29,15 +29,15 @@ public class SplashScreenActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if(Preferences.getInstance(this).getUser() == null){
+       if(Preferences.getInstance(this).getUser() == null){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
             //zu login weiterleiten
-        }else{
+       }else{
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        }
+       }
 
     }
 

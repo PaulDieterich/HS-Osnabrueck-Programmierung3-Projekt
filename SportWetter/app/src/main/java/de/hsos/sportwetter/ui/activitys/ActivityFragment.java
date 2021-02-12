@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -34,14 +36,6 @@ public class ActivityFragment extends Fragment implements LifecycleOwner {
     ActivityViewModel viewModel;
     RecyclerViewAdapter recyclerViewAdapter;
     Activity context;
-    long data;
-    RecyclerView recyclerView;
-    RecyclerViewAdapter.OnTextClickListener listener = new RecyclerViewAdapter.OnTextClickListener() {
-        @Override
-        public void onClick(long id) {
-            data = id;
-        }
-    };
 
 
     public ActivityFragment() {
@@ -53,33 +47,37 @@ public class ActivityFragment extends Fragment implements LifecycleOwner {
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity, container, false);
-            Button createActivity = view.findViewById(R.id.createActivity);
-            rw = view.findViewById(R.id.rv_main);
-            viewModel = new ViewModelProvider(this).get(ActivityViewModel.class);
-            viewModel.getMutableLiveData().observe(getViewLifecycleOwner(),activityListUpdateObserver);
-            createActivity.setOnClickListener(v ->{
-                Log.d("ActivityFragment: ", "createActivity button");
-                Navigation.findNavController(v).navigate(R.id.action_activityFragment_to_activity_createFragment);
-            });
+        Button createActivity = view.findViewById(R.id.createActivity);
+        rw = view.findViewById(R.id.rv_main);
+        viewModel = new ViewModelProvider(this).get(ActivityViewModel.class);
+        viewModel.getMutableLiveData().observe(getViewLifecycleOwner(),activityListUpdateObserver);
+        createActivity.setOnClickListener(v ->{
+            Log.d("ActivityFragment: ", "createActivity button");
+            Navigation.findNavController(v).navigate(R.id.action_activityFragment_to_activity_createFragment);
+        });
 
         //DAO
         ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
         List<Activity> activityList = dao.getAllActivitys();
+
         // Set the adapter
         RecyclerView recyclerView = view.findViewById(R.id.rv_main);
-        recyclerView.setAdapter(new RecyclerViewAdapter(new Activity(),activityList,listener));
+        recyclerView.setAdapter(new RecyclerViewAdapter(new Activity(),activityList));
 
         return view;
 
     }
+
     Observer<ArrayList<Activity>> activityListUpdateObserver = new Observer<ArrayList<Activity>>() {
         @Override
         public void onChanged(ArrayList<Activity> activityArrayList) {
             ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
             activityArrayList = (ArrayList<Activity>) dao.getAllActivitys();
-            recyclerViewAdapter  = new RecyclerViewAdapter(context,activityArrayList,listener);
+            recyclerViewAdapter  = new RecyclerViewAdapter(context,activityArrayList);
             rw.setLayoutManager(new LinearLayoutManager(getContext()));
             rw.setAdapter(recyclerViewAdapter);
+
         }
     };
+
 }

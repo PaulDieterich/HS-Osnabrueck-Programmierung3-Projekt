@@ -1,6 +1,7 @@
 package de.hsos.sportwetter.ui.weather;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -21,6 +22,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.weather.City;
@@ -32,6 +34,8 @@ public class CityViewModel extends ViewModel {
     MutableLiveData<ArrayList<City>> cityLiveData;
     ArrayList<City> cityArrayList;
     Context context;
+
+
     public CityViewModel(){
         cityLiveData = new MutableLiveData<>();
         init();
@@ -47,20 +51,32 @@ public class CityViewModel extends ViewModel {
         cityLiveData.setValue(cityArrayList);
     }
 
-    public void populateList(){
-            City c = new City();
-            c.setName("Bremen");
-            c.setLand("Deuschland");
-            City c1 = new City();
-            c1.setName("Brauenschweig");
-            c1.setLand("Deuschland");
-            City c2 = new City();
-            c2.setName("Bratislava");
-            c2.setLand("Slowakei");
+
+    /**
+    *für vorstellungs zwecke, um alle Städte aus der datenbank(openweather api) nutzen zu dürfen
+    *muss man monatlich zahlen, also haben wir eine kleine auswahl an stäten nach den man suchen kann.
+    */
+     public void populateList(){
+
+/*
+        City c0 = new City("Bremen","Deutschland");
+        City c1 = new City("Brauenschweig","Deutschland");
+        City c2 = new City("London", "Großbritanien");
+        City c3 = new City("Berlin", "Deutschland");
+        City c4 = new City("Paries", "Frankreich");
+        City c5 = new City("Kiel", "Deutschland");
+        City c6 = new City("Osnabrueck","Deutschland");
             ArrayList<City> cityList = new ArrayList<>();
-            cityList.add(c);
+            cityList.add(c0);
             cityList.add(c1);
             cityList.add(c2);
+            cityList.add(c3);
+            cityList.add(c4);
+            cityList.add(c5);
+            cityList.add(c6);
             cityArrayList = cityList;
+            */
+
     }
+
 }

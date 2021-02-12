@@ -7,8 +7,6 @@ import androidx.room.TypeConverter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONObject;
-
 import java.lang.reflect.Type;
 
 import java.util.Collections;
@@ -18,7 +16,6 @@ import java.util.UUID;
 
 import de.hsos.sportwetter.classes.location.Location;
 import de.hsos.sportwetter.classes.sport.Sport;
-import de.hsos.sportwetter.classes.user.ActivityProvider;
 import de.hsos.sportwetter.classes.user.User;
 
 public class Converters {
@@ -32,15 +29,7 @@ public class Converters {
     public static Long dateToTimestamp(Date date) {
         return date == null ? null : date.getTime();
     }
-    @TypeConverter
-    public static UUID fromStringToUUI(String uuid){
-        return uuid == null ? null : UUID.fromString(uuid);
-    }
 
-    @TypeConverter
-    public static String fromUUIDToString(UUID uuid){
-        return uuid == null ? null : uuid.toString();
-    }
     //Beispiel https://medium.com/@toddcookevt/android-room-storing-lists-of-objects-766cca57e3f9
     //Gson gson = new Gson();
     @TypeConverter
@@ -69,13 +58,13 @@ public class Converters {
         return gson.toJson(user);
     }
     @TypeConverter
-    public static ActivityProvider stringToActivityProviderObject(String user) {
-        return user == null ? null : new ActivityProvider(user);
+    public static String UserToObjectToString(User user){
+        Gson gson = new Gson();
+        return gson.toJson(user);
     }
-
     @TypeConverter
-    public static String activityProviderToString( ActivityProvider user) {
-        return user == null ? null : user.toString();
+    public static User stringToUser(String user){
+        return user == null ? null : new User(user);
     }
     @TypeConverter
     public static Sport stringToSportObject(String sport) {

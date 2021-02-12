@@ -15,11 +15,18 @@ public class Preferences {
     private static Preferences instance;
 
     private final SharedPreferences sharedPreferences;
-    private final UserDao userDao;
+    private final Context context;
 
     private Preferences(Context applicationContext) {
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        this.userDao = AppDatabase.getDatabase(applicationContext).userDao();
+        context = applicationContext;
+
+    }
+    public void setFirstStart(boolean firstStart){
+        sharedPreferences.edit().putBoolean("firstStart", firstStart).apply();
+    }
+    public boolean getFirstStart(){
+        return sharedPreferences.getBoolean("firstStart",true);
     }
     public void setUser(User u){
         if(u == null) {
@@ -29,6 +36,7 @@ public class Preferences {
         }
     }
     public User getUser(){
+        UserDao userDao = AppDatabase.getDatabase(context).userDao();
         long userID = sharedPreferences.getLong("userID",-1);
         if(userID > -1){
             for (User user : userDao.getAllUsers()) {

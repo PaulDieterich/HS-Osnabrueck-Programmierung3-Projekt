@@ -1,5 +1,6 @@
 package de.hsos.sportwetter.ui.weather;
 
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -20,14 +22,13 @@ import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.weather.City;
 
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements Filterable {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     City context;
-    private List<City> list;
-    private List<City> copyList;
-    public RecyclerViewAdapter(City context, List<City> items){
+    private Cursor cursor;
+    public RecyclerViewAdapter(City context, Cursor c){
         this.context = context;
-        list = items;
-        copyList = new ArrayList<>(items);
+
+        cursor = c;
     }
     @NotNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,18 +36,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new ViewHolder(view);
     }
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        holder.getCityName().setText(list.get(position).getName());
-        holder.getCountryName().setText(list.get(position).getLand());
+        cursor.moveToPosition(position);
+        String cityName = cursor.getString(cursor.getColumnIndex("name"));
+        String countryName = cursor.getString(cursor.getColumnIndex("country"));
+
+        holder.getCityName().setText(cityName);
+        holder.getCountryName().setText(countryName);
+        holder.itemView.setOnClickListener(v -> {
+            WeatherFragmentArgs args = new WeatherFragmentArgs.Builder().setCityName(cityName).build();
+            Navigation.findNavController(v).navigate(R.id.action_addNewWeatherLocationFragment_to_weatherFragment,args.toBundle());
+        });
+
     }
     public int getItemCount() {
-        return list.size();
+        return cursor.getCount();
     }
 
-    @Override
-    public Filter getFilter() {
 
-        return listFilter;
-    }
+    /*
     private Filter listFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -72,7 +79,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             list.addAll((List) results.values);
             notifyDataSetChanged();
         }
-    };
+    };*/
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -85,9 +92,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             countryName = view.findViewById(R.id.Land);
             cityName = view.findViewById(R.id.CityName);
             LinearLayout item = view.findViewById(R.id.item);
-            item.setOnClickListener(v -> {
-                Navigation.findNavController(v).navigate(R.id.action_addNewWeatherLocationFragment_to_weatherFragment);
-            });
+
         }
 
         public TextView getCityName() {

@@ -2,8 +2,6 @@ package de.hsos.sportwetter.ui.activitys;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -11,15 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import de.hsos.sportwetter.AppDatabase;
@@ -31,7 +23,7 @@ import de.hsos.sportwetter.classes.location.Location;
 import de.hsos.sportwetter.classes.location.LocationDao;
 import de.hsos.sportwetter.classes.sport.Sport;
 import de.hsos.sportwetter.classes.sport.SportDao;
-import de.hsos.sportwetter.classes.user.ActivityProvider;
+import de.hsos.sportwetter.classes.user.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,7 +74,7 @@ public class ActivityCreateFragment extends Fragment {
         Sport s_art = createSport(art);
         Location l_ziel = createLocation(ziel);
         Location l_start = createLocation(start);
-        ActivityProvider p =  (ActivityProvider)Preferences.getInstance(getContext()).getUser();
+        User p = new User();
         Activity newActivity = new Activity(name,p,s_art,l_start,l_ziel);
         return newActivity;
     }

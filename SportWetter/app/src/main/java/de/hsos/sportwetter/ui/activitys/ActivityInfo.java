@@ -37,50 +37,46 @@ import de.hsos.sportwetter.classes.user.User;
 import de.hsos.sportwetter.classes.weather.City;
 
 
-public class ActivityInfo extends Fragment implements RecyclerViewAdapter.OnTextClickListener {
+public class ActivityInfo extends Fragment {
 
-/*
-    final static String DATA_RECEIVE = "data";
-    long activityID = Long.parseLong(DATA_RECEIVE);
-        */
-private static final int INTERNET_PERMISSION = 100;
+    private static final int INTERNET_PERMISSION = 100;
+    private List<Activity> activityList;
 
-private List<Activity> activityList;
-    RecyclerViewAdapter.OnTextClickListener listener;
     OWM owm;
     CurrentWeather cwd;
     private City aktuelleStadt;
-    long id;
+    int id;
     RecyclerViewAdapter recyclerViewAdapter;
-      public ActivityInfo() {
-        // Required empty public constructor
-    }
+    // Required empty public constructor
+    ActivityInfoArgs args;
+    public ActivityInfo() { }
 
+    /**
+     *sucht nach dem namen der aktivität, die zur übergebenen aktivitäts id past die übergeben wurde
+     * in der datenbank und gibt den dort gefundenen aktivitäts orts namen in die Weather api ein und sucht nach
+     * den wetter daten.
+     * Diese werden dann im cwd objeckt gespeichert.
+     */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-          super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_activity_info, container, false);       //welcher nutzer eingeloggt ist, informationen aus shardprefernces.
+        User thisUser = Preferences.getInstance(getContext()).getUser();
+        args = ActivityInfoArgs.fromBundle(getArguments());
+        ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
+        Activity activityInfo =  dao.getActivityById(args.getId());
+        Log.d("ActivityDao", activityInfo.getName());
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
+        args = ActivityInfoArgs.fromBundle(getArguments());
         this.owm = new OWM(getString(R.string.openweather_api_key));
         owm.setUnit(OWM.Unit.METRIC);
         try {
-            this.cwd = owm.currentWeatherByCityName("Braunschweig");
+            this.cwd = owm.currentWeatherByCityName(activityInfo.getStart().getPlaceName());
             this.aktuelleStadt = new City(this.cwd);
         } catch (APIException e) {
             e.printStackTrace();
         }
-    }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.fragment_activity_info, container, false);       //welcher nutzer eingeloggt ist, informationen aus shardprefernces.
-       User thisUser = Preferences.getInstance(getContext()).getUser();
-
-       ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
-       Activity activityInfo =  dao.getActivityById(1);
-        Log.d("ActivityDao", activityInfo.getName());
        TextView sunriseText = view.findViewById(R.id.sunrise_text);
        TextView sunsetText = view.findViewById(R.id.sunset_text);
        TextView rainText = view.findViewById(R.id.rain_text);
@@ -104,10 +100,5 @@ private List<Activity> activityList;
            Toast.makeText(getContext(),thisUser.getUsername() + " wurde hinzugefügt",Toast.LENGTH_LONG).show();
        });
         return view;
-    }
-
-    @Override
-    public void onClick(long id) {
-
     }
 }

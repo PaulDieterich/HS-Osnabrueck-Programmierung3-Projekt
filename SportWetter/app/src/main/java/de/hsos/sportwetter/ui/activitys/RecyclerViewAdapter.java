@@ -25,18 +25,10 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     Activity context;
     private List<Activity> mValues;
-    long id;
-    OnTextClickListener listener;
-    long data;
 
-    public interface OnTextClickListener{
-        void onClick(long id);
-    }
-    public RecyclerViewAdapter(Activity context, List<Activity> items, OnTextClickListener listener) {
+    public RecyclerViewAdapter(Activity context, List<Activity> items) {
         this.context = context;
         mValues = items;
-        this.listener = listener;
-
     }
 
     @NotNull
@@ -47,17 +39,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.getActivity_Name().setText(mValues.get(position).getName());
         holder.getActivity_Ort().setText(mValues.get(position).getStart().getPlaceName());
         holder.getActivity_Sport().setText(mValues.get(position).getArt().getName());
-        data = mValues.get(position).getId();
-        holder.getActivity_Name().setOnClickListener(v->{
-            id = data;
-            listener.onClick(id);
+        holder.itemView.setOnClickListener(v -> {
+            ActivityInfoArgs args = new ActivityInfoArgs.Builder(mValues.get(position).getId()).build();
+            Navigation.findNavController(v).navigate(R.id.action_activityFragment_to_activtyInfo,args.toBundle());
         });
     }
-
     @Override
     public int getItemCount() {
         return mValues.size();
@@ -72,10 +62,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             activity_Name = view.findViewById(R.id.activityName);
             activity_Sport = view.findViewById(R.id.sportName);
             activity_Ort = view.findViewById(R.id.activityOrt);
-            LinearLayout item = view.findViewById(R.id.item);
-            item.setOnClickListener(v -> {
-                Navigation.findNavController(v).navigate(R.id.action_activityFragment_to_activtyInfo);
-            });
         }
 
         public TextView getActivity_Name() {

@@ -16,7 +16,7 @@ import java.util.List;
 @Dao
 public interface UserDao {
     @Insert
-    void insertUser(User sport);
+    long insertUser(User user);
 
     @Update
     void updateUser(User user);
@@ -26,8 +26,4 @@ public interface UserDao {
 
     @Query("SELECT * FROM User")
     public List<User> getAllUsers();
-
-
-
-
 }
