@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +34,14 @@ public class ActivityFragment extends Fragment implements LifecycleOwner {
     ActivityViewModel viewModel;
     RecyclerViewAdapter recyclerViewAdapter;
     Activity context;
+    long data;
     RecyclerView recyclerView;
-
+    RecyclerViewAdapter.OnTextClickListener listener = new RecyclerViewAdapter.OnTextClickListener() {
+        @Override
+        public void onClick(long id) {
+            data = id;
+        }
+    };
 
 
     public ActivityFragment() {
@@ -60,7 +67,7 @@ public class ActivityFragment extends Fragment implements LifecycleOwner {
         List<Activity> activityList = dao.getAllActivitys();
         // Set the adapter
         RecyclerView recyclerView = view.findViewById(R.id.rv_main);
-        recyclerView.setAdapter(new RecyclerViewAdapter(new Activity(),activityList));
+        recyclerView.setAdapter(new RecyclerViewAdapter(new Activity(),activityList,listener));
 
         return view;
 
@@ -70,7 +77,7 @@ public class ActivityFragment extends Fragment implements LifecycleOwner {
         public void onChanged(ArrayList<Activity> activityArrayList) {
             ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
             activityArrayList = (ArrayList<Activity>) dao.getAllActivitys();
-            recyclerViewAdapter  = new RecyclerViewAdapter(context,activityArrayList);
+            recyclerViewAdapter  = new RecyclerViewAdapter(context,activityArrayList,listener);
             rw.setLayoutManager(new LinearLayoutManager(getContext()));
             rw.setAdapter(recyclerViewAdapter);
         }

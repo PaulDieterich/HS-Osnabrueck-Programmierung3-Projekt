@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import de.hsos.sportwetter.classes.activity.Activity;
 
-
-
 public class ActivityViewModel extends ViewModel {
     MutableLiveData<ArrayList<Activity>> activityLiveData;
     ArrayList<Activity> activityArrayList;
@@ -17,7 +15,6 @@ public class ActivityViewModel extends ViewModel {
         init();
     }
     MutableLiveData<ArrayList<Activity>> getMutableLiveData() {
-
         return activityLiveData;
     }
     public void selectItem(ArrayList<Activity> item) {

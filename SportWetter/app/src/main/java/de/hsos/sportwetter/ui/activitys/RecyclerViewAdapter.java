@@ -12,24 +12,31 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
 import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.activity.Activity;
 
+import java.util.ArrayList;
 import java.util.List;
 //Help from: https://developer.android.com/guide/topics/ui/layout/recyclerview
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     Activity context;
-    private final List<Activity> mValues;
+    private List<Activity> mValues;
     long id;
-    public RecyclerViewAdapter(Activity context, List<Activity> items) {
+    OnTextClickListener listener;
+    long data;
+
+    public interface OnTextClickListener{
+        void onClick(long id);
+    }
+    public RecyclerViewAdapter(Activity context, List<Activity> items, OnTextClickListener listener) {
         this.context = context;
         mValues = items;
-    }
-    public interface AdapterListener{
-        void onContrainerClick(View view, int pos);
+        this.listener = listener;
+
     }
 
     @NotNull
@@ -41,48 +48,47 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        id = mValues.get(position).getId();
         holder.getActivity_Name().setText(mValues.get(position).getName());
         holder.getActivity_Ort().setText(mValues.get(position).getStart().getPlaceName());
         holder.getActivity_Sport().setText(mValues.get(position).getArt().getName());
-
+        data = mValues.get(position).getId();
+        holder.getActivity_Name().setOnClickListener(v->{
+            id = data;
+            listener.onClick(id);
+        });
     }
 
     @Override
     public int getItemCount() {
         return mValues.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView activity_Name;
         public final TextView activity_Sport;
         public final TextView activity_Ort;
-
         public ViewHolder(View view) {
             super(view);
             activity_Name = view.findViewById(R.id.activityName);
             activity_Sport = view.findViewById(R.id.sportName);
             activity_Ort = view.findViewById(R.id.activityOrt);
             LinearLayout item = view.findViewById(R.id.item);
-
-            item.setOnClickListener(v->{
+            item.setOnClickListener(v -> {
                 Navigation.findNavController(v).navigate(R.id.action_activityFragment_to_activtyInfo);
-
-
             });
         }
 
         public TextView getActivity_Name() {
             return activity_Name;
         }
-
         public TextView getActivity_Sport() {
             return activity_Sport;
         }
-
         public TextView getActivity_Ort() {
             return activity_Ort;
         }
+
+
     }
 
 }

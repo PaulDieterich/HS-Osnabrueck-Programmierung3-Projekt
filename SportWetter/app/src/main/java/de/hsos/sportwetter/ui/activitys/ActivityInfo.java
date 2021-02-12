@@ -3,6 +3,8 @@ package de.hsos.sportwetter.ui.activitys;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.StrictMode;
@@ -18,10 +20,12 @@ import net.aksingh.owmjapis.api.APIException;
 import net.aksingh.owmjapis.core.OWM;
 import net.aksingh.owmjapis.model.CurrentWeather;
 
+import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import de.hsos.sportwetter.AppDatabase;
@@ -33,17 +37,21 @@ import de.hsos.sportwetter.classes.user.User;
 import de.hsos.sportwetter.classes.weather.City;
 
 
-public class ActivityInfo extends Fragment {
+public class ActivityInfo extends Fragment implements RecyclerViewAdapter.OnTextClickListener {
 
 /*
     final static String DATA_RECEIVE = "data";
     long activityID = Long.parseLong(DATA_RECEIVE);
         */
 private static final int INTERNET_PERMISSION = 100;
+
+private List<Activity> activityList;
+    RecyclerViewAdapter.OnTextClickListener listener;
     OWM owm;
     CurrentWeather cwd;
     private City aktuelleStadt;
-
+    long id;
+    RecyclerViewAdapter recyclerViewAdapter;
       public ActivityInfo() {
         // Required empty public constructor
     }
@@ -64,11 +72,10 @@ private static final int INTERNET_PERMISSION = 100;
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.fragment_activity_info, container, false);
-
-       //welcher nutzer eingeloggt ist, informationen aus shardprefernces.
+       View view = inflater.inflate(R.layout.fragment_activity_info, container, false);       //welcher nutzer eingeloggt ist, informationen aus shardprefernces.
        User thisUser = Preferences.getInstance(getContext()).getUser();
 
        ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
@@ -96,7 +103,11 @@ private static final int INTERNET_PERMISSION = 100;
            dao.updateActivity(activityInfo);
            Toast.makeText(getContext(),thisUser.getUsername() + " wurde hinzugefügt",Toast.LENGTH_LONG).show();
        });
-
         return view;
+    }
+
+    @Override
+    public void onClick(long id) {
+
     }
 }
