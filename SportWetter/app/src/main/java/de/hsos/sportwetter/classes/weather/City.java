@@ -17,7 +17,9 @@ public class City {
 
     }
 
+    public void setName(String n){ name = n;}
     public String getName() { return this.name; }
+    public void setLand(String l){land = l;}
     public String getLand() { return this.land; }
     public Double getLongitude() { return this.longitude; }
     public Double getLatitude() { return this.latitude; }
