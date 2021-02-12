@@ -4,7 +4,9 @@ plugins {
 
 android {
     compileSdkVersion 30
-
+    dataBinding{
+        enabled = true
+    }
     defaultConfig {
         applicationId "de.hsos.sportwetter"
         minSdkVersion 21
@@ -101,8 +103,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-
-      def lifecycle_version = "2.2.0"
+    def lifecycle_version = "2.2.0"
     // ViewModel
 
     //noinspection GradleDependency
@@ -116,5 +117,7 @@ dependencies {
     // Saved state module for ViewModel
     //noinspection GradleDependency
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+
+    implementation "com.android.volley:volley:1.1.0"
 
 }
