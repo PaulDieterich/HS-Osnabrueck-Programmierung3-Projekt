@@ -15,7 +15,7 @@ import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.Preferences;
 import de.hsos.sportwetter.ui.login.LoginActivity;
 
-public class SettingsFragment extends PreferenceFragmentCompat implements View.OnClickListener{
+public class SettingsFragment extends PreferenceFragmentCompat{
 
     NavController navController;
 
@@ -23,20 +23,24 @@ public class SettingsFragment extends PreferenceFragmentCompat implements View.O
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
+        Preference profile = findPreference("profile");
+        profile.setOnPreferenceClickListener(this::profile);
+
         Preference logout = findPreference("ausloggen");
         logout.setOnPreferenceClickListener(this::ausloggen);
-
     }
 
-    @Override
-    public void onClick(View v) {
+    public boolean profile(Preference preference) {
        navController.navigate(R.id.action_settingsFragment_to_profileFragment);
+       return true;
     }
+    
     private boolean ausloggen(Preference preference){
         Preferences.getInstance(getContext()).setUser(null);
 
         Intent intent = new Intent(getContext(), LoginActivity.class);
         startActivity(intent);
+
         return true;
     }
 }
