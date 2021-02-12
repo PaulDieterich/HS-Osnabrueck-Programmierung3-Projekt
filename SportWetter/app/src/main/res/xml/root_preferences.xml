@@ -4,37 +4,25 @@
     tools:context=".ui.settings.SettingsFragment">
 
     <PreferenceCategory android:title="Account">
-        <EditTextPreference
-            android:defaultValue="false"
-            android:key="edit_text_preference_1"
+        <Preference
+            android:id="@+id/profile"
+            android:key="profile"
+            android:onClick="profile"
+            android:title="profile"
             android:selectable="true"
             android:selectAllOnFocus="false"
             android:singleLine="true"
-            android:title="Profile"
-            app:icon="@drawable/ic_baseline_supervised_user_circle_24" />
-
-    </PreferenceCategory>
-    <PreferenceCategory app:title="@string/messages_header">
-
-        <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
-
+            app:icon="@drawable/ic_baseline_supervised_user_circle_24"
+        />
+        <Preference
+            android:id="@+id/ausloggenBox"
+            android:textColor="#F80217"
+            android:key="ausloggen"
+            android:onClick="ausloggen"
+            android:title="ausloggen" />
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/sync_header">
 
 
-    </PreferenceCategory>
-    <Preference
-        android:key="ausloggen"
-        android:id="@+id/ausloggenBox"
-
-        android:onClick="ausloggen"
-        android:title="ausloggen" />
 
 </PreferenceScreen>
