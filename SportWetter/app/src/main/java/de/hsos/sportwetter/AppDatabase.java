@@ -61,7 +61,12 @@ public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-
+    /***
+     * @return AppDatabase
+     * @param context
+     * holt sich die appDatabase instance, wenn die app das erstemal gestartet wird
+     * werden die daten aus der sportWeather.db geladen
+     * */
     public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {

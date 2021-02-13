@@ -28,12 +28,9 @@ import net.aksingh.owmjapis.model.DailyWeatherForecast;
 import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.weather.City;
 import de.hsos.sportwetter.ui.activitys.ActivityInfoArgs;
-
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link WeatherFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+ *  @author Stefan Waschk
+ * */
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class WeatherFragment extends Fragment {
 
@@ -41,20 +38,12 @@ public class WeatherFragment extends Fragment {
     OWM owm;
     CurrentWeather cwd;
     private City aktuelleStadt;
-    String cityName = "Bremen";
-    public WeatherFragment() {
-        // Required empty public constructor
-    }
-
-    public static WeatherFragment newInstance(String param1, String param2) {
-        WeatherFragment fragment = new WeatherFragment();
-        return fragment;
-    }
+    String cityName = "Bremen"; //defalt wetterausgabe, wenn keine stadt gefunden werden kann.
+    public WeatherFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String cityName = "Bremen";
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         WeatherFragmentArgs args = WeatherFragmentArgs.fromBundle(getArguments());
@@ -94,11 +83,12 @@ public class WeatherFragment extends Fragment {
         minTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         maxTemp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
-        //TODO: Aufruf der Logik, vielleicht als Background Task
-        //Eingeben, immer wenn gefunden ArrayList => Cities reingespeichert
 
         Handler handler = new Handler();
         Resources res = getResources();
+        /**
+         * holt sich die daten von der api und setzt diese in die vorgesehenden textfelder ein.
+         * */
         Runnable runnableCode = new Runnable() {
             @Override
             public void run() {
@@ -110,7 +100,6 @@ public class WeatherFragment extends Fragment {
                     maxTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTempMax()));
                     minTemp.setText(String.format(res.getString(R.string.temperature),cwd.getMainData().getTempMin()));
                     // Log.d("Handlers", "Called on main thread");
-                    // Repeat this the same runnable code block again another 5 seconds
                     // 'this' is referencing the Runnable object
                     handler.postDelayed(this, 5000);
                 } catch (APIException e) {
@@ -127,7 +116,5 @@ public class WeatherFragment extends Fragment {
         return view;
     }
 
-    private void setAktuelleStadt(City auswahlStadt) {
-        this.aktuelleStadt = auswahlStadt;
-    }
+
 }

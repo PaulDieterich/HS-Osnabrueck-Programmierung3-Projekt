@@ -30,7 +30,10 @@ import de.hsos.sportwetter.AppDatabase;
 import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.activity.Activity;
 import de.hsos.sportwetter.classes.activity.ActivityDao;
-
+/**
+ *
+ *
+ * */
 public class ActivityFragment extends Fragment implements LifecycleOwner {
     RecyclerView rw;
     ActivityViewModel viewModel;
@@ -55,11 +58,9 @@ public class ActivityFragment extends Fragment implements LifecycleOwner {
             Log.d("ActivityFragment: ", "createActivity button");
             Navigation.findNavController(v).navigate(R.id.action_activityFragment_to_activity_createFragment);
         });
-
         //DAO
         ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
         List<Activity> activityList = dao.getAllActivitys();
-
         // Set the adapter
         RecyclerView recyclerView = view.findViewById(R.id.rv_main);
         recyclerView.setAdapter(new RecyclerViewAdapter(new Activity(),activityList));
@@ -67,9 +68,20 @@ public class ActivityFragment extends Fragment implements LifecycleOwner {
         return view;
 
     }
-
+    /**
+     * activityListUpdateObserver
+     */
     Observer<ArrayList<Activity>> activityListUpdateObserver = new Observer<ArrayList<Activity>>() {
         @Override
+        /**
+         * activityListUpdateObserver onChabged
+         * @params activityArrayList - ArrayList<Activity>
+         * es wird eine arrayliste erstellt und von der dao
+         * mit dao.getALlActivitys() gefüllt.
+         * Es Wird der RecyclerViewAdapter iniziallisert und mit der liste gefüllt
+         * der RecyvlerViewAdapter wird dann an die RecyclerView rw(wurde nicht mehr geändert, danke LRS)
+         * mit rw.setAdapter
+         */
         public void onChanged(ArrayList<Activity> activityArrayList) {
             ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();
             activityArrayList = (ArrayList<Activity>) dao.getAllActivitys();

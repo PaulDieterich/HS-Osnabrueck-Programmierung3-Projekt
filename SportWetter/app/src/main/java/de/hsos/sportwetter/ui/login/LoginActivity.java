@@ -24,7 +24,10 @@ import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.Preferences;
 import de.hsos.sportwetter.classes.user.User;
 import de.hsos.sportwetter.classes.user.UserDao;
-
+/**
+ * LoginActivity
+ * @author Paul Dieterich
+ * */
 public class LoginActivity extends AppCompatActivity {
     Button login, register;
     EditText username, password;
@@ -40,6 +43,15 @@ public class LoginActivity extends AppCompatActivity {
         sharedPreferences = getApplicationContext().getSharedPreferences("usersFile", Context.MODE_PRIVATE);
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
+        /**
+         * login onClick
+         * Speichert die eingaben der textviews
+         * erstellt verbindung zur Userdao.
+         * durchsucht die userDB ob der name und das eingebene passwort
+         * zusammen passen.
+         * setzt den sich einloggenen nutzer in Preferences user.
+         *
+         * */
         login.setOnClickListener(v -> {
             String userName = username.getText().toString();
             String passwd = password.getText().toString();
@@ -59,9 +71,14 @@ public class LoginActivity extends AppCompatActivity {
             }
             Toast.makeText(this, "Username existiert nicht", Toast.LENGTH_LONG).show();
         });
+        /**
+         * register.OnClick
+         * Start RegisterActivity.
+         * */
         register.setOnClickListener(v -> {
             Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 }

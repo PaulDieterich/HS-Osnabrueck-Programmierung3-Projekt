@@ -22,9 +22,22 @@ public interface CityDao {
         @Delete
         void deleteCity(City... city);
 
+
+        /**
+         *
+         * getAllCitys()
+         * @return eine Liste von Citys
+         */
+
         @Query("SELECT * FROM city")
         public List<City> getAllCitys();
 
+
+        /**
+         * getCursor()
+         * @param name - sortiert nach der länge des eigegebenen Strigns.
+         * @return Cursor
+         * */
         @Query("SELECT * FROM city  WHERE name like :name ORDER BY length(name)")
         public Cursor getCursor(String name);
 }

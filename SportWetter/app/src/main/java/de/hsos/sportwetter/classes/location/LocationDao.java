@@ -12,8 +12,11 @@ import java.util.List;
 
 /**
  * @author Paul Dieterich
- * Dao für Sport
+ * Dao für Location
+ * wird aktuell nicht genutzt
+ *
  */
+
 @Dao
 public interface LocationDao {
 
@@ -25,7 +28,10 @@ public interface LocationDao {
 
         @Delete
         void deleteLocation(Location... location);
-
+        /**
+         * getAllLocations
+         * @return Liste aller Locations zuück
+         * */
      @Query("SELECT * FROM Location")
      public List<Location> getAllLocations();
 

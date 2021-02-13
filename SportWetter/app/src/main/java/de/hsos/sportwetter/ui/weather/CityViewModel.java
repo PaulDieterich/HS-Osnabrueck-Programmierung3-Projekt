@@ -28,7 +28,9 @@ import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.weather.City;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+/**
+ * @author Stefan Waschk
+ * */
 public class CityViewModel extends ViewModel {
     private RequestQueue mQueue;
     MutableLiveData<ArrayList<City>> cityLiveData;

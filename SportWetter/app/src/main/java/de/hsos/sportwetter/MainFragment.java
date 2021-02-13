@@ -14,15 +14,8 @@ import android.view.ViewGroup;
 
 import org.jetbrains.annotations.NotNull;
 
-
-
-
 public class MainFragment extends Fragment  {
-    public MainFragment() {
-        // Required empty public constructor
-    }
-
-    NavController navController = null;
+    public MainFragment() { }
 
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {

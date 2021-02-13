@@ -28,7 +28,9 @@ import de.hsos.sportwetter.classes.activity.ActivityDao;
 import de.hsos.sportwetter.classes.user.User;
 import de.hsos.sportwetter.classes.user.UserDao;
 import de.hsos.sportwetter.databinding.ActivityRegisterBinding;
-
+/**
+ * @author Paul Dieterich
+ * */
 public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,14 @@ public class RegisterActivity extends AppCompatActivity {
         EditText password = findViewById(R.id.password);
         EditText email = findViewById(R.id.email);
         Button registerbtn = findViewById(R.id.registerbtn);
+        /**
+         * registerBtn OnClick
+         *
+         * get Userinput from textviews
+         * geht die User dao durch und schaut ob es schon der Username in der
+         * userDB existerit.
+         * wenn nicht, dann dann wird der user erstellt.
+         * */
         registerbtn.setOnClickListener(v -> {
             String userName = username.getText().toString();
             String passwd = password.getText().toString();

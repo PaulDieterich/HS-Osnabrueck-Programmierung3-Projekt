@@ -21,7 +21,16 @@ import de.hsos.sportwetter.classes.activity.Activity;
 
 import java.util.ArrayList;
 import java.util.List;
-//Help from: https://developer.android.com/guide/topics/ui/layout/recyclerview
+
+
+
+/**
+ * RecyclerViewAdapter
+ * @author Paul Dieterich
+ *
+ * Help from: https://developer.android.com/guide/topics/ui/layout/recyclerview
+ * */
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     Activity context;
     private List<Activity> mValues;
@@ -37,6 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_activity_item,parent,false);
         return new ViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {

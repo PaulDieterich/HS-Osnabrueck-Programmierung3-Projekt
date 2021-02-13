@@ -19,6 +19,10 @@ import de.hsos.sportwetter.classes.Preferences;
 import de.hsos.sportwetter.databinding.ActivitySplashScreenBinding;
 import de.hsos.sportwetter.ui.login.LoginActivity;
 
+/**
+ * Paul Dieterich
+ *
+ * */
 public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
@@ -39,6 +43,13 @@ public class SplashScreenActivity extends AppCompatActivity {
             }
         },stop);
     }
+    /***
+     * schedulerSplachscreen
+     * wenn ein Preferences User gespiehcert ist
+     * wird er dirrekt an die mainActivity wetier geleitet.
+     * Wenn kein user gespeichert ist wird der nutzer beim starten
+     * an die LoginActivity weiter geleitet
+     */
     private void scheduleSplachscreen(){
         if(Preferences.getInstance(this).getUser() == null){
             Intent intent = new Intent(this, LoginActivity.class);

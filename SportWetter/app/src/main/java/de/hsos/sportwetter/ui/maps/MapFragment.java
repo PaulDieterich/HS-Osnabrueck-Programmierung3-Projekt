@@ -37,8 +37,13 @@ import de.hsos.sportwetter.R;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
-//help from: https://stackoverflow.com/questions/24320989/locationmanager-locationmanager-this-getsystemservicecontext-location-servi
 
+/**
+ * @author Paul Dieterich
+ *
+ *
+//help from: https://stackoverflow.com/questions/24320989/locationmanager-locationmanager-this-getsystemservicecontext-location-servi
+*/
 public class MapFragment extends Fragment implements LocationListener {
     private static final int ACCESS_FINE_LOCATION_CODE = 100;
     LocationManager locationManager;

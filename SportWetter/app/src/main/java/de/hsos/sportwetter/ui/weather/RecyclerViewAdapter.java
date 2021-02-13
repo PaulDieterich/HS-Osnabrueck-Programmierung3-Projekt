@@ -20,8 +20,10 @@ import java.util.List;
 
 import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.weather.City;
-
-
+/**
+ * RecyclerViewAdapter
+ * @author Stefan Waschk
+ * */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     City context;
     private Cursor cursor;
@@ -36,53 +38,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new ViewHolder(view);
     }
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
+        //set cursor to next position
         cursor.moveToPosition(position);
+        /**
+         * holt sich die zeile name und country aus dem cursor und speichert
+         * diese in die dafür vorgesehenden textfelder
+         * */
         String cityName = cursor.getString(cursor.getColumnIndex("name"));
         String countryName = cursor.getString(cursor.getColumnIndex("country"));
-
         holder.getCityName().setText(cityName);
         holder.getCountryName().setText(countryName);
         holder.itemView.setOnClickListener(v -> {
             WeatherFragmentArgs args = new WeatherFragmentArgs.Builder().setCityName(cityName).build();
             Navigation.findNavController(v).navigate(R.id.action_addNewWeatherLocationFragment_to_weatherFragment,args.toBundle());
         });
-
     }
     public int getItemCount() {
         return cursor.getCount();
     }
 
-
-    /*
-    private Filter listFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<City> filteredList = new ArrayList<>();
-            if(constraint == null || constraint.length() == 0){
-                filteredList.addAll(copyList);
-            }else{
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for(City item : copyList){
-                    if(item.getName().toLowerCase().contains(filterPattern)){
-                        filteredList.add(item);
-                    }
-                }
-            }
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            list.clear();
-            list.addAll((List) results.values);
-            notifyDataSetChanged();
-        }
-    };*/
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         public final TextView cityName;
         public final TextView countryName;
 
@@ -92,7 +67,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             countryName = view.findViewById(R.id.Land);
             cityName = view.findViewById(R.id.CityName);
             LinearLayout item = view.findViewById(R.id.item);
-
         }
 
         public TextView getCityName() {

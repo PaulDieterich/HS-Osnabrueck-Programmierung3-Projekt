@@ -31,6 +31,11 @@ import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.weather.City;
 import de.hsos.sportwetter.classes.weather.CityDao;
 
+/**
+ * AddNewWeatherLocationFragment
+ * @author Stefan Waschk
+ *
+ * */
 public class AddNewWeatherLocationFragment extends Fragment {
     private static String JSON_DATA = "javaapi.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}";
     RecyclerView rw;
@@ -84,13 +89,17 @@ public class AddNewWeatherLocationFragment extends Fragment {
     Observer<ArrayList<City>> cityListUpdateObserver = new Observer<ArrayList<City>>() {
         @Override
         public void onChanged(ArrayList<City> cityArrayList) {
-
-           // cityArrayList = (ArrayList<City>) dao.getAllCitys();
-
             CityList = new ArrayList<>();
         }
     };
-
+    /**
+     * getCursor
+     * @param text - String
+     * @return Cursor
+     *
+     * läd die cityDao
+     * und speichert den dao.getCursor ausruf in cursor
+     * */
     public Cursor getCursor(String text) {
         CityDao dao = AppDatabase.getDatabase(getContext()).cityDao();
         Cursor c = dao.getCursor(text+"%");

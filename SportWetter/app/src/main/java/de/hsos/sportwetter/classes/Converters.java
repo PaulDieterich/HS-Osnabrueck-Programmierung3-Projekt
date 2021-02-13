@@ -18,8 +18,24 @@ import de.hsos.sportwetter.classes.location.Location;
 import de.hsos.sportwetter.classes.sport.Sport;
 import de.hsos.sportwetter.classes.user.User;
 
-public class Converters {
 
+
+public class Converters {
+    /**
+     * Implemeneiterung für die TypeConvertes
+     * Date -> Long
+     * Long -> Date
+     * List<Sport> -> String
+     * String -> List<Sport>
+     * List<User> -> String
+     * String -> List<User>
+     * String -> User
+     * User -> String
+     * Sport -> String
+     * String -> Sport
+     * Location -> String
+     * String -> Location
+     * */
     @TypeConverter
     public static Date timestampToDate(Long date) {
         return date == null ? null : new Date(date);

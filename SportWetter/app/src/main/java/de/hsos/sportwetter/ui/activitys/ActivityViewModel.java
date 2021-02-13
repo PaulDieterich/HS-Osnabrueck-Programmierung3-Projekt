@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import de.hsos.sportwetter.classes.activity.Activity;
+/***
+ * @author Paul Dieterich
+ */
 
 public class ActivityViewModel extends ViewModel {
     MutableLiveData<ArrayList<Activity>> activityLiveData;
@@ -22,10 +25,10 @@ public class ActivityViewModel extends ViewModel {
     }
 
     private void init(){
-        populateList();
+      //  populateList();
         activityLiveData.setValue(activityArrayList);
     }
-    public void populateList(){
+   /* public void populateList(){
 
         Activity a = new Activity();
         a.setName("n name");
@@ -38,6 +41,6 @@ public class ActivityViewModel extends ViewModel {
         activityList.add(a);
 
         activityArrayList = (ArrayList<Activity>) activityList;
-    }
+    } */
 
 }

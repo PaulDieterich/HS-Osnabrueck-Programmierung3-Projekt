@@ -26,19 +26,13 @@ import de.hsos.sportwetter.classes.sport.SportDao;
 import de.hsos.sportwetter.classes.user.User;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link ActivityCreateFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * @author Paul Dieterich
+ * ActivityCreateFragement
  */
 public class ActivityCreateFragment extends Fragment {
 
     public ActivityCreateFragment() {
         // Required empty public constructor
-    }
-    public static ActivityCreateFragment newInstance(String param1, String param2) {
-        ActivityCreateFragment fragment = new ActivityCreateFragment();
-
-        return fragment;
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +49,14 @@ public class ActivityCreateFragment extends Fragment {
         TextView dateTV =  view.findViewById(R.id.Activity_date);
         Button createBtn = view.findViewById(R.id.create_btn);
 
+
+        /**
+         * Bei click auf den createBtn werden die daten aus den textfeldern gelesen und in
+         * String objekte gespeichert. Die Funktion createActivity() wird aufgerufen und ein neues
+         * Activity objekt erstellt.
+         * Dieses wird dann per ActivityDao.insertActivity() in die DB geschrieben.
+         * Danach wird man auf die aktivitäts übersicht zurück navigiert
+         * */
         createBtn.setOnClickListener(v-> {
             String name_S = nameTV.getText().toString();
             String sport_S = sportTV.getText().toString();
@@ -70,6 +72,17 @@ public class ActivityCreateFragment extends Fragment {
         });
     return view;
     }
+
+    /**
+     * @param name - String, name der aktivität
+     * @param art - String name der sportart
+     * @param start - String name des Startortes
+     * @param ziel  - String name des Ziels
+     * @param date  - String datum.
+     * @return Activity
+     * erstellt eine neue Aktivität
+     *
+     * */
     public Activity createActivity(String name, String art, String ziel, String start, String date){
         Sport s_art = createSport(art);
         Location l_ziel = createLocation(ziel);
@@ -78,6 +91,13 @@ public class ActivityCreateFragment extends Fragment {
         Activity newActivity = new Activity(name,p,s_art,l_start,l_ziel);
         return newActivity;
     }
+    /**
+     * createLocation
+     * @param name der Name der location
+     * @return Location
+     * wenn der eingegebene name der Location schon in der Location Datenbank steht wird diese zurückgegeben
+     * wenn die Locaiton nicht gefunden werden konnte wird diese angelegt.
+     * */
     public Location createLocation(String name){
         LocationDao dao = AppDatabase.getDatabase(getContext()).locationDao();
         List<Location> locationList =dao.getAllLocations();
@@ -90,7 +110,13 @@ public class ActivityCreateFragment extends Fragment {
         // dao.insertLocation(newLocation);
         return newLocation;
     }
-
+    /**
+     * createSport
+     * @param art name der Sportart
+     * @return Sport
+     * Wenn der eingegebene Sport name schon in der Datenbank vorhanden ist wird dieser zurückgegeben,
+     * wenn noch kein eintrag mit dem namen vorleigt wird ein neuer angelegt.
+     * */
     public Sport createSport(String art){
         SportDao dao = AppDatabase.getDatabase(getContext()).sportDao();
         List<Sport> sportList =dao.getAllSports();

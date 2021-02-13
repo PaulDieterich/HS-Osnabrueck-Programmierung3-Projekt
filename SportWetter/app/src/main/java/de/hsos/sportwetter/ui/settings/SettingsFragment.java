@@ -14,7 +14,9 @@ import androidx.preference.PreferenceFragmentCompat;
 import de.hsos.sportwetter.R;
 import de.hsos.sportwetter.classes.Preferences;
 import de.hsos.sportwetter.ui.login.LoginActivity;
-
+/**
+ * @author Stefan Waschk
+ */
 public class SettingsFragment extends PreferenceFragmentCompat{
 
     NavController navController;
@@ -29,15 +31,25 @@ public class SettingsFragment extends PreferenceFragmentCompat{
         Preference logout = findPreference("ausloggen");
         logout.setOnPreferenceClickListener(this::ausloggen);
     }
-
+    /**
+     * @param preference
+     * @return boolean - true
+     * Navigiert zum profielfragment
+     * */
     public boolean profile(Preference preference) {
         Navigation.findNavController(getView()).navigate(R.id.action_settingsFragment_to_profileFragment);
        return true;
     }
 
+    /**
+     * @param preference - preferences
+     * @return boolean - true.
+     *
+     * löscht den aktuell eingetragenen nutzer aus den Preferences und ersetzt durch null.
+     * Navigiert zur LoginActivity.
+     * */
     private boolean ausloggen(Preference preference){
         Preferences.getInstance(getContext()).setUser(null);
-
         Intent intent = new Intent(getContext(), LoginActivity.class);
         startActivity(intent);
 

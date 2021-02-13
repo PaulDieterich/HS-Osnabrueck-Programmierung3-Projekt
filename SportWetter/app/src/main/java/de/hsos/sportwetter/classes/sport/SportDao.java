@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * @author Paul Dieterich
  * Dao für Sport
+ * wird aktuell nicht genutzt
  */
 
 
@@ -26,6 +27,11 @@ public interface SportDao {
     @Delete
     void deleteSport(Sport... sports);
 
+
+    /**
+     * getAllSports()
+     * @return liste von Sport aus der Sport Tabel
+     * */
     @Query("SELECT * FROM Sport")
     public List<Sport> getAllSports();
 

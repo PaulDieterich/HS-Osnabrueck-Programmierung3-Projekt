@@ -20,20 +20,15 @@ import com.android.volley.toolbox.Volley;
 import de.hsos.sportwetter.ui.activitys.RecyclerViewAdapter;
 
 import de.hsos.sportwetter.R;
-
+/**
+ * @author Stefan Waschk
+ * */
 public class CityItemFragment extends AppCompatActivity {
 
-    // TODO: Customize parameter argument names
+
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
-
     public  CityItemFragment() { }
-
-    public static CityItemFragment newInstance(int columnCount){
-        CityItemFragment fragment = new  CityItemFragment();
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState){
