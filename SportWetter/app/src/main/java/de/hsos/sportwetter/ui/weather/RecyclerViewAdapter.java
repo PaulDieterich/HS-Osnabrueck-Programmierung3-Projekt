@@ -41,8 +41,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //set cursor to next position
         cursor.moveToPosition(position);
         /**
-         * holt sich die zeile name und country aus dem cursor und speichert
-         * diese in die dafür vorgesehenden textfelder
+         * Holt sich die Zeile name und country aus dem Cursor und speichert
+         * diese in die dafür vorgesehenen Textfelder.
          * */
         String cityName = cursor.getString(cursor.getColumnIndex("name"));
         String countryName = cursor.getString(cursor.getColumnIndex("country"));

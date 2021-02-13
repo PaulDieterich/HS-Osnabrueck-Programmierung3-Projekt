@@ -26,7 +26,7 @@ public interface CityDao {
         /**
          *
          * getAllCitys()
-         * @return eine Liste von Citys
+         * @return Eine Liste von Citys
          */
 
         @Query("SELECT * FROM city")
@@ -35,7 +35,7 @@ public interface CityDao {
 
         /**
          * getCursor()
-         * @param name - sortiert nach der länge des eigegebenen Strigns.
+         * @param name - sortiert nach der Länge des eigegebenen Strings
          * @return Cursor
          * */
         @Query("SELECT * FROM city  WHERE name like :name ORDER BY length(name)")

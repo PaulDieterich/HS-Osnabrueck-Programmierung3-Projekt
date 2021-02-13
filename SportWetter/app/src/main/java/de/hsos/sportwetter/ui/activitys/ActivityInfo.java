@@ -17,8 +17,6 @@ import net.aksingh.owmjapis.api.APIException;
 import net.aksingh.owmjapis.core.OWM;
 import net.aksingh.owmjapis.model.CurrentWeather;
 
-
-
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -47,10 +45,10 @@ public class ActivityInfo extends Fragment {
     public ActivityInfo() { }
 
     /**
-     *sucht nach dem namen der aktivität, die zur übergebenen aktivitäts id past die übergeben wurde
-     * in der datenbank und gibt den dort gefundenen aktivitäts orts namen in die Weather api ein und sucht nach
-     * den wetter daten.
-     * Diese werden dann im cwd objeckt gespeichert.
+     * Sucht nach dem Namen der Aktivität, die zur übergebenen Aktivitäts ID passt, die übergeben wurde.
+     * Sucht anschließend in der Datenbank und gibt den dort gefundenen Aktivitäts-Ortsnamen in die
+     * Weather API ein und sucht nach den Wetterdaten.
+     * Diese werden dann im cwd Objekt gespeichert.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,7 +63,7 @@ public class ActivityInfo extends Fragment {
 
         /**
         *
-        * initzialisierung vom owm objekt. mit den openweather_api_key
+        * Initialisierung vom owm Objekt mit dem openweather_api_key.
         */
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

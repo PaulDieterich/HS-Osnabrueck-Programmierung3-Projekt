@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey;
 
 /**
  * @author Paul Dieterich
- * location klasse für die erstellung von locaion Objekten
- * ebenso eine emplementierung von androidx.room.entity
+ * Location Klasse für die Erstellung von Location Objekten
+ * Ebenso eine Implementierung von androidx.room.entity
  */
 
 @Entity(tableName = "LOCATION")
@@ -30,21 +30,19 @@ public class Location {
     @ColumnInfo(name = "longitude")
     private long longitude;
 
-
-
-
     /**
      * @author Paul Dieterich
      * @version 2
      * @since 20.01.2021
-     * @param placeName - name des ortes der aktivität
+     * @param placeName - Name des Ortes der Aktivität
      * @param street - Straßenname
-     * @param country - ländername
+     * @param country - Ländername
      * @param city - Stadtname
-     * @param plz - postleitzahl
-     * @param latitude - breitengrad - wichtig für die spätere googlemaps anbindung (falls zeit)
-     * @param longitude - längengrad - wichtig für die spätere googlemaps anbindung (falls zeit)
+     * @param plz - Postleitzahl
+     * @param latitude - Breitengrad - wichtig für die spätere googlemaps Anbindung (falls Zeit)
+     * @param longitude - Längengrad - wichtig für die spätere googlemaps Anbindung (falls Zeit)
      * */
+
     @Ignore
     public Location(String placeName, String street, String country, String city, int plz, long latitude, long longitude) {
         this.placeName = placeName;

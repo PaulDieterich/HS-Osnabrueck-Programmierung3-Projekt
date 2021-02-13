@@ -38,7 +38,7 @@ public class WeatherFragment extends Fragment {
     OWM owm;
     CurrentWeather cwd;
     private City aktuelleStadt;
-    String cityName = "Bremen"; //defalt wetterausgabe, wenn keine stadt gefunden werden kann.
+    String cityName = "Bremen"; //default Wetterausgabe, wenn keine Stadt gefunden werden kann; vermeidet nullpointer
     public WeatherFragment() {}
 
     @Override
@@ -87,7 +87,9 @@ public class WeatherFragment extends Fragment {
         Handler handler = new Handler();
         Resources res = getResources();
         /**
-         * holt sich die daten von der api und setzt diese in die vorgesehenden textfelder ein.
+         * Definiert einen Code, der zur Laufzeit im Hintergrund ausgeführt wird.
+         * Alternativ könnte hier ein Thread erstellt werden, bei dem für die aktuelle
+         * Stadt entsprechende Anfragen periodisch abgesendet werden.
          * */
         Runnable runnableCode = new Runnable() {
             @Override

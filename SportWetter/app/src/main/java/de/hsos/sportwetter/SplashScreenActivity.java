@@ -32,8 +32,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         int stop = 10000;
         /**
         *
-        * Handler() ist deprecation, aber das war die schnellste und einfachste lösung auf die ich
-        * gekommen bin
+        * Handler() ist veraltet, aber das war die schnellste und einfachste Lösung auf die ich
+        * gekommen bin.
         * */
         @SuppressWarnings("deprecation") Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -45,10 +45,10 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
     /***
      * schedulerSplachscreen
-     * wenn ein Preferences User gespiehcert ist
-     * wird er dirrekt an die mainActivity wetier geleitet.
-     * Wenn kein user gespeichert ist wird der nutzer beim starten
-     * an die LoginActivity weiter geleitet
+     * Wenn ein Preferences User gespeichert ist,
+     * wird er direkt an die mainActivity weitergeleitet.
+     * Wenn kein User gespeichert ist, wird der Nutzer beim starten
+     * an die LoginActivity weitergeleitet.
      */
     private void scheduleSplachscreen(){
         if(Preferences.getInstance(this).getUser() == null){

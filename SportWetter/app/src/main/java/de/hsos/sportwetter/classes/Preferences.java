@@ -24,22 +24,22 @@ public class Preferences {
     }
     /**
      * setFirstStart()
-     * @param firstStart - boolean, wenn true. dann wird der shardpreference key "firstStart auf true gesetzt. bzw auf false.
+     * @param firstStart - Falls true, wird der shardpreference key "firstStart" auf true gesetzt.
      * */
     public void setFirstStart(boolean firstStart){
         sharedPreferences.edit().putBoolean("firstStart", firstStart).apply();
     }
     /**
      * getFirstStart
-     * @return boolean - returnt den startus fron "firstStart", default ist true
+     * @return boolean - gibt den Status von "firstStart"; standardmäßig true
      * */
     public boolean getFirstStart(){
         return sharedPreferences.getBoolean("firstStart",true);
     }
     /**
      * setUser
-     * @param u - User die UserID des users wird in sharedPreferences gespeichert
-     * defalut ist -1, wenn kein nutzer eingeloggt wird wird bei dem aufrüf -1 in den key "userID" gespeichert
+     * @param u - Die UserID des Users wird in sharedPreferences gespeichert. Default ist -1.
+     *            Falls kein Nutzer eingeloggt wird, wird bei dem Aufruf -1 in den key "userID" gespeichert.
      * */
     public void setUser(User u){
         if(u == null) {
@@ -50,7 +50,7 @@ public class Preferences {
     }
     /**
      * getUser
-     * @return User - der User der aktuell eingeloggt ist. wenn kein user eingeloggt ist, wird null zurück gegeben
+     * @return User - der User der aktuell eingeloggt ist. Falls kein User eingeloggt ist, wird null zurückgegeben.
      * */
     public User getUser(){
         UserDao userDao = AppDatabase.getDatabase(context).userDao();
@@ -70,7 +70,7 @@ public class Preferences {
     }
     /**
      * getInstance
-     * @return Preferences - es wird eine Preferences instance erzeigt. und diese zurück gegeben
+     * @return Preferences - Es wird eine Preferences Instance erzeugt und zurückgegeben.
      *
      * */
     public static Preferences getInstance(Context applicationContext) {

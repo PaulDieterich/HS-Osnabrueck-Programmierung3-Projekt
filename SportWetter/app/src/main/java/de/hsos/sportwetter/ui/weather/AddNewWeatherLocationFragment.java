@@ -97,8 +97,7 @@ public class AddNewWeatherLocationFragment extends Fragment {
      * @param text - String
      * @return Cursor
      *
-     * läd die cityDao
-     * und speichert den dao.getCursor ausruf in cursor
+     * Lädt die cityDao und speichert den dao.getCursor Aufruf in cursor.
      * */
     public Cursor getCursor(String text) {
         CityDao dao = AppDatabase.getDatabase(getContext()).cityDao();

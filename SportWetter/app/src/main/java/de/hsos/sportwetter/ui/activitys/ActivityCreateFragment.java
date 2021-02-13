@@ -51,11 +51,11 @@ public class ActivityCreateFragment extends Fragment {
 
 
         /**
-         * Bei click auf den createBtn werden die daten aus den textfeldern gelesen und in
-         * String objekte gespeichert. Die Funktion createActivity() wird aufgerufen und ein neues
-         * Activity objekt erstellt.
-         * Dieses wird dann per ActivityDao.insertActivity() in die DB geschrieben.
-         * Danach wird man auf die aktivitäts übersicht zurück navigiert
+         * Bei Klick auf den createBtn werden die Daten aus den Textfeldern gelesen und in Form von
+         * String Objekten gespeichert. Die Funktion createActivity() wird aufgerufen und ein neues
+         * Activity Objekt erstellt.
+         * Dieses wird dann per ActivityDao.insertActivity() in die Datenbank geschrieben.
+         * Danach wird man auf die Aktivitätsübersicht zurück navigiert.
          * */
         createBtn.setOnClickListener(v-> {
             String name_S = nameTV.getText().toString();
@@ -74,13 +74,13 @@ public class ActivityCreateFragment extends Fragment {
     }
 
     /**
-     * @param name - String, name der aktivität
-     * @param art - String name der sportart
-     * @param start - String name des Startortes
-     * @param ziel  - String name des Ziels
-     * @param date  - String datum.
+     * @param name - String, Name der Aktivität
+     * @param art - String, Name der Sportart
+     * @param start - String, Name des Startortes
+     * @param ziel  - String, Name des Zielortes
+     * @param date  - String, Datum
      * @return Activity
-     * erstellt eine neue Aktivität
+     * Erstellt eine neue Aktivität.
      *
      * */
     public Activity createActivity(String name, String art, String ziel, String start, String date){
@@ -93,10 +93,10 @@ public class ActivityCreateFragment extends Fragment {
     }
     /**
      * createLocation
-     * @param name der Name der location
+     * @param name - Der Name der Location
      * @return Location
-     * wenn der eingegebene name der Location schon in der Location Datenbank steht wird diese zurückgegeben
-     * wenn die Locaiton nicht gefunden werden konnte wird diese angelegt.
+     * Wenn der eingegebene Name der Location schon in der Location Datenbank steht, wird diese zurückgegeben.
+     * Falls die Location nicht gefunden werden konnte, wird diese angelegt.
      * */
     public Location createLocation(String name){
         LocationDao dao = AppDatabase.getDatabase(getContext()).locationDao();
@@ -112,10 +112,10 @@ public class ActivityCreateFragment extends Fragment {
     }
     /**
      * createSport
-     * @param art name der Sportart
+     * @param art Name der Sportart
      * @return Sport
-     * Wenn der eingegebene Sport name schon in der Datenbank vorhanden ist wird dieser zurückgegeben,
-     * wenn noch kein eintrag mit dem namen vorleigt wird ein neuer angelegt.
+     * Wenn der eingegebene Sportname schon in der Datenbank vorhanden ist, wird dieser zurückgegeben.
+     * Falls noch kein Eintrag mit dem Namen vorliegt, wird ein neuer angelegt.
      * */
     public Sport createSport(String art){
         SportDao dao = AppDatabase.getDatabase(getContext()).sportDao();
