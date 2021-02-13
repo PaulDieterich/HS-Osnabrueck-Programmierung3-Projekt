@@ -35,10 +35,11 @@ import de.hsos.sportwetter.ui.activitys.ActivityInfoArgs;
 public class WeatherFragment extends Fragment {
 
     private static final int INTERNET_PERMISSION = 100;
-    OWM owm;
-    CurrentWeather cwd;
+    private OWM owm;
+    private CurrentWeather cwd;
     private City aktuelleStadt;
-    String cityName = "Bremen"; //default Wetterausgabe, wenn keine Stadt gefunden werden kann; vermeidet nullpointer
+    private String cityName = "Bremen"; //default Wetterausgabe, wenn keine Stadt gefunden werden kann; vermeidet nullpointer
+
     public WeatherFragment() {}
 
     @Override

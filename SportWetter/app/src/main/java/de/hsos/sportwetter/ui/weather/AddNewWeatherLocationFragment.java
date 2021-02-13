@@ -38,14 +38,14 @@ import de.hsos.sportwetter.classes.weather.CityDao;
  * */
 public class AddNewWeatherLocationFragment extends Fragment {
     private static String JSON_DATA = "javaapi.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}";
-    RecyclerView rw;
-    CityViewModel viewModel;
-    RecyclerViewAdapter recyclerViewAdapter;
-    OWM owm;
-    CurrentWeather cwd;
-    List<String> cityList;
-    List<City> CityList;
-    City context;
+    private RecyclerView rw;
+    private CityViewModel viewModel;
+    private RecyclerViewAdapter recyclerViewAdapter;
+    private OWM owm;
+    private CurrentWeather cwd;
+    private List<String> cityList;
+    private List<City> CityList;
+    private City context;
 
     public AddNewWeatherLocationFragment() {
         // Required empty public constructor
