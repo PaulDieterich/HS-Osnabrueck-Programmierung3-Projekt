@@ -57,7 +57,9 @@ public class AddNewWeatherLocationFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull @NotNull LayoutInflater inflater,
+                             @Nullable @org.jetbrains.annotations.Nullable ViewGroup container,
+                             @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather_add_new_location, container, false);
         rw = view.findViewById(R.id.rv_main);
         cityList = new ArrayList<>();
@@ -92,6 +94,7 @@ public class AddNewWeatherLocationFragment extends Fragment {
             CityList = new ArrayList<>();
         }
     };
+
     /**
      * getCursor
      * @param text - String
@@ -103,6 +106,5 @@ public class AddNewWeatherLocationFragment extends Fragment {
         CityDao dao = AppDatabase.getDatabase(getContext()).cityDao();
         Cursor c = dao.getCursor(text+"%");
         return c;
-
     }
 }
