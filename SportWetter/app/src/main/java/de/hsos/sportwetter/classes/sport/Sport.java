@@ -9,8 +9,8 @@ import androidx.room.PrimaryKey;
 import java.util.UUID;
 /**
  * @author Paul Dieterich
- * sport klasse für die erstellung von sport Objekten
- * ebenso eine emplementierung von androidx.room.entity
+ * Sport Klasse für die Erstellung von Sport Objekten
+ * Ebenso eine Implementierung von androidx.room.entity
  */
 
 @Entity(tableName = "SPORT")
@@ -35,9 +35,9 @@ public class Sport {
      * @author Paul Dieterich
      * @version 1
      * @since 20.01.2021
-     * @param name - name des sports, z.B klettern
-     * @param min_anzahl - interesannt für gruppensport oder kleingruppen
-     * @param max_anzahl - interesannt für gruppensport oder kleingruppen
+     * @param name - Name der Sportart (z.B. Joggen)
+     * @param min_anzahl - Interessant für Gruppensport oder Kleingruppen
+     * @param max_anzahl - Interesannt für Gruppensport oder Kleingruppen
      * */
     @Ignore
     public Sport(String name, int min_anzahl, int max_anzahl) {

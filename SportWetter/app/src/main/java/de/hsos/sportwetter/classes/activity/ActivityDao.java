@@ -8,9 +8,8 @@ import androidx.room.Update;
 
 import java.util.List;
 
-
 /**
- * Dao für die Activity klasse.
+ * Dao für die Activity Klasse.
  * */
 
 @Dao
@@ -27,16 +26,18 @@ public interface ActivityDao {
 
     /**
      *
-     * getAllActivitys sucht in der Activity tabel nach activitäten
-     * @return Liste von allen Aktivitäten
+     * getAllActivitys sucht in der Activity Tabelle nach Aktivitäten
+     * @return Liste aller Aktivitäten
      */
+
     @Query("SELECT * FROM Activity")
     public List<Activity> getAllActivitys();
 
     /**
      *
-     * @return Gibt eine Activität zurück die zu der gesuchten :id passt
+     * @return Gibt eine Aktivität zurück, die zu der gesuchten :id passt
      * */
+
     @Query("SELECT * FROM ACTIVITY WHERE activity_id = :id")
      Activity getActivityById(long id);
 

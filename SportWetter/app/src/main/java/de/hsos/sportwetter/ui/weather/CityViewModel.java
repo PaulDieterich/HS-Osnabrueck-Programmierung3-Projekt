@@ -55,8 +55,9 @@ public class CityViewModel extends ViewModel {
 
 
     /**
-    *für vorstellungs zwecke, um alle Städte aus der datenbank(openweather api) nutzen zu dürfen
-    *muss man monatlich zahlen, also haben wir eine kleine auswahl an stäten nach den man suchen kann.
+    * Für Präsentationszwecke. Um alle Städte aus der Datenbank (openweather api) nutzen zu dürfen,
+    * muss man monatlich zahlen, also haben wir eine kleine Auswahl an Städten implementiert,
+    * nach denen man suchen kann.
     */
      public void populateList(){
 

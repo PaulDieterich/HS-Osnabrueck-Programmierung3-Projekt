@@ -13,7 +13,7 @@ import de.hsos.sportwetter.R;
 /**
  * @author Stefan Waschk
  *
- * wurde aus zeitproblemen nicht mehr implementiert
+ * Wurde aus Zeitproblemen nicht mehr implementiert.
  */
 public class ProfileFragment extends Fragment {
     public ProfileFragment() {

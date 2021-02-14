@@ -8,8 +8,6 @@ import androidx.room.Update;
 
 import java.util.List;
 
-
-
 /**
  * @author Paul Dieterich
  * Dao für Location

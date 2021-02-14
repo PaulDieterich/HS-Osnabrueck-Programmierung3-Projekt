@@ -76,11 +76,10 @@ public class ActivityFragment extends Fragment implements LifecycleOwner {
         /**
          * activityListUpdateObserver onChabged
          * @params activityArrayList - ArrayList<Activity>
-         * es wird eine arrayliste erstellt und von der dao
-         * mit dao.getALlActivitys() gefüllt.
-         * Es Wird der RecyclerViewAdapter iniziallisert und mit der liste gefüllt
-         * der RecyvlerViewAdapter wird dann an die RecyclerView rw(wurde nicht mehr geändert, danke LRS)
-         * mit rw.setAdapter
+         * Es wird eine Arrayliste erstellt und von der dao mit dao.getALlActivitys() gefüllt.
+         * Es wird der RecyclerViewAdapter initialisiert und mit der eben erstellten Liste gefüllt.
+         * Der RecyvlerViewAdapter wird dann an die RecyclerView rw (wurde nicht mehr geändert, danke LRS)
+         * mit rw.setAdapter übergeben.
          */
         public void onChanged(ArrayList<Activity> activityArrayList) {
             ActivityDao dao = AppDatabase.getDatabase(getContext()).activityDao();

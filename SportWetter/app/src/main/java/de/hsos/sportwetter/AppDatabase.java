@@ -64,8 +64,8 @@ public abstract class AppDatabase extends RoomDatabase {
     /***
      * @return AppDatabase
      * @param context
-     * holt sich die appDatabase instance, wenn die app das erstemal gestartet wird
-     * werden die daten aus der sportWeather.db geladen
+     * Holt sich die appDatabase Instance. Wenn die App das erste Mal gestartet wird,
+     * werden die Daten aus der sportWeather.db geladen.
      * */
     public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {

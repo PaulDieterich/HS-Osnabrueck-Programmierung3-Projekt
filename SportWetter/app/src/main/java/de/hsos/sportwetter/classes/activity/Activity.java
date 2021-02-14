@@ -41,11 +41,11 @@ public class Activity {
      * @author Paul Dieterich
      * @version 3
      * @since 20.01.2021
-     * @param name - Narme der aktivität
-     * @param user - name des anbieters der aktivität
-     * @param art - sportart der aktivität z.B Joggen
-     * @param ziel - Location wo z.B die jogging runde zuende ist
-     * @param start - Location wo z.B die jogging runde beginnt
+     * @param name - Name der Aktivität
+     * @param user - Name des Anbieters der Aktivität
+     * @param art - Sportart der Aktivität (z.B Joggen)
+     * @param ziel - Location, wo die Sportaktivität endet
+     * @param start - Location, wo die Sportaktivität beginnt
      * */
     @Ignore
     public Activity(String name, User user, Sport art, Location ziel, Location start) {

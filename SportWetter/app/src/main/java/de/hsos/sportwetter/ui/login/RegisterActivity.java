@@ -44,9 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
          * registerBtn OnClick
          *
          * get Userinput from textviews
-         * geht die User dao durch und schaut ob es schon der Username in der
-         * userDB existerit.
-         * wenn nicht, dann dann wird der user erstellt.
+         * Geht die Userdao durch und schaut, ob der Username in der userDB existiert.
+         * Falls nicht, wird der User erstellt.
          * */
         registerbtn.setOnClickListener(v -> {
             String userName = username.getText().toString();

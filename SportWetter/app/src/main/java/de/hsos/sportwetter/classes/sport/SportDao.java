@@ -15,7 +15,6 @@ import java.util.List;
  * wird aktuell nicht genutzt
  */
 
-
 @Dao
 public interface SportDao {
     @Insert
@@ -30,7 +29,7 @@ public interface SportDao {
 
     /**
      * getAllSports()
-     * @return liste von Sport aus der Sport Tabel
+     * @return Liste von Sport aus der Sport Tabelle
      * */
     @Query("SELECT * FROM Sport")
     public List<Sport> getAllSports();

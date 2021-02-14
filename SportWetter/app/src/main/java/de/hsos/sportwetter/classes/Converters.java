@@ -22,7 +22,7 @@ import de.hsos.sportwetter.classes.user.User;
 
 public class Converters {
     /**
-     * Implemeneiterung für die TypeConvertes
+     * Implementierung für die TypeConverters
      * Date -> Long
      * Long -> Date
      * List<Sport> -> String

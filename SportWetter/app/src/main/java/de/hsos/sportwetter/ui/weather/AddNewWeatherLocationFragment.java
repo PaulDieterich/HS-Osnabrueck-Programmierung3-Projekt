@@ -38,14 +38,14 @@ import de.hsos.sportwetter.classes.weather.CityDao;
  * */
 public class AddNewWeatherLocationFragment extends Fragment {
     private static String JSON_DATA = "javaapi.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}";
-    RecyclerView rw;
-    CityViewModel viewModel;
-    RecyclerViewAdapter recyclerViewAdapter;
-    OWM owm;
-    CurrentWeather cwd;
-    List<String> cityList;
-    List<City> CityList;
-    City context;
+    private RecyclerView rw;
+    private CityViewModel viewModel;
+    private RecyclerViewAdapter recyclerViewAdapter;
+    private OWM owm;
+    private CurrentWeather cwd;
+    private List<String> cityList;
+    private List<City> CityList;
+    private City context;
 
     public AddNewWeatherLocationFragment() {
         // Required empty public constructor
@@ -57,7 +57,9 @@ public class AddNewWeatherLocationFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull @NotNull LayoutInflater inflater,
+                             @Nullable @org.jetbrains.annotations.Nullable ViewGroup container,
+                             @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather_add_new_location, container, false);
         rw = view.findViewById(R.id.rv_main);
         cityList = new ArrayList<>();
@@ -92,18 +94,17 @@ public class AddNewWeatherLocationFragment extends Fragment {
             CityList = new ArrayList<>();
         }
     };
+
     /**
      * getCursor
      * @param text - String
      * @return Cursor
      *
-     * läd die cityDao
-     * und speichert den dao.getCursor ausruf in cursor
+     * Lädt die cityDao und speichert den dao.getCursor Aufruf in cursor.
      * */
     public Cursor getCursor(String text) {
         CityDao dao = AppDatabase.getDatabase(getContext()).cityDao();
         Cursor c = dao.getCursor(text+"%");
         return c;
-
     }
 }

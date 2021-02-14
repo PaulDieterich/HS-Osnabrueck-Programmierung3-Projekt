@@ -45,11 +45,10 @@ public class LoginActivity extends AppCompatActivity {
         register = findViewById(R.id.register);
         /**
          * login onClick
-         * Speichert die eingaben der textviews
-         * erstellt verbindung zur Userdao.
-         * durchsucht die userDB ob der name und das eingebene passwort
-         * zusammen passen.
-         * setzt den sich einloggenen nutzer in Preferences user.
+         * Speichert die Eingaben der TextViews.
+         * Erstellt eine Verbindung zur Userdao.
+         * Durchsucht die userDB, ob der Name und das eingebene Passwort zusammenpassen.
+         * Setzt den sich einloggenen Nutzer in Preferences user.
          *
          * */
         login.setOnClickListener(v -> {

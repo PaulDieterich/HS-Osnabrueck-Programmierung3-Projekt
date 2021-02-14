@@ -27,7 +27,7 @@ public interface UserDao {
 
     /**
      * getAllUsers()
-     * @return eine list von Users
+     * @return Eine Liste von Users
      * */
     @Query("SELECT * FROM User")
     public List<User> getAllUsers();

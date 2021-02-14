@@ -34,7 +34,7 @@ public class SettingsFragment extends PreferenceFragmentCompat{
     /**
      * @param preference
      * @return boolean - true
-     * Navigiert zum profielfragment
+     * Navigiert zum ProfileFragment.
      * */
     public boolean profile(Preference preference) {
         Navigation.findNavController(getView()).navigate(R.id.action_settingsFragment_to_profileFragment);
@@ -45,8 +45,8 @@ public class SettingsFragment extends PreferenceFragmentCompat{
      * @param preference - preferences
      * @return boolean - true.
      *
-     * löscht den aktuell eingetragenen nutzer aus den Preferences und ersetzt durch null.
-     * Navigiert zur LoginActivity.
+     * Löscht den aktuell eingetragenen Nutzer aus den Preferences und ersetzt ihn durch null.
+     * Navigiert anschließend zur LoginActivity.
      * */
     private boolean ausloggen(Preference preference){
         Preferences.getInstance(getContext()).setUser(null);
